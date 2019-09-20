@@ -8,46 +8,34 @@
 
 import UIKit
 
-protocol TextFieldCellDelegate: class {
-    func fieldDidBeginEditing(mainLift: String)
-    func field(mainLift: String, changedValueTo value: String)
-}
 
-class TextFieldCell: UITableViewCell, UITextFieldDelegate {
+class TextFieldCell: UITableViewCell{
 
     //MARK: Outlets
     @IBOutlet weak var liftNameLabel: UILabel!
     @IBOutlet weak var fieldValueTextField: UITextField!
     
     //MARK: Data
-    var mainLift: String!
-    weak var delegate: TextFieldCellDelegate?
+    var mainLift: Lift!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        fieldValueTextField.delegate = self
-    }
-    
-    @IBAction func valueChanged(_ sender: UITextField) {
-        self.delegate?.field(mainLift: mainLift, changedValueTo: sender.text ?? "")
-    }
-    
-    func configureWithField(mainLift: String, andValue value: String?, editable: Bool){
-        self.mainLift = mainLift
-        self.fieldValueTextField.text = value ?? ""
-        self.liftNameLabel.text = mainLift
         
-        if editable {
-            self.fieldValueTextField.isUserInteractionEnabled = true
-            self.selectionStyle = .none
-        } else {
-            self.fieldValueTextField.isUserInteractionEnabled = false
-            self.selectionStyle = .default
-        }
+        let border = CALayer()
+        let width = CGFloat(1.0)
+        border.borderColor = UIColor.lightGray.cgColor
+        border.frame = CGRect(x: 0, y: self.frame.size.height - width, width:  self.frame.size.width, height: self.frame.size.height)
+        border.borderWidth = width
+        self.layer.addSublayer(border)
+        self.layer.masksToBounds = true
     }
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        self.delegate?.fieldDidBeginEditing(mainLift: mainLift)
+    func configureWithField(mainLift: Lift, editable: Bool){
+        self.mainLift = mainLift
+        self.fieldValueTextField.text = "\(mainLift.day) - \(mainLift.bbbLift)"
+        self.liftNameLabel.text = mainLift.name
+        self.fieldValueTextField.isUserInteractionEnabled = false
+        self.selectionStyle = .default
     }
     
 }

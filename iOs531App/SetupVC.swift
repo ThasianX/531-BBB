@@ -34,10 +34,10 @@ class SetupVC: UIViewController, UINavigationBarDelegate, UITableViewDataSource,
         
         setupNavBar.items = [item]
         
-        lifts.append(Lift(name: "Overhead Press", progression: 5, trainingMax: 0, personalRecord: 0, day: 1))
-        lifts.append(Lift(name: "Deadlift", progression: 10, trainingMax: 0, personalRecord: 0, day: 2))
-        lifts.append(Lift(name: "Bench Press", progression: 5, trainingMax: 0, personalRecord: 0, day: 4))
-        lifts.append(Lift(name: "Squat", progression: 10, trainingMax: 0, personalRecord: 0, day: 5))
+        lifts.append(Lift(name: "Overhead Press", progression: 5, trainingMax: 0, personalRecord: 0, day: "Monday", bbbLift: "Overhead Press", assistanceLift: "Lat Pulldowns"))
+        lifts.append(Lift(name: "Deadlift", progression: 10, trainingMax: 0, personalRecord: 0, day: "Tuesday", bbbLift: "Deadlift", assistanceLift: "Ab work"))
+        lifts.append(Lift(name: "Bench Press", progression: 5, trainingMax: 0, personalRecord: 0, day: "Thursday", bbbLift: "Bench Press", assistanceLift: "Lat Pulldowns"))
+        lifts.append(Lift(name: "Squat", progression: 10, trainingMax: 0, personalRecord: 0, day: "Friday", bbbLift: "Squat", assistanceLift: "Ab work"))
     }
     //MARK: UINavigationBarDelegate methods
     func position(for bar: UIBarPositioning) -> UIBarPosition {

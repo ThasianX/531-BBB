@@ -9,8 +9,8 @@
 import UIKit
 
 protocol DayAndLiftPickerCellDelegate: class {
-    func dayChangedForField(mainLift: String, toDay day: String)
-    func liftChangedForField(mainLift: String, toLift lift: String)
+    func dayChangedForField(mainLift: Lift, toDay day: String)
+    func liftChangedForField(mainLift: Lift, toLift lift: String)
 }
 
 class DayAndLiftPickerCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDataSource {
@@ -19,7 +19,7 @@ class DayAndLiftPickerCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewD
     @IBOutlet weak var dayAndLiftPicker: UIPickerView!
     
     //MARK: Data
-    var mainLift: String!
+    var mainLift: Lift!
     weak var delegate: DayAndLiftPickerCellDelegate?
     var pickerData: [[String]] = [[String]]()
     
@@ -28,11 +28,16 @@ class DayAndLiftPickerCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewD
         
         dayAndLiftPicker.delegate = self
         dayAndLiftPicker.dataSource = self
-        pickerData = [["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], ["Overhead Press", "Deadlift", "Bench Press", "Squat"]]
+        pickerData = [["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], ["Overhead Press", "Deadlift", "Bench Press", "Squat"]]
     }
 
-    func configureWithField(mainLift: String, currentDay: String){
+    func configureWithField(mainLift: Lift){
         self.mainLift = mainLift
+        //use mainlift to set picker values
+        let dayIndex = pickerData[0].firstIndex(of: mainLift.day)
+        self.dayAndLiftPicker.selectRow(dayIndex!, inComponent: 0, animated: true)
+        let liftIndex = pickerData[1].firstIndex(of: mainLift.bbbLift)
+        self.dayAndLiftPicker.selectRow(liftIndex!, inComponent: 1, animated: true)
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -49,8 +54,10 @@ class DayAndLiftPickerCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewD
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if component==0 {
+            print("Selected row at \(row). Day changed to \(pickerData[component][row])")
             self.delegate?.dayChangedForField(mainLift: mainLift, toDay: pickerData[component][row])
         } else if component==1 {
+            print("Selected row at \(row). BBB lift changed to \(pickerData[component][row])")
             self.delegate?.liftChangedForField(mainLift: mainLift, toLift: pickerData[component][row])
         }
     }

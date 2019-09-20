@@ -174,19 +174,16 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Overhead Press" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zwe-CF-2KT">
-                                                    <rect key="frame" x="20" y="11.5" width="122" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="20" y="11.5" width="130" height="21"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jIq-VX-KnM">
-                                                    <rect key="frame" x="150" y="7" width="236" height="30"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jIq-VX-KnM">
+                                                    <rect key="frame" x="150" y="11" width="236" height="22"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
-                                                    <connections>
-                                                        <action selector="valueChanged:" destination="yvh-Og-LvW" eventType="editingChanged" id="FNa-54-N7t"/>
-                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -317,6 +314,10 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="67x-q6-fbd" id="Yan-uy-Cs7"/>
+                                    <outlet property="delegate" destination="67x-q6-fbd" id="K3i-lp-OYI"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -331,21 +332,21 @@
             </objects>
             <point key="canvasLocation" x="997.10144927536237" y="300"/>
         </scene>
-        <!--Item 1-->
+        <!--Cycle-->
         <scene sceneID="p4L-Us-IKh">
             <objects>
-                <viewController id="7Da-Fe-1hX" sceneMemberID="viewController">
+                <viewController title="Cycle" id="7Da-Fe-1hX" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PAk-WV-XNL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="ItE-5f-ckZ"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="Z56-Yx-zhh"/>
+                    <navigationItem key="navigationItem" title="Current Cycle" id="j4m-08-wGf"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Bh-zS-kWg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="88" y="-350"/>
+            <point key="canvasLocation" x="997.10144927536237" y="-350.22321428571428"/>
         </scene>
         <!--Main Controller-->
         <scene sceneID="zQh-my-wDs">
@@ -357,7 +358,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="7Da-Fe-1hX" kind="relationship" relationship="viewControllers" id="NBq-hQ-h80"/>
+                        <segue destination="CZn-HZ-5Ig" kind="relationship" relationship="viewControllers" id="NBq-hQ-h80"/>
                         <segue destination="hCh-Af-hF7" kind="relationship" relationship="viewControllers" id="rL6-AI-1VJ"/>
                     </connections>
                 </tabBarController>
@@ -383,6 +384,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oFc-Mw-8zA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="86.956521739130437" y="300"/>
+        </scene>
+        <!--Item 1-->
+        <scene sceneID="nmg-I5-1Wx">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CZn-HZ-5Ig" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item 1" id="Z56-Yx-zhh"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="cXc-Dx-K6t">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="7Da-Fe-1hX" kind="relationship" relationship="rootViewController" id="Iez-XV-edY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vkq-13-SJh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="86.956521739130437" y="-350.22321428571428"/>
         </scene>
     </scenes>
 </document>
