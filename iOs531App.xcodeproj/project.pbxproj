@@ -133,8 +133,8 @@
 			isa = PBXGroup;
 			children = (
 				1EB22DC1232C0F0800099FBB /* RoundToCell.swift */,
-				1EB22DC3232E8FA500099FBB /* ProgressionCell.swift */,
 				1E44EF17232E98B2006F7E6C /* TrainingMaxCell.swift */,
+				1EB22DC3232E8FA500099FBB /* ProgressionCell.swift */,
 			);
 			path = ConfigCells;
 			sourceTree = "<group>";

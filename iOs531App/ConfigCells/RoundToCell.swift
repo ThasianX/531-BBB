@@ -15,7 +15,6 @@ class RoundToCell: UITableViewCell {
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
-        selectionStyle = .none
     }
 
 }

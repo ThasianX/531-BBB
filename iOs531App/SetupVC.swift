@@ -8,6 +8,53 @@
 
 import UIKit
 
+//Extension for allowing users to exit out of decimal pad
+extension UITextField {
+    
+    public override func awakeFromNib() {
+        super.awakeFromNib()
+        self.addHideinputAccessoryView()
+    }
+    
+    func addHideinputAccessoryView(){
+        let toolbar = UIToolbar()
+        //Fits the toolbar across the input accessory view. So you can see the gray separators and fill of the toolbar.
+        toolbar.sizeToFit()
+        
+        //Flexible space is used to make sure the done button is right aligned.
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.resignFirstResponder))
+        
+        toolbar.setItems([flexibleSpace, doneButton], animated: true)
+        
+        self.inputAccessoryView = toolbar
+    }
+}
+
+extension SetupVC: TrainingMaxCellDelegate {
+    func maxChangedForField(mainLift: Lift, max: Double) {
+        let index = lifts.firstIndex(of: mainLift)
+        let cell = tableView.cellForRow(at: IndexPath(row: index!, section: 1)) as! TrainingMaxCell
+        let roundTo = roundValues[selectedRoundToIndex]
+        let roundedNum = round(max/roundTo)*roundTo
+        cell.liftMaxField.placeholder = "\(roundedNum) lb"
+        cell.liftMaxField.text = ""
+        //later functionality would include making what the user enters a hint. Then the text would be cleared
+    }
+}
+
+extension SetupVC: ProgressionCellDelegate {
+    func progressionChangedForField(mainLift: Lift, progression: Double) {
+        let index = lifts.firstIndex(of: mainLift)
+        let cell = tableView.cellForRow(at: IndexPath(row: index!, section: 2)) as! ProgressionCell
+        let roundTo = roundValues[selectedRoundToIndex]
+        let roundedNum = round(progression/roundTo)*roundTo
+        cell.progressionField.placeholder = "\(roundedNum) lb"
+        cell.progressionField.text = ""
+        //later functionality would include making what the user enters a hint. Then the text would be cleared
+    }
+}
+
 class SetupVC: UIViewController, UINavigationBarDelegate, UITableViewDataSource, UITableViewDelegate {
     
     
@@ -16,10 +63,10 @@ class SetupVC: UIViewController, UINavigationBarDelegate, UITableViewDataSource,
     @IBOutlet weak var tableView: UITableView!
     
     //MARK: Table data sources
-    let roundValues : [Double] = [2.5, 5, 10]
-    let liftNames : [String] = ["Overhead Press", "Deadlift", "Bench Press", "Squat"]
+    let roundValues : [Double] = [2.5, 5]
     
-    var chosenRoundTo = 2.5
+    //Index used for tracking which index of round to is currently checked
+    var selectedRoundToIndex = 1
     var lifts : [Lift] = []
     
     //MARK: Initialization
@@ -39,6 +86,7 @@ class SetupVC: UIViewController, UINavigationBarDelegate, UITableViewDataSource,
         lifts.append(Lift(name: "Bench Press", progression: 5, trainingMax: 0, personalRecord: 0, day: "Thursday", bbbLift: "Bench Press", assistanceLift: "Lat Pulldowns"))
         lifts.append(Lift(name: "Squat", progression: 10, trainingMax: 0, personalRecord: 0, day: "Friday", bbbLift: "Squat", assistanceLift: "Ab work"))
     }
+    
     //MARK: UINavigationBarDelegate methods
     func position(for bar: UIBarPositioning) -> UIBarPosition {
         return UIBarPosition.topAttached
@@ -51,13 +99,17 @@ class SetupVC: UIViewController, UINavigationBarDelegate, UITableViewDataSource,
             for row in 0..<tableView.numberOfRows(inSection: section){
                 if section==1 {
                     let cell = tableView.cellForRow(at: IndexPath(row: row, section: section)) as! TrainingMaxCell
-                    if let num = cell.liftMaxField.text, let max = Double(num){
-                        lifts[row].trainingMax = max
+                    if let text = cell.liftMaxField.placeholder{
+                        let num = text.dropLast(3)
+                        let max = Double(num)
+                        lifts[row].trainingMax = max!
                     }
                 } else if section==2{
                     let cell = tableView.cellForRow(at: IndexPath(row: row, section: section)) as! ProgressionCell
-                    if let num = cell.progressionField.text, let progression = Double(num){
-                        lifts[row].progression = progression
+                    if let text = cell.progressionField.placeholder{
+                        let num = text.dropLast(3)
+                        let progression = Double(num)
+                        lifts[row].progression = progression!
                     }
                 }
             }
@@ -71,7 +123,11 @@ class SetupVC: UIViewController, UINavigationBarDelegate, UITableViewDataSource,
         if let savedData = try? NSKeyedArchiver.archivedData(withRootObject: lifts, requiringSecureCoding: false){
             let defaults = UserDefaults.standard
             defaults.set(savedData, forKey: "lifts")
-            defaults.set(chosenRoundTo, forKey: "roundTo")
+            defaults.set(roundValues[selectedRoundToIndex], forKey: "roundTo")
+            for lift in lifts {
+                print("\(lift.name) + \(lift.trainingMax) + \(lift.progression)")
+            }
+            print(roundValues[selectedRoundToIndex])
         }
     }
     
@@ -82,36 +138,45 @@ class SetupVC: UIViewController, UINavigationBarDelegate, UITableViewDataSource,
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         if section==0 {
             return roundValues.count
         } else if section==1 {
-            return liftNames.count
+            return lifts.count
         } else {
-            return liftNames.count
+            return lifts.count
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        
         if indexPath.section == 0 {
             let cell: RoundToCell = tableView.dequeueReusableCell(withIdentifier: "roundToCell") as! RoundToCell
             cell.weightLabel?.text = "\(roundValues[indexPath.row]) lb"
+            //Checks to see if the current row selected should be checked.
+            if indexPath.row == selectedRoundToIndex {
+                cell.accessoryType = .checkmark
+            } else {
+                cell.accessoryType = .none
+            }
             return cell
+            
         } else if indexPath.section == 1 {
             let cell: TrainingMaxCell = tableView.dequeueReusableCell(withIdentifier: "trainingMaxCell") as! TrainingMaxCell
-            cell.liftLabel?.text = liftNames[indexPath.row]
+            let lift = lifts[indexPath.row]
+            cell.liftLabel?.text = lift.name
             cell.liftMaxField?.placeholder = "0 lb"
+            cell.delegate = self
+            cell.configureWithField(mainLift: lift)
             return cell
+            
         } else {
             let cell: ProgressionCell = tableView.dequeueReusableCell(withIdentifier: "progressionCell") as! ProgressionCell
-            cell.progressionLiftLabel?.text = liftNames[indexPath.row]
-            cell.progressionField?.placeholder = "\(lifts[indexPath.row].progression) lb"
+            let lift = lifts[indexPath.row]
+            cell.progressionLiftLabel?.text = lift.name
+            cell.progressionField?.placeholder = "\(lift.progression) lb"
+            cell.delegate = self
+            cell.configureWithField(mainLift: lift)
             return cell
         }
-        
-        
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -127,21 +192,29 @@ class SetupVC: UIViewController, UINavigationBarDelegate, UITableViewDataSource,
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section==0{
-            chosenRoundTo = roundValues[indexPath.row]
-            let cell = tableView.cellForRow(at: indexPath)
-            cell?.accessoryType = UITableViewCell.AccessoryType.checkmark
+            //Deselecting the row removes the gray fill of the cell. Also makes clicking the cell look more animated
+            tableView.deselectRow(at: indexPath, animated: true)
+            
+            //If the user clicks on the row that is currently checked, don't do anything.
+            if indexPath.row == selectedRoundToIndex {
+                return
+            }
+            
+            /*Since we got past the check, we know that the user checked a different row. We take get the cell of the
+             current row and set its accessory to checked. Then, we use the selectedRoundToIndex to make an indexpath
+             to the old cell that is checked. Here, we just uncheck the old cell. Final step is to set the roundtoindex
+             to the current indexpath's row.
+             */
+            let newCell = tableView.cellForRow(at: indexPath)
+            newCell?.accessoryType = .checkmark
+            
+            let oldCell = tableView.cellForRow(at: IndexPath(row: selectedRoundToIndex, section: 0))
+            oldCell?.accessoryType = .none
+            
+            selectedRoundToIndex = indexPath.row
         }
         
     }
-    
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        if indexPath.section==0 {
-            let cell = tableView.cellForRow(at: indexPath)
-            cell?.accessoryType = UITableViewCell.AccessoryType.none
-        }
-        
-        
-    }
-    
-
 }
+
+
