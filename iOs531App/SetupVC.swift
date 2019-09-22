@@ -8,28 +8,28 @@
 
 import UIKit
 
-//Extension for allowing users to exit out of decimal pad
-extension UITextField {
-    
-    public override func awakeFromNib() {
-        super.awakeFromNib()
-        self.addHideinputAccessoryView()
-    }
-    
-    func addHideinputAccessoryView(){
-        let toolbar = UIToolbar()
-        //Fits the toolbar across the input accessory view. So you can see the gray separators and fill of the toolbar.
-        toolbar.sizeToFit()
-        
-        //Flexible space is used to make sure the done button is right aligned.
-        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.resignFirstResponder))
-        
-        toolbar.setItems([flexibleSpace, doneButton], animated: true)
-        
-        self.inputAccessoryView = toolbar
-    }
-}
+//Won't be using this for now. Felt like with the sliding decimal pad, it would be more intuitive for users to just tap out
+////Extension for allowing users to exit out of decimal pad
+//extension UITextField {
+//
+//    public override func awakeFromNib() {
+//        super.awakeFromNib()
+//        self.addHideinputAccessoryView()
+//    }
+//
+//    func addHideinputAccessoryView(){
+//        let toolbar =  UIToolbar(frame: CGRect(x: 0, y: 0, width: self.superview!.frame.size.width, height: 40))
+//        //Fits the toolbar across the input accessory view. So you can see the gray separators and fill of the toolbar.
+//
+//        //Flexible space is used to make sure the done button is right aligned.
+//        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+//        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.resignFirstResponder))
+//
+//        toolbar.setItems([flexibleSpace, doneButton], animated: true)
+//
+//        self.inputAccessoryView = toolbar
+//    }
+//}
 
 extension SetupVC: TrainingMaxCellDelegate {
     func maxChangedForField(mainLift: Lift, max: Double) {
@@ -39,7 +39,6 @@ extension SetupVC: TrainingMaxCellDelegate {
         let roundedNum = round(max/roundTo)*roundTo
         cell.liftMaxField.placeholder = "\(roundedNum) lb"
         cell.liftMaxField.text = ""
-        //later functionality would include making what the user enters a hint. Then the text would be cleared
     }
 }
 
@@ -51,7 +50,6 @@ extension SetupVC: ProgressionCellDelegate {
         let roundedNum = round(progression/roundTo)*roundTo
         cell.progressionField.placeholder = "\(roundedNum) lb"
         cell.progressionField.text = ""
-        //later functionality would include making what the user enters a hint. Then the text would be cleared
     }
 }
 
@@ -63,7 +61,7 @@ class SetupVC: UIViewController, UINavigationBarDelegate, UITableViewDataSource,
     @IBOutlet weak var tableView: UITableView!
     
     //MARK: Table data sources
-    let roundValues : [Double] = [2.5, 5]
+    let roundValues : [Double] = [2.5, 5, 10]
     
     //Index used for tracking which index of round to is currently checked
     var selectedRoundToIndex = 1

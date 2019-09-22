@@ -24,7 +24,7 @@ class TextFieldCell: UITableViewCell{
     
     func configureWithField(mainLift: Lift, editable: Bool){
         self.mainLift = mainLift
-        self.fieldValueTextField.text = "\(mainLift.day) - \(mainLift.bbbLift)"
+        self.fieldValueTextField.text = "\(mainLift.day) - BBB: \(mainLift.bbbLift)"
         self.liftNameLabel.text = mainLift.name
         self.fieldValueTextField.isUserInteractionEnabled = false
         self.selectionStyle = .default
