@@ -16,6 +16,9 @@
 		1E68FD3B2323FA1200631945 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E68FD392323FA1200631945 /* LaunchScreen.storyboard */; };
 		1E68FD462323FA1200631945 /* iOs531AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E68FD452323FA1200631945 /* iOs531AppTests.swift */; };
 		1E78D9802332A99F0058306B /* DayAndLiftPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E78D97F2332A99F0058306B /* DayAndLiftPickerCell.swift */; };
+		1EA611192337ACB6001B3710 /* TPKeyboardAvoidingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA611172337ACB6001B3710 /* TPKeyboardAvoidingTableView.m */; };
+		1EA6111C2337AD24001B3710 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA6111B2337AD24001B3710 /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
+		1EA6111F2337AD92001B3710 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA6111D2337AD92001B3710 /* TPKeyboardAvoidingScrollView.m */; };
 		1EB22DC0232BE20F00099FBB /* CycleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB22DBF232BE20F00099FBB /* CycleVC.swift */; };
 		1EB22DC2232C0F0800099FBB /* RoundToCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB22DC1232C0F0800099FBB /* RoundToCell.swift */; };
 		1EB22DC4232E8FA500099FBB /* ProgressionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB22DC3232E8FA500099FBB /* ProgressionCell.swift */; };
@@ -48,6 +51,13 @@
 		1E68FD452323FA1200631945 /* iOs531AppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOs531AppTests.swift; sourceTree = "<group>"; };
 		1E68FD472323FA1200631945 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1E78D97F2332A99F0058306B /* DayAndLiftPickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayAndLiftPickerCell.swift; sourceTree = "<group>"; };
+		1EA611162337ACB5001B3710 /* iOs531App-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iOs531App-Bridging-Header.h"; sourceTree = "<group>"; };
+		1EA611172337ACB6001B3710 /* TPKeyboardAvoidingTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingTableView.m; sourceTree = "<group>"; };
+		1EA611182337ACB6001B3710 /* TPKeyboardAvoidingTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingTableView.h; sourceTree = "<group>"; };
+		1EA6111A2337AD24001B3710 /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
+		1EA6111B2337AD24001B3710 /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
+		1EA6111D2337AD92001B3710 /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
+		1EA6111E2337AD92001B3710 /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
 		1EB22DBF232BE20F00099FBB /* CycleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CycleVC.swift; sourceTree = "<group>"; };
 		1EB22DC1232C0F0800099FBB /* RoundToCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundToCell.swift; sourceTree = "<group>"; };
 		1EB22DC3232E8FA500099FBB /* ProgressionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressionCell.swift; sourceTree = "<group>"; };
@@ -113,6 +123,7 @@
 				1EBF0BA4232FDCBC00502394 /* MainController.swift */,
 				1E68FD322323FA1200631945 /* SetupVC.swift */,
 				1E68FD342323FA1200631945 /* Main.storyboard */,
+				1EA611152337AC4F001B3710 /* TPKeyboard */,
 				1E68FD372323FA1200631945 /* Assets.xcassets */,
 				1E68FD392323FA1200631945 /* LaunchScreen.storyboard */,
 				1E68FD3C2323FA1200631945 /* Info.plist */,
@@ -127,6 +138,20 @@
 				1E68FD472323FA1200631945 /* Info.plist */,
 			);
 			path = iOs531AppTests;
+			sourceTree = "<group>";
+		};
+		1EA611152337AC4F001B3710 /* TPKeyboard */ = {
+			isa = PBXGroup;
+			children = (
+				1EA6111E2337AD92001B3710 /* TPKeyboardAvoidingScrollView.h */,
+				1EA6111D2337AD92001B3710 /* TPKeyboardAvoidingScrollView.m */,
+				1EA6111A2337AD24001B3710 /* UIScrollView+TPKeyboardAvoidingAdditions.h */,
+				1EA6111B2337AD24001B3710 /* UIScrollView+TPKeyboardAvoidingAdditions.m */,
+				1EA611182337ACB6001B3710 /* TPKeyboardAvoidingTableView.h */,
+				1EA611172337ACB6001B3710 /* TPKeyboardAvoidingTableView.m */,
+				1EA611162337ACB5001B3710 /* iOs531App-Bridging-Header.h */,
+			);
+			name = TPKeyboard;
 			sourceTree = "<group>";
 		};
 		1EBF0B9E232F9F5500502394 /* ConfigCells */ = {
@@ -197,6 +222,7 @@
 				TargetAttributes = {
 					1E68FD2C2323FA1200631945 = {
 						CreatedOnToolsVersion = 10.3;
+						LastSwiftMigration = 1100;
 					};
 					1E68FD402323FA1200631945 = {
 						CreatedOnToolsVersion = 10.3;
@@ -251,12 +277,15 @@
 				1E78D9802332A99F0058306B /* DayAndLiftPickerCell.swift in Sources */,
 				1EBF0BA7232FDD7B00502394 /* SettingsController.swift in Sources */,
 				1EBF0BA5232FDCBC00502394 /* MainController.swift in Sources */,
+				1EA6111C2337AD24001B3710 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				1EB22DC4232E8FA500099FBB /* ProgressionCell.swift in Sources */,
 				1EB22DC0232BE20F00099FBB /* CycleVC.swift in Sources */,
 				1E68FD332323FA1200631945 /* SetupVC.swift in Sources */,
+				1EA6111F2337AD92001B3710 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				1EBF0BA3232FC43600502394 /* Lift.swift in Sources */,
 				1E68FD312323FA1200631945 /* AppDelegate.swift in Sources */,
 				1E44EF18232E98B2006F7E6C /* TrainingMaxCell.swift in Sources */,
+				1EA611192337ACB6001B3710 /* TPKeyboardAvoidingTableView.m in Sources */,
 				1EB22DC2232C0F0800099FBB /* RoundToCell.swift in Sources */,
 				1E64982123316CD600C94146 /* TextFieldCell.swift in Sources */,
 			);
@@ -420,6 +449,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 75H2NCGMKS;
 				INFOPLIST_FILE = iOs531App/Info.plist;
@@ -429,6 +459,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kevinli.iOs531App;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "iOs531App/iOs531App-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -438,6 +470,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 75H2NCGMKS;
 				INFOPLIST_FILE = iOs531App/Info.plist;
@@ -447,6 +480,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kevinli.iOs531App;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "iOs531App/iOs531App-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
