@@ -17,7 +17,7 @@ class Lift: NSObject, NSCoding {
         case personalRecord = "Personal Record"
         case day = "Day"
         case bbbLift = "Boring But Big Lift"
-        case assistanceLift = "Assistance Lift"
+        case assistanceLifts = "Assistance Lifts"
     }
 
     var name: String
@@ -26,21 +26,21 @@ class Lift: NSObject, NSCoding {
     var personalRecord : Int
     var day : String
     var bbbLift : String
-    var assistanceLift : String
+    var assistanceLifts : [String]
     
-    init(name: String, progression: Double, trainingMax: Double, personalRecord : Int, day : String, bbbLift : String, assistanceLift : String) {
+    init(name: String, progression: Double, trainingMax: Double, personalRecord : Int, day : String, bbbLift : String, assistanceLifts : [String]) {
         self.name = name
         self.progression = progression
         self.trainingMax = trainingMax
         self.personalRecord = personalRecord
         self.day = day
         self.bbbLift = bbbLift
-        self.assistanceLift = assistanceLift
+        self.assistanceLifts = assistanceLifts
     }
     
     //MARK: NSCoding
     required convenience init?(coder aDecoder: NSCoder){
-        guard let name = aDecoder.decodeObject(forKey: Keys.name.rawValue) as? String, let day = aDecoder.decodeObject(forKey: Keys.day.rawValue) as? String, let bbbLift = aDecoder.decodeObject(forKey: Keys.bbbLift.rawValue) as? String, let assistanceLift = aDecoder.decodeObject(forKey: Keys.assistanceLift.rawValue) as? String
+        guard let name = aDecoder.decodeObject(forKey: Keys.name.rawValue) as? String, let day = aDecoder.decodeObject(forKey: Keys.day.rawValue) as? String, let bbbLift = aDecoder.decodeObject(forKey: Keys.bbbLift.rawValue) as? String, let assistanceLifts = aDecoder.decodeObject(forKey: Keys.assistanceLifts.rawValue) as? [String]
             else {
                 return nil
         }
@@ -52,7 +52,7 @@ class Lift: NSObject, NSCoding {
             personalRecord: aDecoder.decodeInteger(forKey: Keys.personalRecord.rawValue),
             day: day,
             bbbLift: bbbLift,
-            assistanceLift: assistanceLift
+            assistanceLifts: assistanceLifts
             )
     }
     
@@ -63,6 +63,6 @@ class Lift: NSObject, NSCoding {
         aCoder.encode(self.personalRecord, forKey: Keys.personalRecord.rawValue)
         aCoder.encode(self.day, forKey: Keys.day.rawValue)
         aCoder.encode(self.bbbLift, forKey: Keys.bbbLift.rawValue)
-        aCoder.encode(self.assistanceLift, forKey: Keys.assistanceLift.rawValue)
+        aCoder.encode(self.assistanceLifts, forKey: Keys.assistanceLifts.rawValue)
     }
 }

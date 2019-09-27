@@ -8,11 +8,6 @@
 
 import UIKit
 
-/*
- Will attempt to recover by breaking constraint
- <NSLayoutConstraint:0x600000a60410 'TB_Trailing_Trailing' H:[_UIModernBarButton:0x7fea28e2f450'Done']-(20)-|   (active, names: '|':_UIButtonBarButton:0x7fea28e2e240 )>
- */
-
 extension SettingsController: TrainingMaxCellDelegate {
     func maxChangedForField(mainLift: Lift, max: Double) {
         let index = lifts.firstIndex(of: mainLift)
@@ -22,8 +17,12 @@ extension SettingsController: TrainingMaxCellDelegate {
         let roundedNum = round(max/roundTo)*roundTo
         cell.liftMaxField.placeholder = "\(roundedNum) lb"
         cell.liftMaxField.text = ""
+        lifts[index!].trainingMax = roundedNum
+        saveLifts()
     }
 }
+
+
 
 extension SettingsController: ProgressionCellDelegate {
     func progressionChangedForField(mainLift: Lift, progression: Double) {
@@ -34,10 +33,52 @@ extension SettingsController: ProgressionCellDelegate {
         let roundedNum = round(progression/roundTo)*roundTo
         cell.progressionField.placeholder = "\(roundedNum) lb"
         cell.progressionField.text = ""
+        lifts[index!].progression = roundedNum
+        saveLifts()
     }
 }
 
-class SettingsController: UIViewController, UITableViewDelegate, UITableViewDataSource, DayAndLiftPickerCellDelegate {
+extension SettingsController: TimerCellDelegate {
+    func stateChanged(timerLabel: String, isOn: Bool) {
+        let index = timerTitles.firstIndex(of: timerLabel)
+        UserDefaults.standard.set(isOn, forKey: timerKeys[index!])
+    }
+}
+
+extension SettingsController: AssistanceCatalogVCDelegate {
+    func assistanceSelectionComplete(index: Int) {
+        print("Assistance selection complete. Reloading row at \(index)")
+        tableView.reloadRows(at: [IndexPath(row: index, section: 1)], with: .automatic)
+    }
+    
+    func assistanceExerciseSelected(lift: Lift, index: Int) {
+        print("Assistance exercise selected for \(lift.name).")
+        lifts[index].assistanceLifts = lift.assistanceLifts
+        
+        saveLifts()
+    }
+}
+
+extension SettingsController: DayAndLiftPickerCellDelegate {
+    
+    func dayChangedForField(mainLift: Lift, toDay day: String) {
+        print("Day changed from \(mainLift.day) to \(day)")
+        let index = lifts.firstIndex(of: mainLift)
+        lifts[index!].day = day
+        saveLifts()
+        tableView.reloadRows(at: [IndexPath(row: pickerIndexPath!.row-1, section: 0)], with: .automatic)
+    }
+    
+    func liftChangedForField(mainLift: Lift, toLift lift: String) {
+        print("BBB lift changed from \(mainLift.name) to \(lift)")
+        let index = lifts.firstIndex(of: mainLift)
+        lifts[index!].bbbLift = lift
+        saveLifts()
+        tableView.reloadRows(at: [IndexPath(row: pickerIndexPath!.row-1, section: 0)], with: .automatic)
+    }
+}
+
+class SettingsController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     //MARK: Outlets
     @IBOutlet weak var tableView: UITableView!
@@ -45,9 +86,12 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
     //MARK: Table Data Sources
     let roundValues : [Double] = [2.5, 5, 10]
     var selectedRoundToIndex: Int = 1
+    var selectedAssistanceIndex: Int?
     var lifts : [Lift] = []
     
-    let headerTitles = ["Program Template", "Assistance Work", "Round to smallest weight", "Training maxes", "Weight Progression", "Timers"]
+    let headerTitles = ["Program Template", "Assistance Work", "Round to smallest weight", "Training maxes", "Weight Progression", "Timer Cofiguration"]
+    let timerTitles = ["Show 5/3/1 Timer", "Show BBB Timer", "Show Assistance Timer"]
+    let timerKeys = ["531", "BBB", "Ass"]
     
     //datepicker related data
     var pickerIndexPath: IndexPath?
@@ -62,10 +106,15 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.rowHeight = UITableView.automaticDimension
         
         let defaults = UserDefaults.standard
+        
         if let savedData = defaults.value(forKey: "lifts") as? Data {
             if let decodedData = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(savedData) as? [Lift] {
                 lifts = decodedData
             }
+        }
+        
+        for lift in lifts {
+            print("Main lifts: Name - \(lift.name) + Training max - \(lift.trainingMax) + Progression - \(lift.progression)")
         }
         
         if let roundValue = defaults.value(forKey: "roundTo") as? Double {
@@ -73,13 +122,9 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
             selectedRoundToIndex = index!
         }
         
-        for lift in lifts {
-            print("\(lift.name) + \(lift.trainingMax) + \(lift.progression)")
-        }
-        print(roundValues[selectedRoundToIndex])
-
+        print("Weights are currently being rounded to \(roundValues[selectedRoundToIndex]) lb")
     }
-
+    
     //MARK: Tableview methods
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -96,7 +141,7 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
         case 0:
             return pickerVisible ? lifts.count + 1 : lifts.count
         case 1:
-            return 0
+            return lifts.count
         case 2:
             return roundValues.count
         case 3:
@@ -104,7 +149,7 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
         case 4:
             return lifts.count
         case 5:
-            return 0
+            return timerTitles.count
         default:
             ()
         }
@@ -118,7 +163,7 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
             /*We are setting up the appearance of cells in the table now. If there is a picker visible, which means a row that supports a picker must've been selected
              before remaking specific rows of the table, and the current index of that picker is the same as the current index of the table, then a new cell is created
              with the dayAndLiftPickerCell prototype. The cell is populated using data obtained from the parent cell, or the cell above, that opened it.
-            */
+             */
             if pickerVisible && pickerIndexPath! == indexPath{
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: "dayAndLiftPickerCell") as! DayAndLiftPickerCell
                 cell.delegate = self
@@ -145,7 +190,7 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
                  For the case when the picker isn't showing, the lift corresponding to the row of the table index is returned. When the picker is showing but the current table index is
                  not the same as the index of the picker, we employ checks to determine if the current table index is above or below the picker index. This way, we can decide whether to
                  use the lift corresponding to the current row of the table index or the lift corresponding to the row above the table index.
-                */
+                 */
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: "textFieldCell") as! TextFieldCell
                 
                 let lift = calculateLiftForIndexPath(indexPath: indexPath)
@@ -153,7 +198,14 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
                 return cell
             }
         case 1:
-            ()
+            let cell = tableView.dequeueReusableCell(withIdentifier: "assistanceCell") as! AssistanceCell
+            let lift = lifts[indexPath.row]
+            cell.liftLabel.text = lift.name
+            cell.assistanceLabel.text = printAssistance(assistanceLifts: lift.assistanceLifts)
+            cell.assistanceLabel.frame = CGRect(x:0,y:0,width:cell.assistanceLabel.intrinsicContentSize.width,height:cell.assistanceLabel.intrinsicContentSize.height)
+            
+            //Pass name of main lift to
+            return cell
         case 2:
             let cell: RoundToCell = tableView.dequeueReusableCell(withIdentifier: "roundToCell") as! RoundToCell
             cell.weightLabel?.text = "\(roundValues[indexPath.row]) lb"
@@ -181,17 +233,32 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
             cell.configureWithField(mainLift: lift)
             return cell
         case 5:
-            ()
+            let cell: TimerCell = tableView.dequeueReusableCell(withIdentifier: "timerCell") as! TimerCell
+            let state: Bool = UserDefaults.standard.value(forKey: timerKeys[indexPath.row]) as! Bool
+            cell.delegate = self
+            cell.timerLabel.text = timerTitles[indexPath.row]
+            cell.timerSwitch.setOn(state, animated: false)
+            return cell
         default:
             ()
         }
         return UITableViewCell()
     }
     
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        switch indexPath.section {
+        case 1:
+            selectedAssistanceIndex = indexPath.row
+            return indexPath
+        default:
+            return indexPath
+        }
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let section = indexPath.section
-        if section==0{
+        switch indexPath.section {
+        case 0:
             tableView.deselectRow(at: indexPath, animated: true)
             
             //Checks to see if the section of the indexPath corresponds with the picker section. If not, then the picker is dismissed.
@@ -211,7 +278,7 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
                  there can only be two scenarios: one where the current picker is closed and no other picker is opened or one where the current picker is closed and
                  another picker is opened. No matter the case, the current picker has to be deleted from the table. That's why following, we test to see if we should
                  insert a new picker at a different row.
-                */
+                 */
                 tableView.deleteRows(at: [pickerIndexPath!], with: .fade)
                 let oldPickerIndexPath = pickerIndexPath!
                 
@@ -226,7 +293,7 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
                      
                      But what if the index is less than the old picker index? As mentioned earlier, only the indexes greater than the old picker index were shifted down
                      one; indexes less than the old picker index remain the same. Therefore, the row to add a new picker would be the row right below the current index.
-                    */
+                     */
                     let newRow = oldPickerIndexPath.row < indexPath.row ? indexPath.row : indexPath.row + 1
                     pickerIndexPath = IndexPath(row: newRow, section: indexPath.section)
                     tableView.insertRows(at: [pickerIndexPath!], with: .fade)
@@ -237,7 +304,11 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
                 tableView.insertRows(at: [pickerIndexPath!], with: .fade)
             }
             tableView.endUpdates()
-        } else if section==2 {
+        case 1:
+            tableView.deselectRow(at: indexPath, animated: true)
+            
+            
+        case 2:
             //Deselecting the row removes the gray fill of the cell. Also makes clicking the cell look more animated
             tableView.deselectRow(at: indexPath, animated: true)
             
@@ -258,6 +329,10 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
             oldCell?.accessoryType = .none
             
             selectedRoundToIndex = indexPath.row
+            
+            UserDefaults.standard.set(roundValues[selectedRoundToIndex], forKey: "roundTo")
+        default:
+            ()
         }
     }
     
@@ -312,21 +387,32 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    //MARK: DayAndLiftPickerCellDelegate methods
-    func dayChangedForField(mainLift: Lift, toDay day: String) {
-        print("Day changed for \(mainLift.name) to \(day)")
-        let index = lifts.firstIndex(of: mainLift)
-        mainLift.day = day
-        lifts[index!] = mainLift
-        tableView.reloadData()
+    func printAssistance(assistanceLifts: [String]) -> String{
+        var output = ""
+        for lift in assistanceLifts {
+            output+="\(lift), "
+        }
+        if assistanceLifts.count != 0{
+            output = String(output.prefix(output.count-2))
+        }
+        return output
     }
     
-    func liftChangedForField(mainLift: Lift, toLift lift: String) {
-        print("BBB lift changed for \(mainLift.name) to \(lift)")
-        let index = lifts.firstIndex(of: mainLift)
-        mainLift.bbbLift = lift
-        lifts[index!] = mainLift
-        tableView.reloadData()
+    func saveLifts(){
+        print("Updating lifts for userdefaults")
+        let defaults = UserDefaults.standard
+        if let data = try? NSKeyedArchiver.archivedData(withRootObject: lifts, requiringSecureCoding: false){
+            defaults.set(data, forKey: "lifts")
+        }
     }
     
+    //MARK: Segue overriden methods
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showAssistance" {
+            let vc = segue.destination as! AssistanceCatalogVC
+            vc.liftToPass = lifts[selectedAssistanceIndex!]
+            vc.indexToPass = selectedAssistanceIndex
+            vc.delegate = self
+        }
+    }
 }

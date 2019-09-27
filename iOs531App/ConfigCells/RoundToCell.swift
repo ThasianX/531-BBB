@@ -12,9 +12,4 @@ class RoundToCell: UITableViewCell {
 
     //MARK: Properties
     @IBOutlet weak var weightLabel: UILabel!
-    
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)!
-    }
-
 }

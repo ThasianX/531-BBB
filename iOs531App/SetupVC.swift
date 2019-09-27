@@ -31,6 +31,7 @@ import UIKit
 //    }
 //}
 
+
 extension SetupVC: TrainingMaxCellDelegate {
     func maxChangedForField(mainLift: Lift, max: Double) {
         let index = lifts.firstIndex(of: mainLift)
@@ -79,10 +80,10 @@ class SetupVC: UIViewController, UINavigationBarDelegate, UITableViewDataSource,
         
         setupNavBar.items = [item]
         
-        lifts.append(Lift(name: "Overhead Press", progression: 5, trainingMax: 0, personalRecord: 0, day: "Monday", bbbLift: "Overhead Press", assistanceLift: "Lat Pulldowns"))
-        lifts.append(Lift(name: "Deadlift", progression: 10, trainingMax: 0, personalRecord: 0, day: "Tuesday", bbbLift: "Deadlift", assistanceLift: "Ab work"))
-        lifts.append(Lift(name: "Bench Press", progression: 5, trainingMax: 0, personalRecord: 0, day: "Thursday", bbbLift: "Bench Press", assistanceLift: "Lat Pulldowns"))
-        lifts.append(Lift(name: "Squat", progression: 10, trainingMax: 0, personalRecord: 0, day: "Friday", bbbLift: "Squat", assistanceLift: "Ab work"))
+        lifts.append(Lift(name: "Overhead Press", progression: 5, trainingMax: 0, personalRecord: 0, day: "Monday", bbbLift: "Overhead Press", assistanceLifts: []))
+        lifts.append(Lift(name: "Deadlift", progression: 10, trainingMax: 0, personalRecord: 0, day: "Tuesday", bbbLift: "Deadlift", assistanceLifts: []))
+        lifts.append(Lift(name: "Bench Press", progression: 5, trainingMax: 0, personalRecord: 0, day: "Thursday", bbbLift: "Bench Press", assistanceLifts: []))
+        lifts.append(Lift(name: "Squat", progression: 10, trainingMax: 0, personalRecord: 0, day: "Friday", bbbLift: "Squat", assistanceLifts: []))
     }
     
     //MARK: UINavigationBarDelegate methods
@@ -122,6 +123,12 @@ class SetupVC: UIViewController, UINavigationBarDelegate, UITableViewDataSource,
             let defaults = UserDefaults.standard
             defaults.set(savedData, forKey: "lifts")
             defaults.set(roundValues[selectedRoundToIndex], forKey: "roundTo")
+            //Setting timer defaults to true
+            defaults.set(true, forKey: "531")
+            defaults.set(true, forKey: "BBB")
+            defaults.set(true, forKey: "Ass")
+            let array: [String] = []
+            defaults.set(array, forKey: "assistanceCatalog")
             for lift in lifts {
                 print("\(lift.name) + \(lift.trainingMax) + \(lift.progression)")
             }
