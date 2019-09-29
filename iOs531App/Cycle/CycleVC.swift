@@ -82,10 +82,49 @@ class CycleVC: UIViewController {
                 }
             }
             
+            sortLiftsByDay()
+            
             if let savedData = try? NSKeyedArchiver.archivedData(withRootObject: cachedLifts, requiringSecureCoding: false){
                 defaults.set(savedData, forKey: "cachedLifts")
             }
         }
+    }
+    
+    //MARK: Helper methods
+    func sortLiftsByDay(){
+        var newLifts: [Lift] = []
+        
+        let weekDayNumbers = [
+            "Sunday": 1,
+            "Monday": 2,
+            "Tuesday": 3,
+            "Wednesday": 4,
+            "Thursday": 5,
+            "Friday": 6,
+            "Saturday": 7,
+        ]
+        
+        var liftDays: [String] = []
+        for lift in cachedLifts {
+            liftDays.append(lift.day)
+        }
+        
+        liftDays.sort(by: { (weekDayNumbers[$0] ?? 7) < (weekDayNumbers[$1] ?? 7)})
+        
+        for day in liftDays {
+            var found = false
+            var i = 0
+            while !found {
+                if cachedLifts[i].day == day {
+                    newLifts.append(cachedLifts[i])
+                    cachedLifts.remove(at: i)
+                    found = true
+                }
+                i+=1
+            }
+        }
+        
+        cachedLifts = newLifts
     }
     
     //MARK: Bar Button Action
@@ -93,6 +132,7 @@ class CycleVC: UIViewController {
         //Recalculate the number of checkboxes there are.
     }
     
+    //MARK: Segue methods
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showWeek" {
             print("Show week segue called")

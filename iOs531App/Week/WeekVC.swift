@@ -15,7 +15,7 @@ protocol WeekVCDelegate: class {
 extension WeekVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("Number of rows in section called")
-        switch daysSegControl.selectedSegmentIndex {
+        switch section {
         case 0:
             return 3
         case 1:
@@ -38,6 +38,7 @@ extension WeekVC: UITableViewDataSource {
             cell.setDescription.text = "40% of your training max"
             return cell
         case 1:
+            print(tableView.numberOfRows(inSection: indexPath.section))
             if indexPath.row == 2{
                 let cell = tableView.dequeueReusableCell(withIdentifier: "prCell") as! PrCell
                 //Index is wrong
@@ -49,6 +50,8 @@ extension WeekVC: UITableViewDataSource {
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "setCell") as! SetCell
+                print(indexPath.row)
+                print(index)
                 let weight = round((percentagesToPass[indexPath.row] * liftsToPass[index].trainingMax)/roundTo!) * roundTo!
                 cell.setLabel.text = "\(repsToPass[indexPath.row]) reps at \(weight) lbs"
                 cell.setDescription.text = "\(Int(percentagesToPass[indexPath.row]*100.0))% of your training max"
@@ -76,15 +79,37 @@ extension WeekVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return headerTitles[section]
+        if section < 3 {
+            return "\(headerTitles[section]) - \(liftsToPass[daysSegControl.selectedSegmentIndex].name)"
+        } else {
+            return headerTitles[section]
+        }
     }
     
 }
 
 extension WeekVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath) as! PrCell
         
+        if indexPath.section==1 && indexPath.row==2 {
+            let cell = tableView.cellForRow(at: indexPath) as! PrCell
+            if cell.accessoryType == .checkmark {
+                cell.accessoryType = .none
+            } else {
+                cell.accessoryType = .checkmark
+                //start timer
+                timerEnabled(section: indexPath.section)
+            }
+        }
+        
+        let cell = tableView.cellForRow(at: indexPath) as! SetCell
+        if cell.accessoryType == .checkmark {
+            cell.accessoryType = .none
+        } else {
+            cell.accessoryType = .checkmark
+            //start timer
+            timerEnabled(section: indexPath.section)
+        }
     }
 }
 
@@ -132,28 +157,37 @@ class WeekVC: UIViewController {
         return sets
     }
     
-    
     func nameSegmentedControls(){
-        let weekDayNumbers = [
-            "Sunday": 1,
-            "Monday": 2,
-            "Tuesday": 3,
-            "Wednesday": 4,
-            "Thursday": 5,
-            "Friday": 6,
-            "Saturday": 7,
-        ]
-        
-        var liftDays: [String] = []
-        for lift in liftsToPass {
-            liftDays.append(lift.day)
+        for i in 0..<liftsToPass.count {
+            daysSegControl.setTitle(liftsToPass[i].day, forSegmentAt: i)
         }
+    }
+    
+    func timerEnabled(section: Int){
+        let defaults = UserDefaults.standard
         
-        liftDays.sort(by: { (weekDayNumbers[$0] ?? 7) < (weekDayNumbers[$1] ?? 7)})
-        
-        for i in 0..<liftDays.count {
-            daysSegControl.setTitle(liftDays[i], forSegmentAt: i)
+        switch section {
+        case 1:
+            let timer = defaults.value(forKey: "531") as! Bool
+            if timer {
+                startTimer()
+            }
+        case 2:
+            let timer = defaults.value(forKey: "BBB") as! Bool
+            if timer {
+                startTimer()
+            }
+        case 3:
+            let timer = defaults.value(forKey: "Ass") as! Bool
+            if timer {
+                startTimer()
+            }
+        default:
+            ()
         }
+    }
+    
+    func startTimer(){
         
     }
 }
