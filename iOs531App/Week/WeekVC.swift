@@ -90,9 +90,11 @@ extension WeekVC: UITableViewDataSource {
 
 extension WeekVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         
         if indexPath.section==1 && indexPath.row==2 {
             let cell = tableView.cellForRow(at: indexPath) as! PrCell
+            //As to input new PR first if already checked
             if cell.accessoryType == .checkmark {
                 cell.accessoryType = .none
             } else {
@@ -100,15 +102,15 @@ extension WeekVC: UITableViewDelegate {
                 //start timer
                 timerEnabled(section: indexPath.section)
             }
-        }
-        
-        let cell = tableView.cellForRow(at: indexPath) as! SetCell
-        if cell.accessoryType == .checkmark {
-            cell.accessoryType = .none
         } else {
-            cell.accessoryType = .checkmark
-            //start timer
-            timerEnabled(section: indexPath.section)
+            let cell = tableView.cellForRow(at: indexPath) as! SetCell
+            if cell.accessoryType == .checkmark {
+                cell.accessoryType = .none
+            } else {
+                cell.accessoryType = .checkmark
+                //start timer
+                timerEnabled(section: indexPath.section)
+            }
         }
     }
 }
@@ -188,6 +190,13 @@ class WeekVC: UIViewController {
     }
     
     func startTimer(){
-        
+        performSegue(withIdentifier: "showTimer", sender: self)
     }
+//    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "showTimer" {
+//            var vc = segue.destination as! TimerVCViewController
+//
+//        }
+//    }
 }
