@@ -127,8 +127,18 @@ class SetupVC: UIViewController, UINavigationBarDelegate, UITableViewDataSource,
             defaults.set(true, forKey: "531")
             defaults.set(true, forKey: "BBB")
             defaults.set(true, forKey: "Ass")
-            let array: [String] = []
-            defaults.set(array, forKey: "assistanceCatalog")
+            //One time initialization for assistance catalog array
+            let assistanceArray: [String] = []
+            defaults.set(assistanceArray, forKey: "assistanceCatalog")
+            //One time initialization for checkbox state arrays
+            var checkboxStateArray: [[Bool]] = [[], [], [], []]
+            for i in 0...3 {
+                for _ in 0...10 {
+                    checkboxStateArray[i].append(false)
+                }
+            }
+            defaults.set(checkboxStateArray, forKey: "checkboxStates")
+            
             for lift in lifts {
                 print("\(lift.name) + \(lift.trainingMax) + \(lift.progression)")
             }

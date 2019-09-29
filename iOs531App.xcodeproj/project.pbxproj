@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E2A7088233F97820080479D /* WeekDisplayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2A7087233F97820080479D /* WeekDisplayCell.swift */; };
 		1E44EF18232E98B2006F7E6C /* TrainingMaxCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E44EF17232E98B2006F7E6C /* TrainingMaxCell.swift */; };
+		1E541A7F233FC1F300BAF1FF /* SetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E541A7E233FC1F300BAF1FF /* SetCell.swift */; };
+		1E541A81233FC24F00BAF1FF /* PrCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E541A80233FC24F00BAF1FF /* PrCell.swift */; };
+		1E541A84233FC31F00BAF1FF /* WeekVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E541A83233FC31F00BAF1FF /* WeekVC.swift */; };
 		1E64982123316CD600C94146 /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E64982023316CD600C94146 /* TextFieldCell.swift */; };
 		1E68FD312323FA1200631945 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E68FD302323FA1200631945 /* AppDelegate.swift */; };
 		1E68FD332323FA1200631945 /* SetupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E68FD322323FA1200631945 /* SetupVC.swift */; };
@@ -44,7 +48,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1E2A7087233F97820080479D /* WeekDisplayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDisplayCell.swift; sourceTree = "<group>"; };
 		1E44EF17232E98B2006F7E6C /* TrainingMaxCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingMaxCell.swift; sourceTree = "<group>"; };
+		1E541A7E233FC1F300BAF1FF /* SetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetCell.swift; sourceTree = "<group>"; };
+		1E541A80233FC24F00BAF1FF /* PrCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrCell.swift; sourceTree = "<group>"; };
+		1E541A83233FC31F00BAF1FF /* WeekVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekVC.swift; sourceTree = "<group>"; };
 		1E64982023316CD600C94146 /* TextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
 		1E68FD2D2323FA1200631945 /* Fit Don't Quit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fit Don't Quit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E68FD302323FA1200631945 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +104,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E2A7086233F97530080479D /* Cycle */ = {
+			isa = PBXGroup;
+			children = (
+				1E2A7087233F97820080479D /* WeekDisplayCell.swift */,
+				1EB22DBF232BE20F00099FBB /* CycleVC.swift */,
+			);
+			path = Cycle;
+			sourceTree = "<group>";
+		};
+		1E541A82233FC2FA00BAF1FF /* Week */ = {
+			isa = PBXGroup;
+			children = (
+				1E541A7E233FC1F300BAF1FF /* SetCell.swift */,
+				1E541A80233FC24F00BAF1FF /* PrCell.swift */,
+				1E541A83233FC31F00BAF1FF /* WeekVC.swift */,
+			);
+			path = Week;
+			sourceTree = "<group>";
+		};
 		1E64981F23316CAC00C94146 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -132,10 +159,11 @@
 				1E68FD302323FA1200631945 /* AppDelegate.swift */,
 				1E9851D0233CDA0E00E7DAE7 /* Popover */,
 				1E64981F23316CAC00C94146 /* Settings */,
+				1E2A7086233F97530080479D /* Cycle */,
+				1E541A82233FC2FA00BAF1FF /* Week */,
 				1EBF0B9F232FBDFF00502394 /* Lifts */,
 				1EBF0B9E232F9F5500502394 /* ConfigCells */,
 				1E68FD322323FA1200631945 /* SetupVC.swift */,
-				1EB22DBF232BE20F00099FBB /* CycleVC.swift */,
 				1EBF0BA4232FDCBC00502394 /* MainController.swift */,
 				1E68FD342323FA1200631945 /* Main.storyboard */,
 				1EA611152337AC4F001B3710 /* TPKeyboard */,
@@ -300,6 +328,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E541A7F233FC1F300BAF1FF /* SetCell.swift in Sources */,
 				1E7D304B2337AFC200E7EEB3 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				1E718CD9233CF82900CBB1AC /* AssistanceExerciseCell.swift in Sources */,
 				1E78D9802332A99F0058306B /* DayAndLiftPickerCell.swift in Sources */,
@@ -309,6 +338,8 @@
 				1EBF0BA5232FDCBC00502394 /* MainController.swift in Sources */,
 				1EB22DC4232E8FA500099FBB /* ProgressionCell.swift in Sources */,
 				1EB22DC0232BE20F00099FBB /* CycleVC.swift in Sources */,
+				1E2A7088233F97820080479D /* WeekDisplayCell.swift in Sources */,
+				1E541A81233FC24F00BAF1FF /* PrCell.swift in Sources */,
 				1E68FD332323FA1200631945 /* SetupVC.swift in Sources */,
 				1EBF0BA3232FC43600502394 /* Lift.swift in Sources */,
 				1E7D304C2337AFC200E7EEB3 /* TPKeyboardAvoidingTableView.m in Sources */,
@@ -317,6 +348,7 @@
 				1EB22DC2232C0F0800099FBB /* RoundToCell.swift in Sources */,
 				1E6E790A233A47A700053941 /* AssistanceCell.swift in Sources */,
 				1E64982123316CD600C94146 /* TextFieldCell.swift in Sources */,
+				1E541A84233FC31F00BAF1FF /* WeekVC.swift in Sources */,
 				1E6E790C233A531800053941 /* AssistanceCatalogVC.swift in Sources */,
 				1E9851CF233CD95C00E7DAE7 /* AssistanceInputCell.swift in Sources */,
 				1E96B1952337D59200B28A85 /* TimerCell.swift in Sources */,

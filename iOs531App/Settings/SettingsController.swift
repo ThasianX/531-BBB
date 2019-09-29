@@ -306,8 +306,6 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
             tableView.endUpdates()
         case 1:
             tableView.deselectRow(at: indexPath, animated: true)
-            
-            
         case 2:
             //Deselecting the row removes the gray fill of the cell. Also makes clicking the cell look more animated
             tableView.deselectRow(at: indexPath, animated: true)
