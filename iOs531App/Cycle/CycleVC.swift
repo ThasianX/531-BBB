@@ -21,11 +21,13 @@ extension CycleVC: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "weekDisplayCell", for: indexPath) as! WeekDisplayCell
         cell.weekLabel.text = weekTitles[indexPath.row]
         cell.trainingPercentagesLabel.text = weekDescriptions[indexPath.row]
+        //Filters the number of trues in the array
         let numberOfTrue = checkboxStates[indexPath.row].filter{$0}.count
         print("There are \(numberOfTrue) trues out in the array of  \(checkboxStates[indexPath.row]) booleans")
-        let progress = Float(numberOfTrue / checkboxStates[indexPath.row].count)
+        let progress = Float(Double(numberOfTrue) / Double(checkboxStates[indexPath.row].count))
+        print("Progress is \(100*progress)%")
         cell.progressView.setProgress(progress, animated: true)
-        cell.progressViewLabel.text = "\(Int(progress))% complete"
+        cell.progressViewLabel.text = "\(Int(100*progress))% complete"
         
         return cell
     }
@@ -39,8 +41,23 @@ extension CycleVC: UICollectionViewDelegate {
 }
 
 extension CycleVC: WeekVCDelegate {
-    func setClicked(index: Int) {
+    func setCheckedState(section: Int, index: Int, checked: Bool) {
+        switch section {
+        case 0:
+            checkboxStates[selectedIndex!][index] = checked
+        case 1:
+            checkboxStates[selectedIndex!][index+3] = checked
+        case 2:
+            checkboxStates[selectedIndex!][index+6] = checked
+        default:
+            checkboxStates[selectedIndex!][index+11] = checked
+        }
         
+        UserDefaults.standard.set(checkboxStates, forKey: "checkboxStates")
+    }
+    
+    func workoutComplete() {
+        collectionView.reloadItems(at: [IndexPath(row: selectedIndex!, section: 0)])
     }
 }
 
@@ -54,44 +71,45 @@ class CycleVC: UIViewController {
     let weekTitles = ["Week 1", "Week 2", "Week 3", "Week 4"]
     let weekDescriptions = ["5/3/1 - 65% | 75% | 85%", "5/3/1 - 70% | 80% | 90%", "5/3/1 - 75% | 85% | 95%", "Deload - 40% | 50% | 60%"]
     let weekReps = [[5,5,5],[3,3,3], [5,3,1],[5,5,5]]
-    var checkboxStates : [[Bool]] = [[]]
-    var cachedLifts: [Lift] = []
+    var checkboxStates : [[Bool]]!
+    var cachedLifts: [Lift]!
     let weekPercentages = [[0.65,0.75,0.85], [0.70,0.80,0.90], [0.75,0.85,0.95], [0.40,0.50,0.60]]
     var selectedIndex: Int?
+    var assistanceForEachDay: [Int] = []
     
     override func viewDidLoad() {
         let defaults = UserDefaults.standard
-        checkboxStates = defaults.value(forKey: "checkboxStates") as! [[Bool]]
+        checkboxStates = defaults.value(forKey: "checkboxStates") as? [[Bool]]
         
         if defaults.value(forKey: "notFirstCycle") != nil{
-            print("Setting cached lifts1")
             if let savedData = defaults.value(forKey: "cachedLifts") as? Data {
                 if let decodedData = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(savedData) as? [Lift] {
-                    print("Setting cached lifts2")
                     cachedLifts = decodedData
                 }
             }
+            assistanceForEachDay = defaults.value(forKey: "assistanceForEachDay") as! [Int]
         } else {
             defaults.set(true, forKey: "notFirstCycle")
-            print("Setting cached lifts3")
             
             if let savedData = defaults.value(forKey: "lifts") as? Data {
                 if let decodedData = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(savedData) as? [Lift] {
-                    print("Setting cached lifts4")
                     cachedLifts = decodedData
                 }
             }
             
-            sortLiftsByDay()
+            sortLiftsByDayAndCountAssistance()
             
-            if let savedData = try? NSKeyedArchiver.archivedData(withRootObject: cachedLifts, requiringSecureCoding: false){
+            if let savedData = try? NSKeyedArchiver.archivedData(withRootObject: cachedLifts!, requiringSecureCoding: false){
                 defaults.set(savedData, forKey: "cachedLifts")
             }
+            
+            defaults.set(checkboxStates, forKey: "checkboxStates")
+            defaults.set(assistanceForEachDay, forKey: "assistanceForEachDay")
         }
     }
     
     //MARK: Helper methods
-    func sortLiftsByDay(){
+    private func sortLiftsByDayAndCountAssistance(){
         var newLifts: [Lift] = []
         
         let weekDayNumbers = [
@@ -104,9 +122,14 @@ class CycleVC: UIViewController {
             "Saturday": 7,
         ]
         
+        //Will be used to track number of assistance exercises
+        var assistanceCounter = 0
+        
         var liftDays: [String] = []
         for lift in cachedLifts {
             liftDays.append(lift.day)
+            assistanceCounter += lift.assistanceLifts.count
+            assistanceForEachDay.append(lift.assistanceLifts.count)
         }
         
         liftDays.sort(by: { (weekDayNumbers[$0] ?? 7) < (weekDayNumbers[$1] ?? 7)})
@@ -124,12 +147,51 @@ class CycleVC: UIViewController {
             }
         }
         
+        //Sorted lifts array - Days asc
         cachedLifts = newLifts
+        
+        //Appending the number of assistance exercises
+        for i in 0..<3 {
+            for _ in 0..<assistanceCounter {
+                checkboxStates[i].append(false)
+            }
+        }
+    }
+    
+    private func resetCheckedStatesAndAssistance(){
+        
+        for i in 0...3 {
+            checkboxStates[i].removeAll()
+            for _ in 0...43 {
+                checkboxStates[i].append(false)
+            }
+        }
+        assistanceForEachDay.removeAll()
     }
     
     //MARK: Bar Button Action
     @IBAction func resetCycle(_ sender: UIBarButtonItem) {
-        //Recalculate the number of checkboxes there are.
+        let defaults = UserDefaults.standard
+        
+        resetCheckedStatesAndAssistance()
+        
+        if let savedData = defaults.value(forKey: "lifts") as? Data {
+            if let decodedData = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(savedData) as? [Lift] {
+                cachedLifts = decodedData
+            }
+        }
+        
+        sortLiftsByDayAndCountAssistance()
+        
+        if let savedData = try? NSKeyedArchiver.archivedData(withRootObject: cachedLifts!, requiringSecureCoding: false){
+            defaults.set(savedData, forKey: "cachedLifts")
+        }
+        
+        defaults.set(checkboxStates, forKey: "checkboxStates")
+        defaults.set(assistanceForEachDay, forKey: "assistanceForEachDay")
+        
+        collectionView.reloadSections(IndexSet(integer: 0))
+        
     }
     
     //MARK: Segue methods
@@ -142,6 +204,8 @@ class CycleVC: UIViewController {
             vc.navigationItem.title = weekTitles[selectedIndex!]
             vc.repsToPass = weekReps[selectedIndex!]
             vc.roundTo = UserDefaults.standard.value(forKey: "roundTo") as? Double
+            vc.checkboxStates = checkboxStates[selectedIndex!]
+            vc.assistanceForEachDay = assistanceForEachDay
             vc.delegate = self
         }
     }

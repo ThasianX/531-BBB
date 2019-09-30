@@ -26,9 +26,11 @@ class TimerVC: UIViewController {
     //MARK: Data
     var shapeLayer: CAShapeLayer!
     var pulsatingLayer: CAShapeLayer!
-    var timeLeft: TimeInterval = 90
+    var timeLeft: TimeInterval!
     var timer = Timer()
     var endTime: Date?
+    var finishedSet: String!
+    var nextSet: String!
     
     let timerLabel: UILabel = {
         let label = UILabel()
@@ -50,8 +52,26 @@ class TimerVC: UIViewController {
         setUpCircleLayers()
         
         addTimeLabel()
+        addFinishedSetLabel()
+        addNextSetLabel()
         
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
+//        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
+        
+        print("Attempting to animate timer stroke")
+        animateTimer()
+        //Defines future end time by adding timeLeft to date
+        endTime = Date().addingTimeInterval(timeLeft)
+        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+        
+    }
+    
+    private func addFinishedSetLabel(){
+        let label = UILabel()
+        
+        
+    }
+    
+    private func addNextSetLabel(){
         
     }
     
@@ -59,6 +79,7 @@ class TimerVC: UIViewController {
         return .lightContent
     }
     
+    //MARK: Private functions
     private func setUpCircleLayers(){
         //Creates pulsating layer
         pulsatingLayer = createCircleShapeLayer(strokeColor: .clear, fillColor: UIColor.pulsatingFillColor)
@@ -98,8 +119,6 @@ class TimerVC: UIViewController {
         layer.position = view.center
         return layer
     }
-    
-    //MARK: Private functions
     
     private func addTimeLabel() {
         //I ignore the x and y values for position here since I'm going to center it anyway. Height and width are 100
@@ -141,11 +160,12 @@ class TimerVC: UIViewController {
     }
     
     @objc func handleForeground(){
-        print("Back from foreground")
+        print("Entering foreground")
         animatePulsatingLayer()
     }
     
     private func animatePulsatingLayer(){
+        print("Animating pulsating layer")
         let animation = CABasicAnimation(keyPath: "transform.scale")
         animation.toValue = 1.3
         animation.duration = 0.8

@@ -9,7 +9,8 @@
 import UIKit
 
 protocol WeekVCDelegate: class {
-    func setClicked(index: Int)
+    func setCheckedState(section: Int, index: Int, checked: Bool)
+    func workoutComplete()
 }
 
 extension WeekVC: UITableViewDataSource {
@@ -36,6 +37,12 @@ extension WeekVC: UITableViewDataSource {
             let weight = round((0.4 * liftsToPass[index].trainingMax)/roundTo!) * roundTo!
             cell.setLabel.text = "5 reps at \(weight) lbs"
             cell.setDescription.text = "40% of your training max"
+            if isChecked(indexPath: indexPath){
+                cell.accessoryType = .checkmark
+            } else {
+                cell.accessoryType = .none
+            }
+            
             return cell
         case 1:
             print(tableView.numberOfRows(inSection: indexPath.section))
@@ -47,6 +54,12 @@ extension WeekVC: UITableViewDataSource {
                 cell.setDescription.text = "\(Int(percentagesToPass[2]*100.0))% of your training max"
                 //Index is wrong.
                 cell.prLabel.text = "Beat your previous PR of \(liftsToPass[index].personalRecord)"
+                if isChecked(indexPath: indexPath){
+                    cell.accessoryType = .checkmark
+                } else {
+                    cell.accessoryType = .none
+                }
+                
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "setCell") as! SetCell
@@ -55,6 +68,12 @@ extension WeekVC: UITableViewDataSource {
                 let weight = round((percentagesToPass[indexPath.row] * liftsToPass[index].trainingMax)/roundTo!) * roundTo!
                 cell.setLabel.text = "\(repsToPass[indexPath.row]) reps at \(weight) lbs"
                 cell.setDescription.text = "\(Int(percentagesToPass[indexPath.row]*100.0))% of your training max"
+                if isChecked(indexPath: indexPath){
+                    cell.accessoryType = .checkmark
+                } else {
+                    cell.accessoryType = .none
+                }
+                
                 return cell
             }
         case 2:
@@ -63,6 +82,12 @@ extension WeekVC: UITableViewDataSource {
             let weight = round((0.6 * liftsToPass[index].trainingMax)/roundTo!) * roundTo!
             cell.setLabel.text = "10 reps at \(weight) lbs"
             cell.setDescription.text = "60% of your training max"
+            if isChecked(indexPath: indexPath){
+                cell.accessoryType = .checkmark
+            } else {
+                cell.accessoryType = .none
+            }
+            
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "setCell") as! SetCell
@@ -90,29 +115,105 @@ extension WeekVC: UITableViewDataSource {
 
 extension WeekVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if indexPath.section==1 && indexPath.row==2 {
-            let cell = tableView.cellForRow(at: indexPath) as! PrCell
-            //As to input new PR first if already checked
+        if indexPath.section == 0 {
+            let cell = self.tableView.cellForRow(at: indexPath) as! SetCell
             if cell.accessoryType == .checkmark {
                 cell.accessoryType = .none
+                setChecked(indexPath: indexPath, checked: false)
             } else {
                 cell.accessoryType = .checkmark
-                //start timer
-                timerEnabled(section: indexPath.section)
+                setChecked(indexPath: indexPath, checked: true)
+            }
+            return
+        }
+        
+        var setDescription: String?
+        var nextSetDescription: String?
+        
+        if indexPath.section == 1 {
+            
+            if indexPath.row == 0 {
+                
+                let cell = self.tableView.cellForRow(at: indexPath) as! SetCell
+                if cell.accessoryType == .checkmark {
+                    cell.accessoryType = .none
+                    setChecked(indexPath: indexPath, checked: false)
+                    return
+                } else {
+                    cell.accessoryType = .checkmark
+                    let nextIndex = IndexPath(row: 1, section: 1)
+                    let nextCell = self.tableView.cellForRow(at: nextIndex) as! SetCell
+                    setDescription = "Completed: \(cell.setLabel.text!) of \(liftsToPass[daysSegControl.selectedSegmentIndex].name)"
+                    nextSetDescription = "Upcoming: \(nextCell.setLabel.text!) of \(liftsToPass[daysSegControl.selectedSegmentIndex].name)"
+                    setChecked(indexPath: indexPath, checked: true)
+                }
+                
+            } else if indexPath.row == 1 {
+                
+                let cell = self.tableView.cellForRow(at: indexPath) as! SetCell
+                if cell.accessoryType == .checkmark {
+                    cell.accessoryType = .none
+                    setChecked(indexPath: indexPath, checked: false)
+                    return
+                } else {
+                    cell.accessoryType = .checkmark
+                    let nextIndex = IndexPath(row: 2, section: 1)
+                    let nextCell = self.tableView.cellForRow(at: nextIndex) as! PrCell
+                    setDescription = "Completed: \(cell.setLabel.text!) of \(liftsToPass[daysSegControl.selectedSegmentIndex].name)"
+                    nextSetDescription = "Upcoming: \(nextCell.setLabel.text!) of \(liftsToPass[daysSegControl.selectedSegmentIndex].name)"
+                    setChecked(indexPath: indexPath, checked: true)
+                }
+                
+            } else {
+                
+                let cell = self.tableView.cellForRow(at: indexPath) as! PrCell
+                
+                if cell.accessoryType == .checkmark {
+                    cell.accessoryType = .none
+                    setChecked(indexPath: indexPath, checked: false)
+                    return
+                } else {
+                    //Ask to input new PR first if not checked
+                    cell.accessoryType = .checkmark
+                    //start timer
+                    let nextIndex = IndexPath(row: 0, section: 2)
+                    let nextCell = self.tableView.cellForRow(at: nextIndex) as! SetCell
+                    setDescription = "Completed: \(cell.setLabel.text!) of \(liftsToPass[daysSegControl.selectedSegmentIndex].name)"
+                    nextSetDescription = "Upcoming: \(nextCell.setLabel.text!) of \(liftsToPass[daysSegControl.selectedSegmentIndex].bbbLift)"
+                    setChecked(indexPath: indexPath, checked: true)
+                }
+            }
+            
+        } else if indexPath.section == 2 {
+            let cell = self.tableView.cellForRow(at: indexPath) as! SetCell
+            if cell.accessoryType == .checkmark {
+                cell.accessoryType = .none
+                setChecked(indexPath: indexPath, checked: false)
+                return
+            } else {
+                cell.accessoryType = .checkmark
+                setChecked(indexPath: indexPath, checked: true)
+                
+                setDescription = "Completed: \(cell.setLabel.text!) of \(liftsToPass[daysSegControl.selectedSegmentIndex].bbbLift)"
+                
+                if let nextCellIndexPath = nextCellIndexPath(currentIndexPath: indexPath) {
+                    let nextCell = self.tableView.cellForRow(at: nextCellIndexPath) as? SetCell
+                    
+                    nextSetDescription = "Upcoming: \(nextCell!.setLabel.text!) of \(liftsToPass[daysSegControl.selectedSegmentIndex].bbbLift)"
+                } else {
+                    nextSetDescription = "This is your last set! Well done!"
+                }
             }
         } else {
-            let cell = tableView.cellForRow(at: indexPath) as! SetCell
-            if cell.accessoryType == .checkmark {
-                cell.accessoryType = .none
-            } else {
-                cell.accessoryType = .checkmark
-                //start timer
-                timerEnabled(section: indexPath.section)
-            }
+            //Do assistance cell stuff here
         }
+        
+        timerEnabled(section: indexPath.section, setDescription: setDescription!, nextSetDescription: nextSetDescription!)
     }
+    
 }
 
 class WeekVC: UIViewController {
@@ -128,11 +229,21 @@ class WeekVC: UIViewController {
     var percentagesToPass: [Double]!
     var repsToPass: [Int]!
     var roundTo: Double!
+    var selectedTimer: Int?
+    var currentSetDescription: String?
+    var nextSetDescription: String?
+    var checkboxStates: [Bool]!
+    var assistanceForEachDay: [Int]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         nameSegmentedControls()
         //Use segmented control to select the index of where the user last left off
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        delegate?.workoutComplete()
     }
     
     //MARK: Segmented Control Action
@@ -165,38 +276,118 @@ class WeekVC: UIViewController {
         }
     }
     
-    func timerEnabled(section: Int){
+    func timerEnabled(section: Int, setDescription: String, nextSetDescription: String){
         let defaults = UserDefaults.standard
+        
+        currentSetDescription = setDescription
+        self.nextSetDescription = nextSetDescription
         
         switch section {
         case 1:
             let timer = defaults.value(forKey: "531") as! Bool
             if timer {
-                startTimer()
+                selectedTimer = 0
+                performSegue(withIdentifier: "showTimer", sender: self)
             }
         case 2:
             let timer = defaults.value(forKey: "BBB") as! Bool
             if timer {
-                startTimer()
+                selectedTimer = 1
+                performSegue(withIdentifier: "showTimer", sender: self)
             }
         case 3:
             let timer = defaults.value(forKey: "Ass") as! Bool
             if timer {
-                startTimer()
+                selectedTimer = 2
+                performSegue(withIdentifier: "showTimer", sender: self)
             }
         default:
             ()
         }
     }
     
-    func startTimer(){
-        performSegue(withIdentifier: "showTimer", sender: self)
+    func nextCellIndexPath(currentIndexPath: IndexPath) -> IndexPath? {
+        let startRow = currentIndexPath.row
+        let startSection = currentIndexPath.section
+        
+        var nextRow = startRow
+        var nextSection = startSection
+        
+        if nextSection == 3 && nextRow == (tableView.numberOfRows(inSection: 3)-1){
+            return nil
+        } else if startRow == (tableView.numberOfRows(inSection: startSection)-1) {
+            if tableView.numberOfRows(inSection: 3) == 0 {
+                return nil
+            } else {
+                nextSection+=1
+                nextRow = 0
+            }
+        } else {
+            nextRow+=1
+        }
+        
+        return IndexPath(row: nextRow, section: nextSection)
     }
-//    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "showTimer" {
-//            var vc = segue.destination as! TimerVCViewController
-//
-//        }
-//    }
+    
+    private func isChecked(indexPath: IndexPath) -> Bool{
+        let row = indexPath.row
+        let section = indexPath.section
+        
+        var pageIndex = 0
+        for i in 0..<daysSegControl.selectedSegmentIndex {
+            pageIndex += assistanceForEachDay[i]+11 
+        }
+        
+        switch section {
+        case 0:
+            return checkboxStates[pageIndex+row]
+        case 1:
+            return checkboxStates[pageIndex+row+3]
+        case 2:
+            return checkboxStates[pageIndex+row+6]
+        default:
+            return checkboxStates[pageIndex+row+11]
+        }
+    }
+    
+    private func setChecked(indexPath: IndexPath, checked: Bool){
+        let row = indexPath.row
+        let section = indexPath.section
+        
+        var pageIndex = 0
+        for i in 0..<daysSegControl.selectedSegmentIndex {
+            pageIndex += assistanceForEachDay[i]+11
+        }
+        
+        let index = pageIndex+row
+        
+        switch section {
+        case 0:
+            checkboxStates[index] = checked
+        case 1:
+            checkboxStates[index+3] = checked
+        case 2:
+            checkboxStates[index+6] = checked
+        default:
+            checkboxStates[index+11] = checked
+        }
+        
+        delegate?.setCheckedState(section: section, index: index, checked: checked)
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showTimer" {
+            let vc = segue.destination as! TimerVC
+            if let timerIndex = selectedTimer {
+                let time = UserDefaults.standard.value(forKey: "timer\(timerIndex)") as! Double
+                vc.timeLeft = time
+                vc.finishedSet = currentSetDescription
+                vc.nextSet = nextSetDescription
+                print("Starting time is \(time) seconds")
+                print("\(currentSetDescription!)")
+                print("\(nextSetDescription!)")
+            }
+        }
+    }
 }

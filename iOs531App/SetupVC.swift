@@ -133,11 +133,16 @@ class SetupVC: UIViewController, UINavigationBarDelegate, UITableViewDataSource,
             //One time initialization for checkbox state arrays
             var checkboxStateArray: [[Bool]] = [[], [], [], []]
             for i in 0...3 {
-                for _ in 0...10 {
+                for _ in 0...43 {
                     checkboxStateArray[i].append(false)
                 }
             }
             defaults.set(checkboxStateArray, forKey: "checkboxStates")
+            
+            //Setting initial values for each timer
+            defaults.set(90, forKey: "timer0")
+            defaults.set(90, forKey: "timer1")
+            defaults.set(90, forKey: "timer2")
             
             for lift in lifts {
                 print("\(lift.name) + \(lift.trainingMax) + \(lift.progression)")
