@@ -24,7 +24,7 @@ extension WeekVC: UITableViewDataSource {
         case 2:
             return 5
         default:
-            return countSetsOfAssistance(assistance: liftsToPass[daysSegControl.selectedSegmentIndex].assistanceLifts)
+            return assistanceForEachDay[daysSegControl.selectedSegmentIndex]
         }
     }
     
@@ -92,9 +92,11 @@ extension WeekVC: UITableViewDataSource {
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "setCell") as! SetCell
             //Need index to find out the assistance lifts
-            var assistance = "Lat work"
-            cell.setLabel.text = "10 reps of \(assistance)"
-            cell.setDescription.isHidden = true
+            let index = assistanceForEachDay[daysSegControl.selectedSegmentIndex]-assistanceForEachDay[0]+indexPath.row
+            
+            cell.setLabel.text = "\(assistanceChunks[index].liftName) for \(assistanceChunks[index].reps) reps"
+            cell.setDescription.text = "Keep that grind going"
+            
             return cell
         }
     }
@@ -176,13 +178,35 @@ extension WeekVC: UITableViewDelegate {
                     setChecked(indexPath: indexPath, checked: false)
                     return
                 } else {
+                    let lift = liftsToPass[daysSegControl.selectedSegmentIndex]
                     //Ask to input new PR first if not checked
-                    cell.accessoryType = .checkmark
+                    let alert = UIAlertController(title: "Personal Record", message: "Enter your new personal record for \(lift.name)", preferredStyle: .alert)
+                    alert.addTextField(configurationHandler: { (textField) in
+                        textField.placeholder = "Enter new PR"
+                        textField.keyboardType = .numberPad
+                    })
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                        let newPrTextField = alert.textFields![0] as UITextField
+                        if let newPr = newPrTextField.text, let prVal = Int(newPr){
+                            //First, add newPr to the prValues array
+                            self.addNewPr(newPr:prVal)
+                            if prVal > lift.personalRecord {
+                                cell.prLabel.text = "Achieved a new PR of \(prVal)"
+                                self.updatePr(newPr: prVal)
+                            } else {
+                                cell.prLabel.text = "Not quite this time. Beat \(lift.personalRecord) reps next time"
+                            }
+                        }
+                        cell.accessoryType = .checkmark
+                    } ))
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil ))
+                    
+                    self.present(alert, animated: true, completion: nil)
                     //start timer
                     let nextIndex = IndexPath(row: 0, section: 2)
                     let nextCell = self.tableView.cellForRow(at: nextIndex) as! SetCell
-                    setDescription = "Completed: \(cell.setLabel.text!) of \(liftsToPass[daysSegControl.selectedSegmentIndex].name)"
-                    nextSetDescription = "Upcoming: \(nextCell.setLabel.text!) of \(liftsToPass[daysSegControl.selectedSegmentIndex].bbbLift)"
+                    setDescription = "Completed: \(cell.setLabel.text!) of \(lift.name)"
+                    nextSetDescription = "Upcoming: \(nextCell.setLabel.text!) of \(lift.bbbLift)"
                     setChecked(indexPath: indexPath, checked: true)
                 }
             }
@@ -234,12 +258,12 @@ class WeekVC: UIViewController {
     var nextSetDescription: String?
     var checkboxStates: [Bool]!
     var assistanceForEachDay: [Int]!
+    var assistanceChunks: [AssistanceChunk]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         nameSegmentedControls()
         //Use segmented control to select the index of where the user last left off
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -261,6 +285,20 @@ class WeekVC: UIViewController {
     }
     
     //MARK: Helper methods
+    
+    func updatePr(newPr: Int){
+        liftsToPass[daysSegControl.selectedSegmentIndex].personalRecord = newPr
+        if let savedData = try? NSKeyedArchiver.archivedData(withRootObject: liftsToPass!, requiringSecureCoding: false){
+            UserDefaults.standard.set(savedData, forKey: "cachedLifts")
+        }
+    }
+    
+    func addNewPr(newPr: Int){
+        var prValues = UserDefaults.standard.value(forKey: "prValues") as! [[Int]]
+        prValues[daysSegControl.selectedSegmentIndex].append(newPr)
+        UserDefaults.standard.set(prValues, forKey: "prValues")
+    }
+    
     func countSetsOfAssistance(assistance: [String]) -> Int {
         var sets = 0
         for exercise in assistance{

@@ -27,6 +27,7 @@
 		1E7D304A2337AFC200E7EEB3 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7D30442337AFC200E7EEB3 /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
 		1E7D304B2337AFC200E7EEB3 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7D30452337AFC200E7EEB3 /* TPKeyboardAvoidingScrollView.m */; };
 		1E7D304C2337AFC200E7EEB3 /* TPKeyboardAvoidingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7D30462337AFC200E7EEB3 /* TPKeyboardAvoidingTableView.m */; };
+		1E8BA06723439EA800B1B81F /* AssistanceChunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8BA06623439EA800B1B81F /* AssistanceChunk.swift */; };
 		1E96B1952337D59200B28A85 /* TimerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96B1942337D59200B28A85 /* TimerCell.swift */; };
 		1E9851CF233CD95C00E7DAE7 /* AssistanceInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9851CE233CD95C00E7DAE7 /* AssistanceInputCell.swift */; };
 		1EB22DC0232BE20F00099FBB /* CycleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB22DBF232BE20F00099FBB /* CycleVC.swift */; };
@@ -78,6 +79,7 @@
 		1E7D30482337AFC200E7EEB3 /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
 		1E7D30492337AFC200E7EEB3 /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
 		1E7D304D2337AFE200E7EEB3 /* iOs531App-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iOs531App-Bridging-Header.h"; sourceTree = "<group>"; };
+		1E8BA06623439EA800B1B81F /* AssistanceChunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistanceChunk.swift; sourceTree = "<group>"; };
 		1E96B1942337D59200B28A85 /* TimerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerCell.swift; sourceTree = "<group>"; };
 		1E9851CE233CD95C00E7DAE7 /* AssistanceInputCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistanceInputCell.swift; sourceTree = "<group>"; };
 		1EB22DBF232BE20F00099FBB /* CycleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CycleVC.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				1E541A7E233FC1F300BAF1FF /* SetCell.swift */,
 				1E541A80233FC24F00BAF1FF /* PrCell.swift */,
 				1E541A83233FC31F00BAF1FF /* WeekVC.swift */,
+				1E8BA06623439EA800B1B81F /* AssistanceChunk.swift */,
 			);
 			path = Week;
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 				1E68FD312323FA1200631945 /* AppDelegate.swift in Sources */,
 				1E44EF18232E98B2006F7E6C /* TrainingMaxCell.swift in Sources */,
 				1EB22DC2232C0F0800099FBB /* RoundToCell.swift in Sources */,
+				1E8BA06723439EA800B1B81F /* AssistanceChunk.swift in Sources */,
 				1E6E790A233A47A700053941 /* AssistanceCell.swift in Sources */,
 				1E64982123316CD600C94146 /* TextFieldCell.swift in Sources */,
 				1E541A84233FC31F00BAF1FF /* WeekVC.swift in Sources */,

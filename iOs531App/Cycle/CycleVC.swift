@@ -76,6 +76,7 @@ class CycleVC: UIViewController {
     let weekPercentages = [[0.65,0.75,0.85], [0.70,0.80,0.90], [0.75,0.85,0.95], [0.40,0.50,0.60]]
     var selectedIndex: Int?
     var assistanceForEachDay: [Int] = []
+    var assistanceChunks: [AssistanceChunk] = []
     
     override func viewDidLoad() {
         let defaults = UserDefaults.standard
@@ -87,7 +88,13 @@ class CycleVC: UIViewController {
                     cachedLifts = decodedData
                 }
             }
+            
             assistanceForEachDay = defaults.value(forKey: "assistanceForEachDay") as! [Int]
+            print(assistanceForEachDay)
+            
+            let fetchedData = defaults.data(forKey: "assistanceChunks")!
+            assistanceChunks = try! PropertyListDecoder().decode([AssistanceChunk].self, from: fetchedData)
+            print(assistanceChunks)
         } else {
             defaults.set(true, forKey: "notFirstCycle")
             
@@ -105,6 +112,10 @@ class CycleVC: UIViewController {
             
             defaults.set(checkboxStates, forKey: "checkboxStates")
             defaults.set(assistanceForEachDay, forKey: "assistanceForEachDay")
+            
+            let assistanceChunkData = try! PropertyListEncoder().encode(assistanceChunks)
+            defaults.set(assistanceChunkData, forKey: "assistanceChunks")
+            print(assistanceChunks)
         }
     }
     
@@ -129,7 +140,23 @@ class CycleVC: UIViewController {
         for lift in cachedLifts {
             liftDays.append(lift.day)
             assistanceCounter += lift.assistanceLifts.count
-            assistanceForEachDay.append(lift.assistanceLifts.count)
+            var counter = 0
+            for exercise in lift.assistanceLifts {
+                let setsIndex = exercise.range(of: " Sets: ")
+                let endIndex = exercise.index(exercise.endIndex, offsetBy: -1)
+                let numOfAssistance =  Int(String(exercise[setsIndex!.upperBound..<endIndex]))!
+                counter += numOfAssistance
+                
+                let repsIndex = exercise.range(of: " Reps: ")
+                let start = exercise.index(exercise.startIndex, offsetBy: 6)
+                let exerciseName = String(exercise[start..<repsIndex!.lowerBound])
+                let reps = Int(String(exercise[repsIndex!.upperBound..<setsIndex!.lowerBound]))!
+                
+                for _ in 0..<numOfAssistance {
+                    assistanceChunks.append(AssistanceChunk(liftName: exerciseName, reps: reps))
+                }
+            }
+            assistanceForEachDay.append(counter)
         }
         
         liftDays.sort(by: { (weekDayNumbers[$0] ?? 7) < (weekDayNumbers[$1] ?? 7)})
@@ -167,6 +194,7 @@ class CycleVC: UIViewController {
             }
         }
         assistanceForEachDay.removeAll()
+        assistanceChunks.removeAll()
     }
     
     //MARK: Bar Button Action
@@ -190,6 +218,10 @@ class CycleVC: UIViewController {
         defaults.set(checkboxStates, forKey: "checkboxStates")
         defaults.set(assistanceForEachDay, forKey: "assistanceForEachDay")
         
+        let assistanceChunkData = try! PropertyListEncoder().encode(assistanceChunks)
+        defaults.set(assistanceChunkData, forKey: "assistanceChunks")
+        print(assistanceChunks)
+        
         collectionView.reloadSections(IndexSet(integer: 0))
         
     }
@@ -206,6 +238,7 @@ class CycleVC: UIViewController {
             vc.roundTo = UserDefaults.standard.value(forKey: "roundTo") as? Double
             vc.checkboxStates = checkboxStates[selectedIndex!]
             vc.assistanceForEachDay = assistanceForEachDay
+            vc.assistanceChunks = assistanceChunks
             vc.delegate = self
         }
     }

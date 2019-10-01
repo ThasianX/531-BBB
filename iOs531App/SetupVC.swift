@@ -144,6 +144,10 @@ class SetupVC: UIViewController, UINavigationBarDelegate, UITableViewDataSource,
             defaults.set(90, forKey: "timer1")
             defaults.set(90, forKey: "timer2")
             
+            //Creating the array that will store PRs for every lift
+            let prValues: [[Int]] = [[]]
+            defaults.set(prValues, forKey: "prValues")
+            
             for lift in lifts {
                 print("\(lift.name) + \(lift.trainingMax) + \(lift.progression)")
             }
