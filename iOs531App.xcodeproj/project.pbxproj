@@ -124,8 +124,8 @@
 			children = (
 				1E541A7E233FC1F300BAF1FF /* SetCell.swift */,
 				1E541A80233FC24F00BAF1FF /* PrCell.swift */,
-				1E541A83233FC31F00BAF1FF /* WeekVC.swift */,
 				1E8BA06623439EA800B1B81F /* AssistanceChunk.swift */,
+				1E541A83233FC31F00BAF1FF /* WeekVC.swift */,
 			);
 			path = Week;
 			sourceTree = "<group>";

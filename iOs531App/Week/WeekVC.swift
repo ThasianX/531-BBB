@@ -13,6 +13,21 @@ protocol WeekVCDelegate: class {
     func workoutComplete()
 }
 
+extension WeekVC: TimerVCDelegate {
+    
+    func addTime() {
+        var time = UserDefaults.standard.value(forKey: "timer\(selectedTimer!)") as! Double
+        time += 10
+        UserDefaults.standard.set(time, forKey: "timer\(selectedTimer!)")
+    }
+    
+    func subtractTime() {
+        var time = UserDefaults.standard.value(forKey: "timer\(selectedTimer!)") as! Double
+        time -= 10
+        UserDefaults.standard.set(time, forKey: "timer\(selectedTimer!)")
+    }
+}
+
 extension WeekVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("Number of rows in section called")
@@ -36,7 +51,7 @@ extension WeekVC: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "setCell") as! SetCell
             let weight = round((0.4 * liftsToPass[index].trainingMax)/roundTo!) * roundTo!
             cell.setLabel.text = "5 reps at \(weight) lbs"
-            cell.setDescription.text = "40% of your training max"
+            cell.setDescription.text = "40% of your training max of \(liftsToPass[index].trainingMax) lbs"
             if isChecked(indexPath: indexPath){
                 cell.accessoryType = .checkmark
             } else {
@@ -51,9 +66,9 @@ extension WeekVC: UITableViewDataSource {
                 //Index is wrong
                 let weight = round((percentagesToPass[2] * liftsToPass[index].trainingMax)/roundTo!) * roundTo!
                 cell.setLabel.text = "\(repsToPass[2]) reps at \(weight) lbs"
-                cell.setDescription.text = "\(Int(percentagesToPass[2]*100.0))% of your training max"
+                cell.setDescription.text = "\(Int(percentagesToPass[2]*100.0))% of your training max of \(liftsToPass[index].trainingMax) lbs"
                 //Index is wrong.
-                cell.prLabel.text = "Beat your previous PR of \(liftsToPass[index].personalRecord)"
+                cell.prLabel.text = "Beat your previous PR of \(liftsToPass[index].personalRecord) reps"
                 if isChecked(indexPath: indexPath){
                     cell.accessoryType = .checkmark
                 } else {
@@ -63,11 +78,9 @@ extension WeekVC: UITableViewDataSource {
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "setCell") as! SetCell
-                print(indexPath.row)
-                print(index)
                 let weight = round((percentagesToPass[indexPath.row] * liftsToPass[index].trainingMax)/roundTo!) * roundTo!
                 cell.setLabel.text = "\(repsToPass[indexPath.row]) reps at \(weight) lbs"
-                cell.setDescription.text = "\(Int(percentagesToPass[indexPath.row]*100.0))% of your training max"
+                cell.setDescription.text = "\(Int(percentagesToPass[indexPath.row]*100.0))% of your training max of \(liftsToPass[index].trainingMax) lbs"
                 if isChecked(indexPath: indexPath){
                     cell.accessoryType = .checkmark
                 } else {
@@ -79,9 +92,10 @@ extension WeekVC: UITableViewDataSource {
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "setCell") as! SetCell
             //Index is wrong
-            let weight = round((0.6 * liftsToPass[index].trainingMax)/roundTo!) * roundTo!
+            let bbbMax = trainingMaxForBBB(bbb: liftsToPass[index].bbbLift)
+            let weight = round((0.6 * bbbMax)/roundTo!) * roundTo!
             cell.setLabel.text = "10 reps at \(weight) lbs"
-            cell.setDescription.text = "60% of your training max"
+            cell.setDescription.text = "60% of your training max of \(bbbMax) lbs"
             if isChecked(indexPath: indexPath){
                 cell.accessoryType = .checkmark
             } else {
@@ -94,8 +108,13 @@ extension WeekVC: UITableViewDataSource {
             //Need index to find out the assistance lifts
             let index = assistanceForEachDay[daysSegControl.selectedSegmentIndex]-assistanceForEachDay[0]+indexPath.row
             
-            cell.setLabel.text = "\(assistanceChunks[index].liftName) for \(assistanceChunks[index].reps) reps"
+            cell.setLabel.text = "\(assistanceChunks[index].reps) reps of \(assistanceChunks[index].liftName)"
             cell.setDescription.text = "Keep that grind going"
+            if isChecked(indexPath: indexPath){
+                cell.accessoryType = .checkmark
+            } else {
+                cell.accessoryType = .none
+            }
             
             return cell
         }
@@ -191,7 +210,7 @@ extension WeekVC: UITableViewDelegate {
                             //First, add newPr to the prValues array
                             self.addNewPr(newPr:prVal)
                             if prVal > lift.personalRecord {
-                                cell.prLabel.text = "Achieved a new PR of \(prVal)"
+                                cell.prLabel.text = "Achieved a new PR of \(prVal) reps"
                                 self.updatePr(newPr: prVal)
                             } else {
                                 cell.prLabel.text = "Not quite this time. Beat \(lift.personalRecord) reps next time"
@@ -226,13 +245,35 @@ extension WeekVC: UITableViewDelegate {
                 if let nextCellIndexPath = nextCellIndexPath(currentIndexPath: indexPath) {
                     let nextCell = self.tableView.cellForRow(at: nextCellIndexPath) as? SetCell
                     
-                    nextSetDescription = "Upcoming: \(nextCell!.setLabel.text!) of \(liftsToPass[daysSegControl.selectedSegmentIndex].bbbLift)"
+                    if nextCellIndexPath.section == 3{
+                        nextSetDescription = "Upcoming: \(nextCell!.setLabel.text!)"
+                    } else {
+                        nextSetDescription = "Upcoming: \(nextCell!.setLabel.text!) of \(liftsToPass[daysSegControl.selectedSegmentIndex].bbbLift)"
+                    }
                 } else {
                     nextSetDescription = "This is your last set! Well done!"
                 }
             }
         } else {
-            //Do assistance cell stuff here
+            let cell = self.tableView.cellForRow(at: indexPath) as! SetCell
+            if cell.accessoryType == .checkmark {
+                cell.accessoryType = .none
+                setChecked(indexPath: indexPath, checked: false)
+                return
+            } else {
+                cell.accessoryType = .checkmark
+                setChecked(indexPath: indexPath, checked: true)
+                
+                setDescription = "Completed: \(cell.setLabel.text!)"
+                
+                if let nextCellIndexPath = nextCellIndexPath(currentIndexPath: indexPath) {
+                    let nextCell = self.tableView.cellForRow(at: nextCellIndexPath) as? SetCell
+                    
+                    nextSetDescription = "Upcoming: \(nextCell!.setLabel.text!)"
+                } else {
+                    nextSetDescription = "This is your last set! Well done!"
+                }
+            }
         }
         
         timerEnabled(section: indexPath.section, setDescription: setDescription!, nextSetDescription: nextSetDescription!)
@@ -412,6 +453,20 @@ class WeekVC: UIViewController {
         
         delegate?.setCheckedState(section: section, index: index, checked: checked)
         
+    }
+    
+    private func trainingMaxForBBB(bbb: String) -> Double{
+        var trainingMax: Double = 0
+        var i = 0
+        
+        while(trainingMax != 0){
+            if liftsToPass[i].name == bbb {
+                trainingMax = liftsToPass[i].trainingMax
+            }
+            i+=1
+        }
+        
+        return trainingMax
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
