@@ -33,15 +33,13 @@ class TimerVC: UIViewController {
     //MARK: Data
     var shapeLayer: CAShapeLayer!
     var pulsatingLayer: CAShapeLayer!
-    var timeLeft: TimeInterval!
-    var timer = Timer()
-    var endTime: Date?
+    var timeLeft: Int!
+    var timer : Timer!
     var finishedSet: String!
     var nextSet: String!
     
     let timerLabel: UILabel = {
         let label = UILabel()
-        label.text = "Start"
         label.textAlignment = .center
         label.font = UIFont.boldSystemFont(ofSize: 32)
         label.textColor = .white
@@ -97,9 +95,8 @@ class TimerVC: UIViewController {
         
         print("Attempting to animate timer stroke")
         animateTimer()
-        //Defines future end time by adding timeLeft to date
-        endTime = Date().addingTimeInterval(timeLeft)
-        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+        
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
         
     }
     
@@ -154,6 +151,8 @@ class TimerVC: UIViewController {
         timerLabel.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
         //Label is centered
         timerLabel.center = view.center
+        //Since the timer takes 1 second to start, I want to make sure there's text in the label for that second
+        timerLabel.text = formatTime()
         //Adds the timerLabel to the view.
         view.addSubview(timerLabel)
     }
@@ -244,7 +243,7 @@ class TimerVC: UIViewController {
         //Specifies the value to which the strokeEnd of the shape layer should animate to
         basicAnimation.toValue = 1
         //Specifies how long the animation should take in seconds
-        basicAnimation.duration = timeLeft
+        basicAnimation.duration = Double(timeLeft)
         //These 2 lines tell the animation to not remove the stroke at completion; by default, it does.
         basicAnimation.fillMode = CAMediaTimingFillMode.forwards
         basicAnimation.isRemovedOnCompletion = false
@@ -275,9 +274,16 @@ class TimerVC: UIViewController {
            
        }
     
+    private func formatTime() -> String{
+        let seconds = timeLeft % 60
+        let minutes = timeLeft / 60
+        return String(format: "%02d:%02d", minutes, seconds)
+    }
+    
     //MARK: Objc methods
     
     @objc private func dismissTimer(){
+        timer.invalidate()
         dismiss(animated: true, completion: nil)
     }
     
@@ -291,8 +297,8 @@ class TimerVC: UIViewController {
     
     @objc func updateTime(){
         if timeLeft > 0{
-            timeLeft = endTime?.timeIntervalSinceNow ?? 0
-            timerLabel.text = timeLeft.time
+            timeLeft -= 1
+            timerLabel.text = formatTime()
         } else {
             dismissTimer()
         }
@@ -306,11 +312,25 @@ class TimerVC: UIViewController {
     
     @objc func addTime(){
         //Update Time and UI
+        print("Adding 10 seconds to time")
+        timeLeft+=10
+        timerLabel.text = formatTime()
+        //Update the timer stroke
+        animateTimer()
         delegate?.addTime()
     }
     
     @objc func subtractTime(){
         //Update time and UI
+        print("Subtracting 10 seconds to time")
+        timeLeft-=10
+        if timeLeft > 0 {
+            timerLabel.text = formatTime()
+        } else {
+            timerLabel.text = "00:00"
+        }
+        
+        animateTimer()
         delegate?.subtractTime()
     }
     

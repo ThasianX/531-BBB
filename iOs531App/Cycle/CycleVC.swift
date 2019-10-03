@@ -23,7 +23,7 @@ extension CycleVC: UICollectionViewDataSource {
         cell.trainingPercentagesLabel.text = weekDescriptions[indexPath.row]
         //Filters the number of trues in the array
         let numberOfTrue = checkboxStates[indexPath.row].filter{$0}.count
-        print("There are \(numberOfTrue) trues out in the array of  \(checkboxStates[indexPath.row]) booleans")
+        print("There are \(numberOfTrue) trues out in the array of  \(checkboxStates[indexPath.row]) \(checkboxStates[indexPath.row].count) booleans")
         let progress = Float(Double(numberOfTrue) / Double(checkboxStates[indexPath.row].count))
         print("Progress is \(100*progress)%")
         cell.progressView.setProgress(progress, animated: true)
@@ -139,13 +139,13 @@ class CycleVC: UIViewController {
         var liftDays: [String] = []
         for lift in cachedLifts {
             liftDays.append(lift.day)
-            assistanceCounter += lift.assistanceLifts.count
             var counter = 0
             for exercise in lift.assistanceLifts {
                 let setsIndex = exercise.range(of: " Sets: ")
                 let endIndex = exercise.index(exercise.endIndex, offsetBy: -1)
                 let numOfAssistance =  Int(String(exercise[setsIndex!.upperBound..<endIndex]))!
                 counter += numOfAssistance
+                assistanceCounter += numOfAssistance
                 
                 let repsIndex = exercise.range(of: " Reps: ")
                 let start = exercise.index(exercise.startIndex, offsetBy: 6)
@@ -178,7 +178,7 @@ class CycleVC: UIViewController {
         cachedLifts = newLifts
         
         //Appending the number of assistance exercises
-        for i in 0..<3 {
+        for i in 0...3 {
             for _ in 0..<assistanceCounter {
                 checkboxStates[i].append(false)
             }
@@ -189,7 +189,7 @@ class CycleVC: UIViewController {
         
         for i in 0...3 {
             checkboxStates[i].removeAll()
-            for _ in 0...43 {
+            for _ in 0..<44 {
                 checkboxStates[i].append(false)
             }
         }

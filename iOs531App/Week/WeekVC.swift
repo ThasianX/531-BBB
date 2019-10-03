@@ -16,13 +16,13 @@ protocol WeekVCDelegate: class {
 extension WeekVC: TimerVCDelegate {
     
     func addTime() {
-        var time = UserDefaults.standard.value(forKey: "timer\(selectedTimer!)") as! Double
+        var time = UserDefaults.standard.value(forKey: "timer\(selectedTimer!)") as! Int
         time += 10
         UserDefaults.standard.set(time, forKey: "timer\(selectedTimer!)")
     }
     
     func subtractTime() {
-        var time = UserDefaults.standard.value(forKey: "timer\(selectedTimer!)") as! Double
+        var time = UserDefaults.standard.value(forKey: "timer\(selectedTimer!)") as! Int
         time -= 10
         UserDefaults.standard.set(time, forKey: "timer\(selectedTimer!)")
     }
@@ -300,6 +300,7 @@ class WeekVC: UIViewController {
     var checkboxStates: [Bool]!
     var assistanceForEachDay: [Int]!
     var assistanceChunks: [AssistanceChunk]!
+    var time: [Int]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -414,7 +415,7 @@ class WeekVC: UIViewController {
         
         var pageIndex = 0
         for i in 0..<daysSegControl.selectedSegmentIndex {
-            pageIndex += assistanceForEachDay[i]+11 
+            pageIndex += assistanceForEachDay[i]+11
         }
         
         switch section {
@@ -473,10 +474,11 @@ class WeekVC: UIViewController {
         if segue.identifier == "showTimer" {
             let vc = segue.destination as! TimerVC
             if let timerIndex = selectedTimer {
-                let time = UserDefaults.standard.value(forKey: "timer\(timerIndex)") as! Double
+                let time = UserDefaults.standard.value(forKey: "timer\(timerIndex)") as! Int
                 vc.timeLeft = time
                 vc.finishedSet = currentSetDescription
                 vc.nextSet = nextSetDescription
+                vc.delegate = self
                 print("Starting time is \(time) seconds")
                 print("\(currentSetDescription!)")
                 print("\(nextSetDescription!)")
