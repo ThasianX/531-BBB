@@ -1,15 +1,14 @@
 //
-//  iOs531AppTests.swift
-//  iOs531AppTests
+//  Fit_Don_t_QuitTests.swift
+//  Fit Don't QuitTests
 //
-//  Created by Kevin Li on 9/7/19.
+//  Created by Kevin Li on 10/4/19.
 //  Copyright © 2019 Kevin Li. All rights reserved.
 //
 
 import XCTest
-@testable import iOs531App
 
-class iOs531AppTests: XCTestCase {
+class Fit_Don_t_QuitTests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -26,7 +25,7 @@ class iOs531AppTests: XCTestCase {
 
     func testPerformanceExample() {
         // This is an example of a performance test case.
-        self.measure {
+        measure {
             // Put the code you want to measure the time of here.
         }
     }
