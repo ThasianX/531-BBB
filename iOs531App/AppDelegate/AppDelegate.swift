@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         var vc: UIViewController
         
-        if(UserDefaults.standard.value(forKey: "setup") as? Bool) == nil {
+        if(UserDefaults.standard.value(forKey: SavedKeys.finishedSetup) as? Bool) == nil {
             vc = storyboard.instantiateViewController(withIdentifier: "Setup")
         } else {
             vc = storyboard.instantiateInitialViewController()!

@@ -15,7 +15,6 @@ class SetupController{
     private (set) var roundValues: [Double]!
     private (set) var selectedRoundToIndex: Int!
     private (set) var headerTitles: [String]!
-    private (set) var numberOfSections: Int!
     
     let viewModel: SetupListViewModel
     
@@ -38,7 +37,7 @@ class SetupController{
         
         var rows = [RowViewModel]()
         
-        for section in 0..<numberOfSections {
+        for section in 0..<headerTitles.count {
             if section == 0 {
                 for i in 0..<roundValues.count {
                     let roundToVM: RoundToCellVM = RoundToCellVM(weight: roundValues[i], isSelected: (selectedRoundToIndex==i))
@@ -86,7 +85,6 @@ class SetupController{
         roundValues = [2.5, 5, 10]
         selectedRoundToIndex = 1
         headerTitles = ["Round to smallest weight", "Training maxes", "Weight progression"]
-        numberOfSections = 3
     }
     
     //Returns the type of cell for tableview dequeue method
@@ -140,22 +138,21 @@ class SetupController{
     
     func savePreferences(){
         let defaults = UserDefaults.standard
-
         //Saving setup value so that setup doesn't get called again
-        defaults.set(true, forKey: "finishedSetup")
-        log.debug("Finished setup value saved: \(defaults.value(forKey: "finishedSetup") as! Bool)")
+        defaults.set(true, forKey: SavedKeys.finishedSetup)
+        log.debug("Finished setup value saved: \(defaults.value(forKey: SavedKeys.finishedSetup) as! Bool)")
 
         //Saving roundTo value
-        defaults.set(getRoundTo(), forKey: "roundTo")
-        log.debug("RoundTo value saved: \(getRoundTo())")
+        defaults.set(getRoundTo(), forKey: SavedKeys.roundTo)
+        log.debug("RoundTo value saved: \(defaults.value(forKey: SavedKeys.roundTo) as! Double) lb")
 
         //Setting timer defaults to true
-        defaults.set(true, forKey: "531")
-        defaults.set(true, forKey: "BBB")
-        defaults.set(true, forKey: "Ass")
-        log.debug("531 Timer value(on/off) saved: \(defaults.value(forKey: "531") as! Bool)")
-        log.debug("BBB Timer value(on/off) saved: \(defaults.value(forKey: "BBB") as! Bool)")
-        log.debug("Ass Timer value(on/off) saved: \(defaults.value(forKey: "Ass") as! Bool)")
+        defaults.set(true, forKey: SavedKeys.getTimerSwitchKeys(timer: 0))
+        defaults.set(true, forKey: SavedKeys.getTimerSwitchKeys(timer: 1))
+        defaults.set(true, forKey: SavedKeys.getTimerSwitchKeys(timer: 2))
+        log.debug("531 Timer value(on/off) saved: \(defaults.value(forKey: SavedKeys.getTimerSwitchKeys(timer: 0)) as! Bool)")
+        log.debug("BBB Timer value(on/off) saved: \(defaults.value(forKey: SavedKeys.getTimerSwitchKeys(timer: 1)) as! Bool)")
+        log.debug("Ass Timer value(on/off) saved: \(defaults.value(forKey: SavedKeys.getTimerSwitchKeys(timer: 2)) as! Bool)")
 
 
         //One time initialization for checkbox state arrays
@@ -165,16 +162,16 @@ class SetupController{
                 checkboxStateArray[i].append(false)
             }
         }
-        defaults.set(checkboxStateArray, forKey: "checkboxStates")
-        log.debug("Checkbox state array saved: \(checkboxStateArray)")
+        defaults.set(checkboxStateArray, forKey: SavedKeys.checkboxStates)
+        log.debug("Checkbox state array saved: \(defaults.value(forKey: SavedKeys.checkboxStates) as! [[Bool]])")
 
         //Setting initial values for each timer
-        defaults.set(90, forKey: "timer0")
-        defaults.set(90, forKey: "timer1")
-        defaults.set(90, forKey: "timer2")
-        log.debug("Timer0 saved: \(defaults.value(forKey: "timer0") as! Int)")
-        log.debug("Timer1 saved: \(defaults.value(forKey: "timer1") as! Int)")
-        log.debug("Timer2 saved: \(defaults.value(forKey: "timer2") as! Int)")
+        defaults.set(90, forKey: SavedKeys.getTimeLeftKeys(timer: 0))
+        defaults.set(90, forKey: SavedKeys.getTimeLeftKeys(timer: 1))
+        defaults.set(90, forKey: SavedKeys.getTimeLeftKeys(timer: 2))
+        log.debug("531 time saved: \(defaults.value(forKey: SavedKeys.getTimeLeftKeys(timer: 0)) as! Int)")
+        log.debug("BBB time saved: \(defaults.value(forKey: SavedKeys.getTimeLeftKeys(timer: 1)) as! Int)")
+        log.debug("Ass time saved: \(defaults.value(forKey: SavedKeys.getTimeLeftKeys(timer: 2)) as! Int)")
     }
     
     func setupDatabase(){

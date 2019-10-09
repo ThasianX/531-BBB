@@ -8,22 +8,6 @@
 
 import UIKit
 import SQLite
-import os
-//
-//extension SetupVC: CellEditable {
-//    func updateField(index: Int, section: Int, num: Double) {
-//        if section == 1 {
-//            let max = controller.updateTrainingMax(index: index, max: num)
-//            let cell = tableView.cellForRow(at: IndexPath(row: index, section: section)) as! TrainingMaxCell
-//            cell.updateMax(max: max)
-//            
-//        } else if section == 2 {
-//            let progression = controller.updateProgression(index: index, progression: num)
-//            let cell = tableView.cellForRow(at: IndexPath(row: index, section: section)) as! ProgressionCell
-//            cell.updateProgression(progression: progression)
-//        }
-//    }
-//}
 
 extension SetupVC: EditValueCellDelegate {
     func valueChangedForField(index: Int, section: Int, value: Double) {
@@ -116,28 +100,6 @@ class SetupVC: UIViewController, UINavigationBarDelegate, UITableViewDataSource,
         
         return cell!
         
-//        if indexPath.section == 0 {
-//            let cell: RoundToCell = tableView.dequeueReusableCell(withIdentifier: "roundToCell") as! RoundToCell
-//            let weight = viewModel.roundValues[indexPath.row]
-//            let isSelected = indexPath.row == viewModel.selectedRoundToIndex
-//            cell.setup(weight: weight, isSelected: isSelected)
-//
-//            return cell
-//
-//        } else if indexPath.section == 1 {
-//            let cell: TrainingMaxCell = tableView.dequeueReusableCell(withIdentifier: "trainingMaxCell") as! TrainingMaxCell
-//            let index = indexPath.row
-//            cell.setup(name: viewModel.lifts[index].name, index: index)
-//            cell.delegate = self
-//            return cell
-//
-//        } else {
-//            let cell: ProgressionCell = tableView.dequeueReusableCell(withIdentifier: "progressionCell") as! ProgressionCell
-//            let index = indexPath.row
-//            cell.setup(name: viewModel.lifts[index].name, index: index)
-//            cell.delegate = self
-//            return cell
-//        }
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
