@@ -114,12 +114,22 @@ class AssistanceCatalogVC: UIViewController {
     var liftToPass: Lift!
     var indexToPass: Int!
     
+    //MARK: ViewModel
+    var viewModel: AssistanceCatalogVM {
+        return controller.viewModel
+    }
+    
+    lazy var controller: AssistanceCatalogController = {
+        return AssistanceCatalogController()
+    }()
+    
     weak var delegate: AssistanceCatalogVCDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        assistanceCatalog = UserDefaults.standard.value(forKey: "assistanceCatalog") as! [String]
-        liftLabel.text = liftToPass.name
+        liftLabel.text = controller.lift.name
+        
+        
 //        selectedExercises = liftToPass.assistanceLifts
         print("Selected exercises: \(selectedExercises)")
     }
@@ -148,3 +158,4 @@ class AssistanceCatalogVC: UIViewController {
     }
     
 }
+

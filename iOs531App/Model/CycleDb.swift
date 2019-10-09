@@ -16,7 +16,7 @@ class CycleDb {
     private let mainLifts = Table("mainLifts")
     //Will use both id and name
     private let id = Expression<Int64>("id")
-    private let name = Expression<String?>("name")
+    private let name = Expression<String>("name")
     private let progression = Expression<Double>("progression")
     private let trainingMax = Expression<Double>("trainingMax")
     private let personalRecord = Expression<Int64>("personalRecord")
@@ -25,8 +25,8 @@ class CycleDb {
     private let bbbLiftId = Expression<Int64>("bbbLiftId")
     
     private let assistanceCatalog = Table("assistanceCatalog")
-    private let reps = Expression<Double>("reps")
-    private let sets = Expression<Double>("sets")
+    private let reps = Expression<Int64>("reps")
+    private let sets = Expression<Int64>("sets")
     private let type = Expression<String>("type")
     
     private let overheadPressAssistance = Table("overheadPressAssistance")
@@ -95,12 +95,6 @@ class CycleDb {
             try db!.run(squatAssistance.create(ifNotExists: true) { table in
                 table.column(id, references: assistanceCatalog, id)
             })
-            
-            log.info("Creating lifts assistance table")
-            try db!.run(liftsAssistance.create(ifNotExists: true) { table in
-                table.column(id, references: assistanceCatalog, id)
-            })
-            
         } catch {
             log.error("Unable to create table: \(error)")
         }
@@ -121,7 +115,7 @@ class CycleDb {
         
         do {
             for lift in try db!.prepare(self.mainLifts) {
-                lifts.append(Lift(id: lift[id], name: lift[name]!, progression: lift[progression], trainingMax: lift[trainingMax], personalRecord: lift[personalRecord], dayString: lift[dayString], dayInt: lift[dayInt], bbbLiftId: lift[bbbLiftId]))
+                lifts.append(Lift(id: lift[id], name: lift[name], progression: lift[progression], trainingMax: lift[trainingMax], personalRecord: lift[personalRecord], dayString: lift[dayString], dayInt: lift[dayInt], bbbLiftId: lift[bbbLiftId]))
             }
         } catch {
             log.error("Select failed")
@@ -136,7 +130,7 @@ class CycleDb {
         var resultLift: Lift?
         do {
             let lift = try db!.pluck(query)!
-            resultLift = Lift(id: lift[id], name: lift[name]!, progression: lift[progression], trainingMax: lift[trainingMax], personalRecord: lift[personalRecord], dayString: lift[dayString], dayInt: lift[dayInt], bbbLiftId: lift[bbbLiftId])
+            resultLift = Lift(id: lift[id], name: lift[name], progression: lift[progression], trainingMax: lift[trainingMax], personalRecord: lift[personalRecord], dayString: lift[dayString], dayInt: lift[dayInt], bbbLiftId: lift[bbbLiftId])
         } catch {
             log.error("Get lift failed: \(error)")
         }
@@ -148,7 +142,7 @@ class CycleDb {
         var resultLift: Lift?
         do {
             let lift = try db!.pluck(query)!
-            resultLift = Lift(id: lift[id], name: lift[name]!, progression: lift[progression], trainingMax: lift[trainingMax], personalRecord: lift[personalRecord], dayString: lift[dayString], dayInt: lift[dayInt], bbbLiftId: lift[bbbLiftId])
+            resultLift = Lift(id: lift[id], name: lift[name], progression: lift[progression], trainingMax: lift[trainingMax], personalRecord: lift[personalRecord], dayString: lift[dayString], dayInt: lift[dayInt], bbbLiftId: lift[bbbLiftId])
         } catch {
             log.error("Get lift failed: \(error)")
         }
@@ -230,19 +224,51 @@ class CycleDb {
         return result
     }
     
-    func getAssistanceExercisesForLift(cid: Int64) -> String{
-        var assistanceExercises = ""
+    func getAssistanceExercisesForLift(cid: Int64) -> [Assistance]{
+        var assistance = [Assistance]()
         
         do {
             let assistanceTable = getTableForId(id: cid)
-            for exercises in try db!.prepare(assistanceTable) {
-                assistanceExercises.append("\(exercises[name]!) - \(exercises[reps])x\(exercises[sets])\n")
+            for row in try db!.prepare(assistanceTable) {
+                let query = assistanceCatalog.filter(id == row[id])
+                let exercise = try db!.pluck(query)!
+                assistance.append(Assistance(id: exercise[id], name: exercise[name], reps: exercise[reps], sets: exercise[sets], type: exercise[type]))
             }
         } catch {
             print("Select failed")
         }
         
-        return assistanceExercises
+        return assistance
+    }
+    
+    func getAssistanceCatalog() -> [Assistance]{
+        var catalog = [Assistance]()
+        
+        do {
+            for exercise in try db!.prepare(self.assistanceCatalog) {
+                catalog.append(Assistance(id: exercise[id], name: exercise[name], reps: exercise[reps], sets: exercise[sets], type: exercise[type]))
+            }
+        } catch {
+            log.error("Select failed")
+        }
+        
+        return catalog
+    }
+    
+    func getAssistanceIdsForLift(cid: Int64) -> [Int64] {
+        var assistanceIds = [Int64]()
+        let table = getTableForId(id: cid)
+        
+        do {
+            for row in try db!.prepare(table){
+                assistanceIds.append(row[id])
+            }
+        } catch {
+            log.error("Failed to get assistance ids for lift: \(error)")
+        }
+        
+        return assistanceIds
+        
     }
     
     private func getTableForId(id: Int64) -> Table{

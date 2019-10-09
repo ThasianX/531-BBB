@@ -63,7 +63,13 @@ class SettingsController {
                 for i in 0..<lifts.count {
                     let lift = lifts[i]
                     let assistanceExercises = db.getAssistanceExercisesForLift(cid: lift.id!)
-                    let assistanceVM: AssistanceCellVM = AssistanceCellVM(liftName: lift.name, assistanceExercises: assistanceExercises, index: i)
+                    
+                    var assistanceString = ""
+                    for exercise in assistanceExercises {
+                        assistanceString.append("\(exercise.name) - \(exercise.sets)x\(exercise.reps)")
+                    }
+                    
+                    let assistanceVM: AssistanceCellVM = AssistanceCellVM(liftName: lift.name, assistanceExercises: assistanceString, index: i)
                     log.debug("AssistanceCellVM created with: liftName - \(assistanceVM.liftName), assistanceExercises - \(assistanceVM.assistanceExercises)")
                     vm = assistanceVM
                     rows.append(vm!)
@@ -339,8 +345,9 @@ class SettingsController {
     }
     
     func prepareData(vc: AssistanceCatalogVC){
-        vc.liftToPass = lifts[selectedAssistanceIndex!]
-        vc.indexToPass = selectedAssistanceIndex
+        vc.controller.lift = lifts[selectedAssistanceIndex!]
+        vc.controller.index = selectedAssistanceIndex
+        log.debug("Passing to AssistanceCatalogVC: liftToPass - \(lifts[selectedAssistanceIndex!]) + indexToPass - \(selectedAssistanceIndex!)")
     }
     
 }

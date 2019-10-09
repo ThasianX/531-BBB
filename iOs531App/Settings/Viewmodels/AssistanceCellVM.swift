@@ -8,7 +8,7 @@
 
 import Foundation
 
-class AssistanceCellVM: RowViewModel, ViewModelPressible {
+class AssistanceCellVM: RowViewModel {
     
     var liftName: String
     var assistanceExercises: String

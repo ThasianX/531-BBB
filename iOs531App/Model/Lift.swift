@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Lift{
+class Lift: ReflectedStringConvertible{
 
     let id: Int64?
     var name: String
@@ -31,3 +31,4 @@ class Lift{
     }
     
 }
+
