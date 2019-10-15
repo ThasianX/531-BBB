@@ -12,6 +12,12 @@ class SavedKeys {
     private (set) static var finishedSetup = "finishedSetup"
     private (set) static var roundTo = "roundTo"
     private (set) static var checkboxStates = "checkboxStates"
+    private (set) static var programName = "Boring But Big"
+    private (set) static var selectedDay = "selectedDay"
+    
+    static func setProgramName(name: String){
+        programName = name
+    }
     
     static func getTimerSwitchKeys(timer: Int) -> String {
         return "timerSwitch\(timer)"

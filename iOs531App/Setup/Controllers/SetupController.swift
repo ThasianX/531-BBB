@@ -150,9 +150,11 @@ class SetupController{
         defaults.set(true, forKey: SavedKeys.getTimerSwitchKeys(timer: 0))
         defaults.set(true, forKey: SavedKeys.getTimerSwitchKeys(timer: 1))
         defaults.set(true, forKey: SavedKeys.getTimerSwitchKeys(timer: 2))
-        log.debug("531 Timer value(on/off) saved: \(defaults.value(forKey: SavedKeys.getTimerSwitchKeys(timer: 0)) as! Bool)")
-        log.debug("BBB Timer value(on/off) saved: \(defaults.value(forKey: SavedKeys.getTimerSwitchKeys(timer: 1)) as! Bool)")
-        log.debug("Ass Timer value(on/off) saved: \(defaults.value(forKey: SavedKeys.getTimerSwitchKeys(timer: 2)) as! Bool)")
+        defaults.set(true, forKey: SavedKeys.getTimerSwitchKeys(timer: 3))
+        log.debug("Warmup Timer value(on/off) saved: \(defaults.value(forKey: SavedKeys.getTimerSwitchKeys(timer: 0)) as! Bool)")
+        log.debug("531 Timer value(on/off) saved: \(defaults.value(forKey: SavedKeys.getTimerSwitchKeys(timer: 1)) as! Bool)")
+        log.debug("BBB Timer value(on/off) saved: \(defaults.value(forKey: SavedKeys.getTimerSwitchKeys(timer: 2)) as! Bool)")
+        log.debug("Ass Timer value(on/off) saved: \(defaults.value(forKey: SavedKeys.getTimerSwitchKeys(timer: 3)) as! Bool)")
 
 
         //One time initialization for checkbox state arrays
@@ -169,9 +171,15 @@ class SetupController{
         defaults.set(90, forKey: SavedKeys.getTimeLeftKeys(timer: 0))
         defaults.set(90, forKey: SavedKeys.getTimeLeftKeys(timer: 1))
         defaults.set(90, forKey: SavedKeys.getTimeLeftKeys(timer: 2))
-        log.debug("531 time saved: \(defaults.value(forKey: SavedKeys.getTimeLeftKeys(timer: 0)) as! Int)")
-        log.debug("BBB time saved: \(defaults.value(forKey: SavedKeys.getTimeLeftKeys(timer: 1)) as! Int)")
-        log.debug("Ass time saved: \(defaults.value(forKey: SavedKeys.getTimeLeftKeys(timer: 2)) as! Int)")
+        defaults.set(90, forKey: SavedKeys.getTimeLeftKeys(timer: 3))
+        log.debug("Warmup time saved: \(defaults.value(forKey: SavedKeys.getTimeLeftKeys(timer: 0)) as! Int)")
+        log.debug("531 time saved: \(defaults.value(forKey: SavedKeys.getTimeLeftKeys(timer: 1)) as! Int)")
+        log.debug("BBB time saved: \(defaults.value(forKey: SavedKeys.getTimeLeftKeys(timer: 2)) as! Int)")
+        log.debug("Ass time saved: \(defaults.value(forKey: SavedKeys.getTimeLeftKeys(timer: 3)) as! Int)")
+        
+        //Setting the initial selected day value
+        defaults.set(0, forKey: SavedKeys.selectedDay)
+        log.debug("Selected day saved: \(defaults.value(forKey: SavedKeys.selectedDay) as! Int)")
     }
     
     func setupDatabase(){
@@ -187,6 +195,11 @@ class SetupController{
         for lift in mainLifts {
             log.debug("Name: \(lift.name), Max: \(lift.trainingMax), Progression: \(lift.progression)")
         }
+        
+        db.sortLiftsByDay()
+        
+        let percentages = ProgramPercentages(id: nil, name: "Boring But Big", w1d1: 0.65, w1d2: 0.75, w1d3: 0.85, w2d1: 0.70, w2d2: 0.8, w2d3: 0.9, w3d1: 0.75, w3d2: 0.85, w3d3: 0.95, w4d1: 0.4, w4d2: 0.5, w4d3: 0.6)
+        db.insertProgramPercentage(percentages: percentages)
     }
     
 }

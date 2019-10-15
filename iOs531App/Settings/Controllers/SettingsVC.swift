@@ -26,20 +26,6 @@ extension SettingsVC: TimerCellDelegate {
     }
 }
 
-extension SettingsVC: AssistanceCatalogVCDelegate {
-    func assistanceSelectionComplete(index: Int) {
-        print("Assistance selection complete. Reloading row at \(index)")
-        tableView.reloadRows(at: [IndexPath(row: index, section: 1)], with: .automatic)
-    }
-
-    func assistanceExerciseSelected(lift: Lift, index: Int) {
-//        print("Assistance exercise selected for \(lift.name).")
-//        lifts[index].assistanceLifts = lift.assistanceLifts
-//
-//        saveLifts()
-    }
-}
-
 extension SettingsVC: DayAndLiftPickerCellDelegate {
     func dayChangedForField(indexPath: IndexPath, to day: String) {
         
@@ -55,12 +41,18 @@ extension SettingsVC: DayAndLiftPickerCellDelegate {
     }
 }
 
+extension SettingsVC: SettingsControllerDelegate {
+    func reloadAssistance(indexPath: IndexPath){
+        print("Assistance selection complete. Reloading indexpath at \(indexPath)")
+        tableView.reloadRows(at: [indexPath], with: .automatic)
+    }
+}
+
 class SettingsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     //MARK: Outlets
     @IBOutlet weak var tableView: UITableView!
     
-    //MARK: Table Data Sources
     //MARK: ViewModel
     var viewModel: SettingsVM {
         return controller.viewModel
@@ -73,6 +65,7 @@ class SettingsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         log.info("SettingsVC view did load called.")
+        controller.delegate = self
         
         tableView.estimatedRowHeight = 80.0
         tableView.rowHeight = UITableView.automaticDimension
@@ -258,9 +251,9 @@ class SettingsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     //MARK: Segue overriden methods
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showAssistance" {
+            log.info("Show assistance segue called")
             let vc = segue.destination as! AssistanceCatalogVC
             controller.prepareData(vc: vc)
-            vc.delegate = self
         }
     }
 }

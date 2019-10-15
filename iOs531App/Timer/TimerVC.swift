@@ -20,16 +20,7 @@ extension Int {
     }
 }
 
-protocol TimerVCDelegate {
-    func addTime()
-    func subtractTime()
-}
-
 class TimerVC: UIViewController {
-    
-    //MARK: Delegate
-    var delegate: TimerVCDelegate?
-    
     //MARK: Data
     var shapeLayer: CAShapeLayer!
     var pulsatingLayer: CAShapeLayer!
@@ -37,6 +28,8 @@ class TimerVC: UIViewController {
     var timer : Timer!
     var finishedSet: String!
     var nextSet: String!
+    var selectedTimer: Int!
+    var startTime: Int!
     
     let timerLabel: UILabel = {
         let label = UILabel()
@@ -74,30 +67,67 @@ class TimerVC: UIViewController {
         return label
     }()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("View did load called for TimerVC")
-        
-        setupNotificationObservers()
+        print("TimerVC is aware of viewdidload call")
         
         view.backgroundColor = UIColor.backgroundColor
         
+        startTime = timeLeft
+        
         setUpCircleLayers()
         
-        addTimeLabel()
-        addTitleLabel()
-        addFinishedSetLabel()
-        addNextSetLabel()
+        addLabels()
         addButtons()
         
-        //        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
-        
-        print("Attempting to animate timer stroke")
+        log.info("Attempting to animate timer stroke")
         animateTimer()
         
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
         
+    }
+    
+    private func addLabels() {
+        addTimeLabel()
+        addTitleLabel()
+        addFinishedSetLabel()
+        addNextSetLabel()
+    }
+    
+    private func addButtons(){
+        addExitButton()
+        addSubtractButton()
+        addPlusButton()
+    }
+    
+    private func addTitleLabel(){
+        view.addSubview(titleLabel)
+        
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16).isActive = true
+        
+    }
+    
+    private func addFinishedSetLabel(){
+        finishedSetLabel.text = finishedSet
+        
+        view.addSubview(finishedSetLabel)
+        
+        finishedSetLabel.translatesAutoresizingMaskIntoConstraints = false
+        finishedSetLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        finishedSetLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
+        
+    }
+    
+    private func addNextSetLabel(){
+        nextSetLabel.text = nextSet
+        
+        view.addSubview(nextSetLabel)
+        
+        nextSetLabel.translatesAutoresizingMaskIntoConstraints = false
+        nextSetLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        nextSetLabel.topAnchor.constraint(equalTo: finishedSetLabel.bottomAnchor, constant: 8).isActive = true
     }
     
     private func addExitButton() {
@@ -139,13 +169,6 @@ class TimerVC: UIViewController {
         
     }
     
-    private func addButtons(){
-        addExitButton()
-        addSubtractButton()
-        addPlusButton()
-        
-    }
-    
     private func addTimeLabel() {
         //I ignore the x and y values for position here since I'm going to center it anyway. Height and width are 100
         timerLabel.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
@@ -157,52 +180,12 @@ class TimerVC: UIViewController {
         view.addSubview(timerLabel)
     }
     
-    private func addTitleLabel(){
-        view.addSubview(titleLabel)
-        
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16).isActive = true
-        
-    }
-    
-    private func addFinishedSetLabel(){
-        
-        finishedSetLabel.text = finishedSet
-        
-        view.addSubview(finishedSetLabel)
-        
-        finishedSetLabel.translatesAutoresizingMaskIntoConstraints = false
-        finishedSetLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        finishedSetLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
-        
-    }
-    
-    private func addNextSetLabel(){
-        nextSetLabel.text = nextSet
-        
-        view.addSubview(nextSetLabel)
-        
-        nextSetLabel.translatesAutoresizingMaskIntoConstraints = false
-        nextSetLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        nextSetLabel.topAnchor.constraint(equalTo: finishedSetLabel.bottomAnchor, constant: 8).isActive = true
-    }
-    
-    //    private func addSubtractButton)(){
-    //
-    //    }
-    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     
     //MARK: Private functions
     private func setUpCircleLayers(){
-        //Creates pulsating layer
-        pulsatingLayer = createCircleShapeLayer(strokeColor: .clear, fillColor: UIColor.pulsatingFillColor)
-        view.layer.addSublayer(pulsatingLayer)
-        //Initiates the pulsing animation
-        animatePulsatingLayer()
         
         //Creates a track layer for the progress bar on top
         let trackLayer = createCircleShapeLayer(strokeColor: .trackStrokeColor, fillColor: .backgroundColor)
@@ -251,29 +234,6 @@ class TimerVC: UIViewController {
         shapeLayer.add(basicAnimation, forKey: "timerAnimation")
     }
     
-    private func animatePulsatingLayer(){
-           print("Animating pulsating layer")
-           let animation = CABasicAnimation(keyPath: "transform.scale")
-           animation.toValue = 1.3
-           animation.duration = 0.8
-           animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
-           animation.autoreverses = true
-           animation.repeatCount = Float.infinity
-           
-           pulsatingLayer.add(animation, forKey: "pulsing")
-       }
-       
-       
-       private func setupNotificationObservers(){
-           /*What's happening here is first, I begin observing the app for a certain notification, in this case, the foreground. When something happens to
-            the app, like data coming in or task completion, it sends a notification to the notification center. In this case, I am looking for the
-            foreground notification. The notification center then calls the selector on this view controller as a way of telling this controller that a
-            notification it observes has been posted.
-            */
-           NotificationCenter.default.addObserver(self, selector: #selector(handleForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
-           
-       }
-    
     private func formatTime() -> String{
         let seconds = timeLeft % 60
         let minutes = timeLeft / 60
@@ -281,19 +241,10 @@ class TimerVC: UIViewController {
     }
     
     //MARK: Objc methods
-    
     @objc private func dismissTimer(){
         timer.invalidate()
         dismiss(animated: true, completion: nil)
     }
-    
-    //    @objc private func handleTap(){
-    //        print("Attempting to animate timer stroke")
-    //        animateTimer()
-    //        //Defines future end time by adding timeLeft to date
-    //        endTime = Date().addingTimeInterval(timeLeft)
-    //        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
-    //    }
     
     @objc func updateTime(){
         if timeLeft > 0{
@@ -304,20 +255,15 @@ class TimerVC: UIViewController {
         }
     }
     
-    
-    @objc func handleForeground(){
-        print("Entering foreground")
-        animatePulsatingLayer()
-    }
-    
     @objc func addTime(){
         //Update Time and UI
         print("Adding 10 seconds to time")
         timeLeft+=10
         timerLabel.text = formatTime()
+        
         //Update the timer stroke
         animateTimer()
-        delegate?.addTime()
+        updateStartTime(increment: true)
     }
     
     @objc func subtractTime(){
@@ -331,7 +277,16 @@ class TimerVC: UIViewController {
         }
         
         animateTimer()
-        delegate?.subtractTime()
+        updateStartTime(increment: false)
+    }
+    
+    private func updateStartTime(increment: Bool){
+        if increment {
+            startTime+=10
+        } else {
+            startTime-=10
+        }
+        UserDefaults.standard.set(startTime, forKey: SavedKeys.getTimeLeftKeys(timer: selectedTimer))
     }
     
 }

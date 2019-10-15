@@ -9,6 +9,19 @@
 import Foundation
 import UIKit
 
+extension SettingsController: AssistanceCatalogControllerDelegate {
+    func assistanceSelectionComplete(index: Int) {
+        let assistanceString = formatAssistanceExercisesForLift(id: Int64(index))
+        let vm = viewModel.sectionVMs[1].rowVMs[index] as? AssistanceCellVM
+        vm?.assistanceExercises = assistanceString
+        delegate?.reloadAssistance(indexPath: IndexPath(row: index, section: 1))
+    }
+}
+
+protocol SettingsControllerDelegate {
+    func reloadAssistance(indexPath: IndexPath)
+}
+
 class SettingsController {
     
     //MARK: Data
@@ -26,6 +39,7 @@ class SettingsController {
     private (set) var db: CycleDb!
     private (set) var selectedAssistanceIndex: Int?
     
+    var delegate: SettingsControllerDelegate?
     let viewModel: SettingsVM
     
     init(viewModel: SettingsVM = SettingsVM()){
@@ -62,12 +76,8 @@ class SettingsController {
             case 1:
                 for i in 0..<lifts.count {
                     let lift = lifts[i]
-                    let assistanceExercises = db.getAssistanceExercisesForLift(cid: lift.id!)
                     
-                    var assistanceString = ""
-                    for exercise in assistanceExercises {
-                        assistanceString.append("\(exercise.name) - \(exercise.sets)x\(exercise.reps)")
-                    }
+                    let assistanceString = formatAssistanceExercisesForLift(id: lift.id!)
                     
                     let assistanceVM: AssistanceCellVM = AssistanceCellVM(liftName: lift.name, assistanceExercises: assistanceString, index: i)
                     log.debug("AssistanceCellVM created with: liftName - \(assistanceVM.liftName), assistanceExercises - \(assistanceVM.assistanceExercises)")
@@ -133,7 +143,7 @@ class SettingsController {
         log.debug("Weights are currently being rounded to \(roundValues[selectedRoundToIndex]) lb")
         
         headerTitles = ["Program Template", "Assistance Work", "Round to smallest weight", "Training maxes", "Weight Progression", "Timer Cofiguration"]
-        timerTitles = ["Show 5/3/1 Timer", "Show BBB Timer", "Show Assistance Timer"]
+        timerTitles = ["Show Warmup Timer", "Show 5/3/1 Timer", "Show BBB Timer", "Show Assistance Timer"]
     }
     
     //Determines whether to use the picker cell or the text field cell
@@ -312,6 +322,20 @@ class SettingsController {
         
     }
     
+    func formatAssistanceExercisesForLift(id: Int64) -> String{
+        let assistanceExercises = db.getAssistanceExercisesForLift(cid: id)
+        var assistanceString = ""
+        for exercise in assistanceExercises {
+            assistanceString.append("\(exercise.name) - \(exercise.sets)x\(exercise.reps)\n")
+        }
+        
+        if assistanceString.count>0{
+            assistanceString = String(assistanceString.prefix(assistanceString.count-1))
+        }
+        
+        return assistanceString
+    }
+    
     func convertDayToInt(dayString: String) -> Int64 {
         switch dayString {
         case "Monday":
@@ -344,9 +368,11 @@ class SettingsController {
         UserDefaults.standard.set(isOn, forKey: SavedKeys.getTimerSwitchKeys(timer: rowIndex!))
     }
     
+    
     func prepareData(vc: AssistanceCatalogVC){
         vc.controller.lift = lifts[selectedAssistanceIndex!]
         vc.controller.index = selectedAssistanceIndex
+        vc.controller.delegate = self
         log.debug("Passing to AssistanceCatalogVC: liftToPass - \(lifts[selectedAssistanceIndex!]) + indexToPass - \(selectedAssistanceIndex!)")
     }
     

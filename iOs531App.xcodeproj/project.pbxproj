@@ -7,19 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1E64160B234BBD78006815F1 /* AddExerciseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E641607234BBD78006815F1 /* AddExerciseVC.swift */; };
-		1E64160C234BBD78006815F1 /* AssistanceCatalogVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E641608234BBD78006815F1 /* AssistanceCatalogVC.swift */; };
-		1E64160D234BBD78006815F1 /* AssistanceExerciseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E641609234BBD78006815F1 /* AssistanceExerciseCell.swift */; };
-		1E64160E234BBD78006815F1 /* AssistanceInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E64160A234BBD78006815F1 /* AssistanceInputCell.swift */; };
+		1E0C0643234E5AD90037C11D /* AssistanceExerciseCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0C0637234E5AD90037C11D /* AssistanceExerciseCellVM.swift */; };
+		1E0C0644234E5AD90037C11D /* AssistanceInputCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0C0638234E5AD90037C11D /* AssistanceInputCellVM.swift */; };
+		1E0C0645234E5AD90037C11D /* AssistanceExerciseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0C063A234E5AD90037C11D /* AssistanceExerciseCell.swift */; };
+		1E0C0646234E5AD90037C11D /* AssistanceInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0C063B234E5AD90037C11D /* AssistanceInputCell.swift */; };
+		1E0C0647234E5AD90037C11D /* Assistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0C063D234E5AD90037C11D /* Assistance.swift */; };
+		1E0C0648234E5AD90037C11D /* AddExerciseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0C063F234E5AD90037C11D /* AddExerciseVC.swift */; };
+		1E0C0649234E5AD90037C11D /* AssistanceCatalogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0C0640234E5AD90037C11D /* AssistanceCatalogController.swift */; };
+		1E0C064A234E5AD90037C11D /* AssistanceCatalogVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0C0641234E5AD90037C11D /* AssistanceCatalogVC.swift */; };
+		1E0C0654234E5BEA0037C11D /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0C064E234E5BEA0037C11D /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
+		1E0C0655234E5BEA0037C11D /* TPKeyboardAvoidingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0C064F234E5BEA0037C11D /* TPKeyboardAvoidingTableView.m */; };
+		1E0C0656234E5BEA0037C11D /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0C0651234E5BEA0037C11D /* TPKeyboardAvoidingScrollView.m */; };
+		1E2D1EF3234FF94D00CA353F /* WeekDisplayVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2D1EF2234FF94D00CA353F /* WeekDisplayVM.swift */; };
+		1E6346572350C6F500DA904B /* WeekVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6346562350C6F500DA904B /* WeekVC.swift */; };
+		1E6346592350C70000DA904B /* PrCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6346582350C70000DA904B /* PrCell.swift */; };
+		1E63465B2350C70700DA904B /* SetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E63465A2350C70700DA904B /* SetCell.swift */; };
+		1E63465D2350C7D200DA904B /* WeekController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E63465C2350C7D200DA904B /* WeekController.swift */; };
+		1E63465F2350C93100DA904B /* WeekListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E63465E2350C93100DA904B /* WeekListVM.swift */; };
 		1E66D34A2347A7B0007F192F /* SetupData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E66D3492347A7B0007F192F /* SetupData.swift */; };
 		1E68FD312323FA1200631945 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E68FD302323FA1200631945 /* AppDelegate.swift */; };
 		1E68FD332323FA1200631945 /* SetupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E68FD322323FA1200631945 /* SetupVC.swift */; };
 		1E68FD362323FA1200631945 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E68FD342323FA1200631945 /* Main.storyboard */; };
 		1E68FD382323FA1200631945 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E68FD372323FA1200631945 /* Assets.xcassets */; };
 		1E68FD3B2323FA1200631945 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E68FD392323FA1200631945 /* LaunchScreen.storyboard */; };
-		1E6C6A8C234E18FE00144BBA /* Assistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6C6A8B234E18FE00144BBA /* Assistance.swift */; };
 		1E6C6A8E234E21DB00144BBA /* ReflectedStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6C6A8D234E21DB00144BBA /* ReflectedStringConvertible.swift */; };
-		1E6C6A91234E27FF00144BBA /* AssistanceExerciseCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6C6A90234E27FF00144BBA /* AssistanceExerciseCellVM.swift */; };
 		1E747D242348C8E200060423 /* RoundToCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E747D232348C8E200060423 /* RoundToCellVM.swift */; };
 		1E747D262348C9D200060423 /* EditValueVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E747D252348C9D200060423 /* EditValueVM.swift */; };
 		1E747D2A2348CE0000060423 /* CellConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E747D292348CE0000060423 /* CellConfigurable.swift */; };
@@ -30,11 +41,9 @@
 		1E74A7C9234B713000677E76 /* TimerCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E74A7C8234B713000677E76 /* TimerCellVM.swift */; };
 		1E7871F7234778E6009A2561 /* Fit_Don_t_QuitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7871F6234778E6009A2561 /* Fit_Don_t_QuitTests.swift */; };
 		1E78720023478B64009A2561 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = 1E7871FF23478B64009A2561 /* SwiftyBeaver */; };
+		1E79A5972354AFAA00BF5B00 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E79A5962354AFAA00BF5B00 /* Extensions.swift */; };
 		1E7AD436234A24E5009C141D /* ViewModelPressible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7AD435234A24E5009C141D /* ViewModelPressible.swift */; };
 		1E7AD43A234A4443009C141D /* EditValueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7AD439234A4443009C141D /* EditValueCell.swift */; };
-		1E7AD449234A7537009C141D /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7AD443234A7537009C141D /* TPKeyboardAvoidingScrollView.m */; };
-		1E7AD44A234A7537009C141D /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7AD446234A7537009C141D /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
-		1E7AD44B234A7537009C141D /* TPKeyboardAvoidingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7AD447234A7537009C141D /* TPKeyboardAvoidingTableView.m */; };
 		1E7AD44F234A779E009C141D /* CycleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7AD44E234A779E009C141D /* CycleVC.swift */; };
 		1E7AD457234A77C8009C141D /* AssistanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7AD452234A77C8009C141D /* AssistanceCell.swift */; };
 		1E7AD458234A77C8009C141D /* TimerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7AD453234A77C8009C141D /* TimerCell.swift */; };
@@ -50,12 +59,22 @@
 		1E7AD472234A959E009C141D /* DayAndLiftPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7AD455234A77C8009C141D /* DayAndLiftPickerCell.swift */; };
 		1E7BFD7E2346531A00695060 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 1E7BFD7D2346531A00695060 /* SQLite */; };
 		1E7BFD842346759900695060 /* CycleDb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7BFD832346759900695060 /* CycleDb.swift */; };
-		1E7CD11E234E139400F610FE /* AssistanceCatalogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7CD11D234E139400F610FE /* AssistanceCatalogController.swift */; };
-		1E7CD121234E16F000F610FE /* AssistanceCatalogVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7CD120234E16F000F610FE /* AssistanceCatalogVM.swift */; };
-		1EAB1052234E2BC40077769F /* AssistanceInputCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAB1051234E2BC40077769F /* AssistanceInputCellVM.swift */; };
+		1E824B6A235361340066DD1B /* TimerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E824B69235361330066DD1B /* TimerVC.swift */; };
+		1E8FC589234FC15F00932C79 /* CycleVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8FC588234FC15F00932C79 /* CycleVM.swift */; };
+		1E8FC58B234FC2AD00932C79 /* CycleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8FC58A234FC2AD00932C79 /* CycleController.swift */; };
+		1E8FC58E234FE89800932C79 /* ProgramPercentages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8FC58D234FE89800932C79 /* ProgramPercentages.swift */; };
 		1EB22DC2232C0F0800099FBB /* RoundToCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB22DC1232C0F0800099FBB /* RoundToCell.swift */; };
+		1EB6E86E234E8C450052ED4B /* AddExerciseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB6E86D234E8C450052ED4B /* AddExerciseController.swift */; };
+		1EB6E872234E8CFF0052ED4B /* AssistanceCatalogVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB6E871234E8CFF0052ED4B /* AssistanceCatalogVM.swift */; };
+		1EBCD5DD235363E9004A458D /* AlertConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBCD5DC235363E9004A458D /* AlertConfigurable.swift */; };
 		1EBF0BA3232FC43600502394 /* Lift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBF0BA2232FC43600502394 /* Lift.swift */; };
-		1EF5C4C42341336A00A71C18 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF5C4C32341336A00A71C18 /* Extensions.swift */; };
+		1ECCFA1323521DCC00F8AFBB /* WarmupSetVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ECCFA1223521DCC00F8AFBB /* WarmupSetVM.swift */; };
+		1ECCFA172352236100F8AFBB /* MainSetVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ECCFA162352236100F8AFBB /* MainSetVM.swift */; };
+		1ECCFA192352245600F8AFBB /* BbbSetVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ECCFA182352245600F8AFBB /* BbbSetVM.swift */; };
+		1ECCFA1B2352269800F8AFBB /* AssistanceSetVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ECCFA1A2352269800F8AFBB /* AssistanceSetVM.swift */; };
+		1ECCFA1E235235E600F8AFBB /* SetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ECCFA1D235235E600F8AFBB /* SetViewModel.swift */; };
+		1ECCFA20235236DC00F8AFBB /* SectionSetVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ECCFA1F235236DC00F8AFBB /* SectionSetVM.swift */; };
+		1ECCFA22235237DA00F8AFBB /* SetConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ECCFA21235237DA00F8AFBB /* SetConfigurable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,10 +101,27 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1E641607234BBD78006815F1 /* AddExerciseVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddExerciseVC.swift; sourceTree = "<group>"; };
-		1E641608234BBD78006815F1 /* AssistanceCatalogVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssistanceCatalogVC.swift; sourceTree = "<group>"; };
-		1E641609234BBD78006815F1 /* AssistanceExerciseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssistanceExerciseCell.swift; sourceTree = "<group>"; };
-		1E64160A234BBD78006815F1 /* AssistanceInputCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssistanceInputCell.swift; sourceTree = "<group>"; };
+		1E0C0637234E5AD90037C11D /* AssistanceExerciseCellVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssistanceExerciseCellVM.swift; sourceTree = "<group>"; };
+		1E0C0638234E5AD90037C11D /* AssistanceInputCellVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssistanceInputCellVM.swift; sourceTree = "<group>"; };
+		1E0C063A234E5AD90037C11D /* AssistanceExerciseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssistanceExerciseCell.swift; sourceTree = "<group>"; };
+		1E0C063B234E5AD90037C11D /* AssistanceInputCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssistanceInputCell.swift; sourceTree = "<group>"; };
+		1E0C063D234E5AD90037C11D /* Assistance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assistance.swift; sourceTree = "<group>"; };
+		1E0C063F234E5AD90037C11D /* AddExerciseVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddExerciseVC.swift; sourceTree = "<group>"; };
+		1E0C0640234E5AD90037C11D /* AssistanceCatalogController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssistanceCatalogController.swift; sourceTree = "<group>"; };
+		1E0C0641234E5AD90037C11D /* AssistanceCatalogVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssistanceCatalogVC.swift; sourceTree = "<group>"; };
+		1E0C064D234E5BEA0037C11D /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
+		1E0C064E234E5BEA0037C11D /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
+		1E0C064F234E5BEA0037C11D /* TPKeyboardAvoidingTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingTableView.m; sourceTree = "<group>"; };
+		1E0C0650234E5BEA0037C11D /* iOs531App-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "iOs531App-Bridging-Header.h"; path = "TPKeyboard/iOs531App-Bridging-Header.h"; sourceTree = "<group>"; };
+		1E0C0651234E5BEA0037C11D /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
+		1E0C0652234E5BEA0037C11D /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
+		1E0C0653234E5BEA0037C11D /* TPKeyboardAvoidingTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingTableView.h; sourceTree = "<group>"; };
+		1E2D1EF2234FF94D00CA353F /* WeekDisplayVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDisplayVM.swift; sourceTree = "<group>"; };
+		1E6346562350C6F500DA904B /* WeekVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekVC.swift; sourceTree = "<group>"; };
+		1E6346582350C70000DA904B /* PrCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrCell.swift; sourceTree = "<group>"; };
+		1E63465A2350C70700DA904B /* SetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetCell.swift; sourceTree = "<group>"; };
+		1E63465C2350C7D200DA904B /* WeekController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekController.swift; sourceTree = "<group>"; };
+		1E63465E2350C93100DA904B /* WeekListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekListVM.swift; sourceTree = "<group>"; };
 		1E66D3492347A7B0007F192F /* SetupData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupData.swift; sourceTree = "<group>"; };
 		1E68FD2D2323FA1200631945 /* Fit Don't Quit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fit Don't Quit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E68FD302323FA1200631945 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -94,9 +130,7 @@
 		1E68FD372323FA1200631945 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1E68FD3A2323FA1200631945 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1E68FD3C2323FA1200631945 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1E6C6A8B234E18FE00144BBA /* Assistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assistance.swift; sourceTree = "<group>"; };
 		1E6C6A8D234E21DB00144BBA /* ReflectedStringConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectedStringConvertible.swift; sourceTree = "<group>"; };
-		1E6C6A90234E27FF00144BBA /* AssistanceExerciseCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistanceExerciseCellVM.swift; sourceTree = "<group>"; };
 		1E7099822347962B00EC4AA4 /* SetupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupController.swift; sourceTree = "<group>"; };
 		1E747D232348C8E200060423 /* RoundToCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundToCellVM.swift; sourceTree = "<group>"; };
 		1E747D252348C9D200060423 /* EditValueVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditValueVM.swift; sourceTree = "<group>"; };
@@ -111,34 +145,38 @@
 		1E7871F4234778E6009A2561 /* Fit Don't QuitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Fit Don't QuitTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E7871F6234778E6009A2561 /* Fit_Don_t_QuitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fit_Don_t_QuitTests.swift; sourceTree = "<group>"; };
 		1E7871F8234778E6009A2561 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1E79A5962354AFAA00BF5B00 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		1E7AD435234A24E5009C141D /* ViewModelPressible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelPressible.swift; sourceTree = "<group>"; };
 		1E7AD439234A4443009C141D /* EditValueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditValueCell.swift; sourceTree = "<group>"; };
-		1E7AD442234A7537009C141D /* iOs531App-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "iOs531App-Bridging-Header.h"; path = "TPKeyboard/iOs531App-Bridging-Header.h"; sourceTree = "<group>"; };
-		1E7AD443234A7537009C141D /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TPKeyboardAvoidingScrollView.m; path = TPKeyboard/TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
-		1E7AD444234A7537009C141D /* TPKeyboardAvoidingTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TPKeyboardAvoidingTableView.h; path = TPKeyboard/TPKeyboardAvoidingTableView.h; sourceTree = "<group>"; };
-		1E7AD445234A7537009C141D /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+TPKeyboardAvoidingAdditions.h"; path = "TPKeyboard/UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
-		1E7AD446234A7537009C141D /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+TPKeyboardAvoidingAdditions.m"; path = "TPKeyboard/UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
-		1E7AD447234A7537009C141D /* TPKeyboardAvoidingTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TPKeyboardAvoidingTableView.m; path = TPKeyboard/TPKeyboardAvoidingTableView.m; sourceTree = "<group>"; };
-		1E7AD448234A7537009C141D /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TPKeyboardAvoidingScrollView.h; path = TPKeyboard/TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
-		1E7AD44E234A779E009C141D /* CycleVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CycleVC.swift; path = iOs531App/Cycle/CycleVC.swift; sourceTree = SOURCE_ROOT; };
+		1E7AD44E234A779E009C141D /* CycleVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CycleVC.swift; path = iOs531App/Main/Controllers/CycleVC.swift; sourceTree = SOURCE_ROOT; };
 		1E7AD451234A77C8009C141D /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		1E7AD452234A77C8009C141D /* AssistanceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssistanceCell.swift; sourceTree = "<group>"; };
 		1E7AD453234A77C8009C141D /* TimerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerCell.swift; sourceTree = "<group>"; };
 		1E7AD454234A77C8009C141D /* TextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
 		1E7AD455234A77C8009C141D /* DayAndLiftPickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayAndLiftPickerCell.swift; sourceTree = "<group>"; };
-		1E7AD45B234A77DC009C141D /* WeekDisplayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeekDisplayCell.swift; path = iOs531App/Cycle/WeekDisplayCell.swift; sourceTree = SOURCE_ROOT; };
+		1E7AD45B234A77DC009C141D /* WeekDisplayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeekDisplayCell.swift; path = iOs531App/Main/Cells/WeekDisplayCell.swift; sourceTree = SOURCE_ROOT; };
 		1E7AD45E234A7A03009C141D /* SettingsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsData.swift; sourceTree = "<group>"; };
 		1E7AD462234A7A64009C141D /* SettingsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVM.swift; sourceTree = "<group>"; };
 		1E7AD465234A7B24009C141D /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		1E7AD469234A7DC3009C141D /* SavedKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedKeys.swift; sourceTree = "<group>"; };
 		1E7AD470234A9246009C141D /* SchedulePickerVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePickerVM.swift; sourceTree = "<group>"; };
 		1E7BFD832346759900695060 /* CycleDb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CycleDb.swift; sourceTree = "<group>"; };
-		1E7CD11D234E139400F610FE /* AssistanceCatalogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistanceCatalogController.swift; sourceTree = "<group>"; };
-		1E7CD120234E16F000F610FE /* AssistanceCatalogVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistanceCatalogVM.swift; sourceTree = "<group>"; };
-		1EAB1051234E2BC40077769F /* AssistanceInputCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistanceInputCellVM.swift; sourceTree = "<group>"; };
+		1E824B69235361330066DD1B /* TimerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerVC.swift; sourceTree = "<group>"; };
+		1E8FC588234FC15F00932C79 /* CycleVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CycleVM.swift; sourceTree = "<group>"; };
+		1E8FC58A234FC2AD00932C79 /* CycleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CycleController.swift; sourceTree = "<group>"; };
+		1E8FC58D234FE89800932C79 /* ProgramPercentages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramPercentages.swift; sourceTree = "<group>"; };
 		1EB22DC1232C0F0800099FBB /* RoundToCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundToCell.swift; sourceTree = "<group>"; };
+		1EB6E86D234E8C450052ED4B /* AddExerciseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExerciseController.swift; sourceTree = "<group>"; };
+		1EB6E871234E8CFF0052ED4B /* AssistanceCatalogVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssistanceCatalogVM.swift; sourceTree = "<group>"; };
+		1EBCD5DC235363E9004A458D /* AlertConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertConfigurable.swift; sourceTree = "<group>"; };
 		1EBF0BA2232FC43600502394 /* Lift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lift.swift; sourceTree = "<group>"; };
-		1EF5C4C32341336A00A71C18 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		1ECCFA1223521DCC00F8AFBB /* WarmupSetVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarmupSetVM.swift; sourceTree = "<group>"; };
+		1ECCFA162352236100F8AFBB /* MainSetVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSetVM.swift; sourceTree = "<group>"; };
+		1ECCFA182352245600F8AFBB /* BbbSetVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BbbSetVM.swift; sourceTree = "<group>"; };
+		1ECCFA1A2352269800F8AFBB /* AssistanceSetVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistanceSetVM.swift; sourceTree = "<group>"; };
+		1ECCFA1D235235E600F8AFBB /* SetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetViewModel.swift; sourceTree = "<group>"; };
+		1ECCFA1F235236DC00F8AFBB /* SectionSetVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionSetVM.swift; sourceTree = "<group>"; };
+		1ECCFA21235237DA00F8AFBB /* SetConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetConfigurable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,16 +199,66 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1E641606234BBD78006815F1 /* Popover */ = {
+		1E0C0634234E5AD90037C11D /* Popover */ = {
 			isa = PBXGroup;
 			children = (
-				1E6C6A8F234E27E300144BBA /* Cells */,
-				1E6C6A8A234E18EF00144BBA /* Model */,
-				1E7CD11F234E16CD00F610FE /* Controllers */,
-				1E7CD11C234E138200F610FE /* Viewmodels */,
+				1E0C0635234E5AD90037C11D /* Viewmodels */,
+				1E0C0639234E5AD90037C11D /* Cells */,
+				1E0C063C234E5AD90037C11D /* Model */,
+				1E0C063E234E5AD90037C11D /* Controllers */,
 			);
-			name = Popover;
-			path = AppDelegate/Popover;
+			path = Popover;
+			sourceTree = "<group>";
+		};
+		1E0C0635234E5AD90037C11D /* Viewmodels */ = {
+			isa = PBXGroup;
+			children = (
+				1EB6E871234E8CFF0052ED4B /* AssistanceCatalogVM.swift */,
+				1E0C0637234E5AD90037C11D /* AssistanceExerciseCellVM.swift */,
+				1E0C0638234E5AD90037C11D /* AssistanceInputCellVM.swift */,
+			);
+			path = Viewmodels;
+			sourceTree = "<group>";
+		};
+		1E0C0639234E5AD90037C11D /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				1E0C063A234E5AD90037C11D /* AssistanceExerciseCell.swift */,
+				1E0C063B234E5AD90037C11D /* AssistanceInputCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		1E0C063C234E5AD90037C11D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1E0C063D234E5AD90037C11D /* Assistance.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1E0C063E234E5AD90037C11D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1E0C063F234E5AD90037C11D /* AddExerciseVC.swift */,
+				1EB6E86D234E8C450052ED4B /* AddExerciseController.swift */,
+				1E0C0641234E5AD90037C11D /* AssistanceCatalogVC.swift */,
+				1E0C0640234E5AD90037C11D /* AssistanceCatalogController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		1E0C064C234E5BEA0037C11D /* TPKeyboard */ = {
+			isa = PBXGroup;
+			children = (
+				1E0C064D234E5BEA0037C11D /* TPKeyboardAvoidingScrollView.h */,
+				1E0C064E234E5BEA0037C11D /* UIScrollView+TPKeyboardAvoidingAdditions.m */,
+				1E0C064F234E5BEA0037C11D /* TPKeyboardAvoidingTableView.m */,
+				1E0C0651234E5BEA0037C11D /* TPKeyboardAvoidingScrollView.m */,
+				1E0C0652234E5BEA0037C11D /* UIScrollView+TPKeyboardAvoidingAdditions.h */,
+				1E0C0653234E5BEA0037C11D /* TPKeyboardAvoidingTableView.h */,
+			);
+			path = TPKeyboard;
 			sourceTree = "<group>";
 		};
 		1E68FD242323FA1200631945 = {
@@ -197,14 +285,15 @@
 			isa = PBXGroup;
 			children = (
 				1E7AD440234A511A009C141D /* AppDelegate */,
-				1E641606234BBD78006815F1 /* Popover */,
+				1E824B68235361330066DD1B /* Timer */,
 				1E7AD441234A514F009C141D /* Main */,
+				1E0C0634234E5AD90037C11D /* Popover */,
 				1E7AD450234A77C8009C141D /* Settings */,
 				1EBF0B9E232F9F5500502394 /* Setup */,
 				1E7099842347979400EC4AA4 /* Model */,
+				1E0C0650234E5BEA0037C11D /* iOs531App-Bridging-Header.h */,
+				1E0C064C234E5BEA0037C11D /* TPKeyboard */,
 				1E68FD342323FA1200631945 /* Main.storyboard */,
-				1EA611152337AC4F001B3710 /* TPKeyboard */,
-				1EF5C4C32341336A00A71C18 /* Extensions.swift */,
 				1E68FD372323FA1200631945 /* Assets.xcassets */,
 				1E68FD392323FA1200631945 /* LaunchScreen.storyboard */,
 				1E68FD3C2323FA1200631945 /* Info.plist */,
@@ -212,26 +301,10 @@
 			path = iOs531App;
 			sourceTree = "<group>";
 		};
-		1E6C6A8A234E18EF00144BBA /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				1E6C6A8B234E18FE00144BBA /* Assistance.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		1E6C6A8F234E27E300144BBA /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				1E641609234BBD78006815F1 /* AssistanceExerciseCell.swift */,
-				1E64160A234BBD78006815F1 /* AssistanceInputCell.swift */,
-			);
-			path = Cells;
-			sourceTree = "<group>";
-		};
 		1E7099842347979400EC4AA4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1E79A5962354AFAA00BF5B00 /* Extensions.swift */,
 				1EBF0BA2232FC43600502394 /* Lift.swift */,
 				1E7BFD832346759900695060 /* CycleDb.swift */,
 				1E7AD469234A7DC3009C141D /* SavedKeys.swift */,
@@ -265,7 +338,6 @@
 				1E747D232348C8E200060423 /* RoundToCellVM.swift */,
 				1E747D252348C9D200060423 /* EditValueVM.swift */,
 				1E747D2D2348D1FF00060423 /* SetupListViewModel.swift */,
-				1E747D2B2348CEAD00060423 /* RowViewModel.swift */,
 			);
 			path = Viewmodels;
 			sourceTree = "<group>";
@@ -275,6 +347,7 @@
 			children = (
 				1E747D292348CE0000060423 /* CellConfigurable.swift */,
 				1E7AD435234A24E5009C141D /* ViewModelPressible.swift */,
+				1E747D2B2348CEAD00060423 /* RowViewModel.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -316,8 +389,11 @@
 		1E7AD441234A514F009C141D /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				1E7AD44E234A779E009C141D /* CycleVC.swift */,
-				1E7AD45B234A77DC009C141D /* WeekDisplayCell.swift */,
+				1ECCFA1C235229E900F8AFBB /* Protocols */,
+				1E8FC58C234FE88B00932C79 /* Model */,
+				1E8FC587234FC12A00932C79 /* Cells */,
+				1E8FC586234FC0BC00932C79 /* Controllers */,
+				1E8FC585234FC0B100932C79 /* Viewmodels */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -379,38 +455,56 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		1E7CD11C234E138200F610FE /* Viewmodels */ = {
+		1E824B68235361330066DD1B /* Timer */ = {
 			isa = PBXGroup;
 			children = (
-				1E7CD120234E16F000F610FE /* AssistanceCatalogVM.swift */,
-				1E6C6A90234E27FF00144BBA /* AssistanceExerciseCellVM.swift */,
-				1EAB1051234E2BC40077769F /* AssistanceInputCellVM.swift */,
+				1E824B69235361330066DD1B /* TimerVC.swift */,
+			);
+			path = Timer;
+			sourceTree = "<group>";
+		};
+		1E8FC585234FC0B100932C79 /* Viewmodels */ = {
+			isa = PBXGroup;
+			children = (
+				1E8FC588234FC15F00932C79 /* CycleVM.swift */,
+				1E63465E2350C93100DA904B /* WeekListVM.swift */,
+				1ECCFA1F235236DC00F8AFBB /* SectionSetVM.swift */,
+				1E2D1EF2234FF94D00CA353F /* WeekDisplayVM.swift */,
+				1ECCFA1223521DCC00F8AFBB /* WarmupSetVM.swift */,
+				1ECCFA162352236100F8AFBB /* MainSetVM.swift */,
+				1ECCFA182352245600F8AFBB /* BbbSetVM.swift */,
+				1ECCFA1A2352269800F8AFBB /* AssistanceSetVM.swift */,
 			);
 			path = Viewmodels;
 			sourceTree = "<group>";
 		};
-		1E7CD11F234E16CD00F610FE /* Controllers */ = {
+		1E8FC586234FC0BC00932C79 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				1E7CD11D234E139400F610FE /* AssistanceCatalogController.swift */,
-				1E641607234BBD78006815F1 /* AddExerciseVC.swift */,
-				1E641608234BBD78006815F1 /* AssistanceCatalogVC.swift */,
+				1E7AD44E234A779E009C141D /* CycleVC.swift */,
+				1E8FC58A234FC2AD00932C79 /* CycleController.swift */,
+				1E6346562350C6F500DA904B /* WeekVC.swift */,
+				1E63465C2350C7D200DA904B /* WeekController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		1EA611152337AC4F001B3710 /* TPKeyboard */ = {
+		1E8FC587234FC12A00932C79 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				1E7AD442234A7537009C141D /* iOs531App-Bridging-Header.h */,
-				1E7AD448234A7537009C141D /* TPKeyboardAvoidingScrollView.h */,
-				1E7AD443234A7537009C141D /* TPKeyboardAvoidingScrollView.m */,
-				1E7AD444234A7537009C141D /* TPKeyboardAvoidingTableView.h */,
-				1E7AD447234A7537009C141D /* TPKeyboardAvoidingTableView.m */,
-				1E7AD445234A7537009C141D /* UIScrollView+TPKeyboardAvoidingAdditions.h */,
-				1E7AD446234A7537009C141D /* UIScrollView+TPKeyboardAvoidingAdditions.m */,
+				1E7AD45B234A77DC009C141D /* WeekDisplayCell.swift */,
+				1E6346582350C70000DA904B /* PrCell.swift */,
+				1E63465A2350C70700DA904B /* SetCell.swift */,
 			);
-			name = TPKeyboard;
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		1E8FC58C234FE88B00932C79 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1E8FC58D234FE89800932C79 /* ProgramPercentages.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		1EBF0B9E232F9F5500502394 /* Setup */ = {
@@ -423,6 +517,16 @@
 				1E7AD43B234A50A5009C141D /* Viewmodels */,
 			);
 			path = Setup;
+			sourceTree = "<group>";
+		};
+		1ECCFA1C235229E900F8AFBB /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				1ECCFA1D235235E600F8AFBB /* SetViewModel.swift */,
+				1ECCFA21235237DA00F8AFBB /* SetConfigurable.swift */,
+				1EBCD5DC235363E9004A458D /* AlertConfigurable.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -539,45 +643,64 @@
 				1E74A7C9234B713000677E76 /* TimerCellVM.swift in Sources */,
 				1E747D2C2348CEAD00060423 /* RowViewModel.swift in Sources */,
 				1E7AD43A234A4443009C141D /* EditValueCell.swift in Sources */,
+				1ECCFA1323521DCC00F8AFBB /* WarmupSetVM.swift in Sources */,
+				1ECCFA192352245600F8AFBB /* BbbSetVM.swift in Sources */,
+				1ECCFA172352236100F8AFBB /* MainSetVM.swift in Sources */,
 				1E747D2E2348D1FF00060423 /* SetupListViewModel.swift in Sources */,
-				1E64160B234BBD78006815F1 /* AddExerciseVC.swift in Sources */,
+				1E8FC58B234FC2AD00932C79 /* CycleController.swift in Sources */,
+				1E0C0648234E5AD90037C11D /* AddExerciseVC.swift in Sources */,
 				1E7AD46B234A80A2009C141D /* SetupController.swift in Sources */,
+				1E0C0645234E5AD90037C11D /* AssistanceExerciseCell.swift in Sources */,
 				1E7AD45F234A7A03009C141D /* SettingsData.swift in Sources */,
 				1E747D2A2348CE0000060423 /* CellConfigurable.swift in Sources */,
+				1ECCFA1B2352269800F8AFBB /* AssistanceSetVM.swift in Sources */,
 				1E74A7C7234B6F3900677E76 /* AssistanceCellVM.swift in Sources */,
-				1E64160D234BBD78006815F1 /* AssistanceExerciseCell.swift in Sources */,
 				1E7AD436234A24E5009C141D /* ViewModelPressible.swift in Sources */,
 				1E68FD332323FA1200631945 /* SetupVC.swift in Sources */,
 				1E7AD45C234A77DC009C141D /* WeekDisplayCell.swift in Sources */,
 				1EBF0BA3232FC43600502394 /* Lift.swift in Sources */,
+				1E79A5972354AFAA00BF5B00 /* Extensions.swift in Sources */,
+				1EB6E86E234E8C450052ED4B /* AddExerciseController.swift in Sources */,
+				1E0C0644234E5AD90037C11D /* AssistanceInputCellVM.swift in Sources */,
 				1E7AD463234A7A64009C141D /* SettingsVM.swift in Sources */,
+				1E0C0647234E5AD90037C11D /* Assistance.swift in Sources */,
 				1E7BFD842346759900695060 /* CycleDb.swift in Sources */,
-				1E6C6A91234E27FF00144BBA /* AssistanceExerciseCellVM.swift in Sources */,
+				1E2D1EF3234FF94D00CA353F /* WeekDisplayVM.swift in Sources */,
 				1E7AD44F234A779E009C141D /* CycleVC.swift in Sources */,
-				1E6C6A8C234E18FE00144BBA /* Assistance.swift in Sources */,
 				1E7AD468234A7D53009C141D /* SettingsController.swift in Sources */,
+				1E0C0656234E5BEA0037C11D /* TPKeyboardAvoidingScrollView.m in Sources */,
 				1E747D262348C9D200060423 /* EditValueVM.swift in Sources */,
-				1E64160E234BBD78006815F1 /* AssistanceInputCell.swift in Sources */,
 				1E68FD312323FA1200631945 /* AppDelegate.swift in Sources */,
+				1E63465F2350C93100DA904B /* WeekListVM.swift in Sources */,
 				1E747D302348D21400060423 /* SectionVM.swift in Sources */,
-				1E7AD44B234A7537009C141D /* TPKeyboardAvoidingTableView.m in Sources */,
+				1E0C0655234E5BEA0037C11D /* TPKeyboardAvoidingTableView.m in Sources */,
+				1ECCFA20235236DC00F8AFBB /* SectionSetVM.swift in Sources */,
 				1E747D242348C8E200060423 /* RoundToCellVM.swift in Sources */,
+				1E0C064A234E5AD90037C11D /* AssistanceCatalogVC.swift in Sources */,
+				1E0C0646234E5AD90037C11D /* AssistanceInputCell.swift in Sources */,
 				1E6C6A8E234E21DB00144BBA /* ReflectedStringConvertible.swift in Sources */,
-				1E7CD11E234E139400F610FE /* AssistanceCatalogController.swift in Sources */,
 				1E7AD472234A959E009C141D /* DayAndLiftPickerCell.swift in Sources */,
+				1E0C0654234E5BEA0037C11D /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
+				1EBCD5DD235363E9004A458D /* AlertConfigurable.swift in Sources */,
 				1E7AD471234A9246009C141D /* SchedulePickerVM.swift in Sources */,
-				1E7AD44A234A7537009C141D /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				1E7AD46C234A80AF009C141D /* SavedKeys.swift in Sources */,
 				1E7AD46F234A8D34009C141D /* TextFieldCell.swift in Sources */,
-				1E7AD449234A7537009C141D /* TPKeyboardAvoidingScrollView.m in Sources */,
+				1E8FC589234FC15F00932C79 /* CycleVM.swift in Sources */,
+				1E63465D2350C7D200DA904B /* WeekController.swift in Sources */,
+				1EB6E872234E8CFF0052ED4B /* AssistanceCatalogVM.swift in Sources */,
+				1E824B6A235361340066DD1B /* TimerVC.swift in Sources */,
+				1ECCFA1E235235E600F8AFBB /* SetViewModel.swift in Sources */,
 				1E7AD458234A77C8009C141D /* TimerCell.swift in Sources */,
-				1E7CD121234E16F000F610FE /* AssistanceCatalogVM.swift in Sources */,
-				1E64160C234BBD78006815F1 /* AssistanceCatalogVC.swift in Sources */,
+				1E63465B2350C70700DA904B /* SetCell.swift in Sources */,
 				1EB22DC2232C0F0800099FBB /* RoundToCell.swift in Sources */,
-				1EF5C4C42341336A00A71C18 /* Extensions.swift in Sources */,
-				1EAB1052234E2BC40077769F /* AssistanceInputCellVM.swift in Sources */,
+				1E6346592350C70000DA904B /* PrCell.swift in Sources */,
+				1ECCFA22235237DA00F8AFBB /* SetConfigurable.swift in Sources */,
+				1E0C0649234E5AD90037C11D /* AssistanceCatalogController.swift in Sources */,
 				1E66D34A2347A7B0007F192F /* SetupData.swift in Sources */,
+				1E8FC58E234FE89800932C79 /* ProgramPercentages.swift in Sources */,
+				1E6346572350C6F500DA904B /* WeekVC.swift in Sources */,
 				1E7AD466234A7B24009C141D /* SettingsVC.swift in Sources */,
+				1E0C0643234E5AD90037C11D /* AssistanceExerciseCellVM.swift in Sources */,
 				1E7AD457234A77C8009C141D /* AssistanceCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
