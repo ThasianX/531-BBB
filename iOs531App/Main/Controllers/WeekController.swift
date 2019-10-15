@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol WeekControllerDelegate {
-    func reloadPr(indexPath: IndexPath)
+    func reloadPr(indexPath: IndexPath, timerOn: Bool)
 }
 
 protocol CheckBoxStatesDelegate {
@@ -50,7 +50,11 @@ class WeekController {
     func setupOutput(){
         headerTitles = ["Warmup Lifts", "5/3/1 Lifts", "BBB Lifts", "Assistance Lifts"]
         roundTo = UserDefaults.standard.value(forKey: SavedKeys.roundTo) as? Double
-        selectedDay = UserDefaults.standard.value(forKey: SavedKeys.selectedDay) as? Int
+    }
+    
+    func initializeSelectedDay(){
+        selectedDay = UserDefaults.standard.value(forKey: SavedKeys.getSelectedDay(week: navTitle)) as? Int
+        log.info("Selected day is \(selectedDay!)")
     }
     
     func setupViewModel(){
@@ -193,10 +197,13 @@ class WeekController {
                 }
             }
             self.setChecked(indexPath: indexPath, checked: true)
+            var timerOn = false
+            
             if self.timerEnabled(section: indexPath.section) {
                 self.setupSetDescriptions(indexPath: indexPath)
-                self.delegate?.reloadPr(indexPath: indexPath)
+                timerOn = true
             }
+            self.delegate?.reloadPr(indexPath: indexPath, timerOn: timerOn)
         } ))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil ))
         
@@ -205,7 +212,8 @@ class WeekController {
     
     func setSelectedDay(index: Int){
         selectedDay = index
-        UserDefaults.standard.set(selectedDay, forKey: SavedKeys.selectedDay)
+        UserDefaults.standard.set(selectedDay, forKey: SavedKeys.getSelectedDay(week: navTitle))
+        log.info("Selected day set to \(selectedDay!)")
     }
     
     func setupSetDescriptions(indexPath: IndexPath){
@@ -259,10 +267,6 @@ class WeekController {
             days.append(lift.dayString)
         }
         return days
-    }
-    
-    func daySelected(index: Int){
-        selectedDay = index
     }
     
     func prepareData(vc: TimerVC) {

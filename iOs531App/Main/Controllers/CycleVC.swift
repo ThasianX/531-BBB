@@ -9,6 +9,10 @@
 import UIKit
 
 extension CycleVC: UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.rowVms.count
     }
@@ -58,6 +62,10 @@ class CycleVC: UIViewController {
         super.viewDidLoad()
         log.info("CycleVC viewdidload called")
         controller.populateViewModel()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        controller.refreshCycleData()
     }
 
     //MARK: Bar Button Action

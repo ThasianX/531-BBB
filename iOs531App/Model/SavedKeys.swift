@@ -13,7 +13,6 @@ class SavedKeys {
     private (set) static var roundTo = "roundTo"
     private (set) static var checkboxStates = "checkboxStates"
     private (set) static var programName = "Boring But Big"
-    private (set) static var selectedDay = "selectedDay"
     
     static func setProgramName(name: String){
         programName = name
@@ -25,5 +24,9 @@ class SavedKeys {
     
     static func getTimeLeftKeys(timer: Int) -> String {
         return "timeLeft\(timer)"
+    }
+    
+    static func getSelectedDay(week: String) -> String {
+        return "\(week)selectedDay"
     }
 }

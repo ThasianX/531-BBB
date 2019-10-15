@@ -20,7 +20,7 @@ class WeekDisplayCell: UICollectionViewCell, CellConfigurable {
     
     func setup(viewModel: RowViewModel) {
         guard let viewModel = viewModel as? WeekDisplayVM else {
-            return
+            return  
         }
         
         self.viewModel = viewModel

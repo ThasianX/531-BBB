@@ -13,8 +13,11 @@ protocol WeekVCDelegate: class {
 }
 
 extension WeekVC: WeekControllerDelegate {
-    func reloadPr(indexPath: IndexPath) {
-        performSegue(withIdentifier: "showTimer", sender: self)
+    func reloadPr(indexPath: IndexPath, timerOn: Bool) {
+        if timerOn {
+            performSegue(withIdentifier: "showTimer", sender: self)
+        }
+        
         tableView.reloadRows(at: [indexPath], with: .automatic)
     }
 }
@@ -93,6 +96,10 @@ class WeekVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         log.info("WeekVC aware of viewdidload call")
+        
+        navigationItem.title = controller.navTitle
+        controller.initializeSelectedDay()
+        
         initSegmentedControl()
         
         controller.delegate = self
@@ -115,7 +122,7 @@ class WeekVC: UIViewController {
     //MARK: Segmented Control Action
     @IBAction func showDay(_ sender: UISegmentedControl) {
         log.info("showDay called")
-        controller.daySelected(index: daysSegControl.selectedSegmentIndex)
+        controller.setSelectedDay(index: daysSegControl.selectedSegmentIndex)
         
         controller.setupViewModel()
         

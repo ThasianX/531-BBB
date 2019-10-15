@@ -532,9 +532,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1E68FD2C2323FA1200631945 /* iOs531App */ = {
+		1E68FD2C2323FA1200631945 /* iOs531AppBackup */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1E68FD4A2323FA1200631945 /* Build configuration list for PBXNativeTarget "iOs531App" */;
+			buildConfigurationList = 1E68FD4A2323FA1200631945 /* Build configuration list for PBXNativeTarget "iOs531AppBackup" */;
 			buildPhases = (
 				1E68FD292323FA1200631945 /* Sources */,
 				1E68FD2A2323FA1200631945 /* Frameworks */,
@@ -545,7 +545,7 @@
 			);
 			dependencies = (
 			);
-			name = iOs531App;
+			name = iOs531AppBackup;
 			packageProductDependencies = (
 				1E7BFD7D2346531A00695060 /* SQLite */,
 				1E7871FF23478B64009A2561 /* SwiftyBeaver */,
@@ -592,7 +592,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 1E68FD282323FA1200631945 /* Build configuration list for PBXProject "iOs531App" */;
+			buildConfigurationList = 1E68FD282323FA1200631945 /* Build configuration list for PBXProject "iOs531AppBackup" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -609,7 +609,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1E68FD2C2323FA1200631945 /* iOs531App */,
+				1E68FD2C2323FA1200631945 /* iOs531AppBackup */,
 				1E7871F3234778E6009A2561 /* Fit Don't QuitTests */,
 			);
 		};
@@ -718,7 +718,7 @@
 /* Begin PBXTargetDependency section */
 		1E7871FA234778E6009A2561 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1E68FD2C2323FA1200631945 /* iOs531App */;
+			target = 1E68FD2C2323FA1200631945 /* iOs531AppBackup */;
 			targetProxy = 1E7871F9234778E6009A2561 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -945,7 +945,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1E68FD282323FA1200631945 /* Build configuration list for PBXProject "iOs531App" */ = {
+		1E68FD282323FA1200631945 /* Build configuration list for PBXProject "iOs531AppBackup" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1E68FD482323FA1200631945 /* Debug */,
@@ -954,7 +954,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1E68FD4A2323FA1200631945 /* Build configuration list for PBXNativeTarget "iOs531App" */ = {
+		1E68FD4A2323FA1200631945 /* Build configuration list for PBXNativeTarget "iOs531AppBackup" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1E68FD4B2323FA1200631945 /* Debug */,

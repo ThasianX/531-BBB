@@ -75,7 +75,7 @@ class CycleController {
         
         for (i,week) in weekTitles.enumerated() {
             let weekDisplayVM = WeekDisplayVM(week: week, percentages: weekDescriptions[i], progress: calculateProgress(index: i))
-            log.debug("WeekDisplayVM created with: week - \(weekDisplayVM.week) + percentages - \(weekDisplayVM.percentages) + progress - \(weekDisplayVM.progress)")
+            log.debug("WeekDisplayVM created with: week - \(weekDisplayVM.week) + percentages - \(weekDisplayVM.percentages) + progress - \(Int(weekDisplayVM.progress*100))")
             vm = weekDisplayVM
             rowVMs.append(vm!)
         }
@@ -91,6 +91,11 @@ class CycleController {
         self.viewModel.rowVms[index] = vm
     }
     
+    func refreshCycleData(){
+        log.info("Refreshing cycle data")
+        sortedLifts = db.getCachedLifts()
+    }
+    
     func cellIdentifier(rowVM: RowViewModel) -> String {
         return "weekDisplayCell"
     }
@@ -101,6 +106,8 @@ class CycleController {
     }
     
     func resetCycle(){
+        log.info("Cycle is being reset")
+        
         let defaults = UserDefaults.standard
         
         //Resets checkbox states
@@ -117,39 +124,75 @@ class CycleController {
         sortedLifts = db.getCachedLifts()
         
         //Appends the correct number of falses and exercises to checkboxes and assistance array, respectively
-        setupAssistanceAndCheckboxes()
+        resetAssistanceAndCheckboxes()
         
         defaults.set(checkboxStates, forKey: SavedKeys.checkboxStates)
+        resetSelectedDays()
         
         populateViewModel()
     }
     
-    func setupAssistanceAndCheckboxes(){
+    func resetAssistanceAndCheckboxes(){
+        
+        db.cacheAssistanceExercises()
+        
+        var exerciseCounter = 0
         
         for (i, lift) in sortedLifts.enumerated() {
             let assistanceExercises = db.getAssistanceExercisesForLift(cid: lift.id!)
             assistance[i].removeAll()
             
+            log.debug("Assistance exercises: \(assistanceExercises)")
+            
             for exercise in assistanceExercises {
                 for _ in 0..<exercise.sets {
-                    checkboxStates[i].append(false)
+                    exerciseCounter += 1
                     assistance[i].append(exercise)
+                    log.info("Assistance array in this iteration: \(assistance)")
                 }
             }
         }
+        
+        for i in 0...3 {
+            checkboxStates[i].removeAll()
+            
+            for _ in 0..<(44+exerciseCounter) {
+                checkboxStates[i].append(false)
+            }
+        }
+        
+        log.info("Checkbox array values: \(checkboxStates!)")
+        log.info("Assistance array values: \(assistance)")
     }
     
     func setupAssistance(){
+        
         for (i, lift) in sortedLifts.enumerated() {
-            let assistanceExercises = db.getAssistanceExercisesForLift(cid: lift.id!)
+            
+            let assistanceExercises = db.getCachedAssistanceExercisesForLift(cid: lift.id!)
+            
             assistance.append([Assistance]())
+            
             for exercise in assistanceExercises {
                 for _ in 0..<exercise.sets {
                     assistance[i].append(exercise)
                 }
             }
         }
-        log.info("Assistance array values: \(assistance)")
+        log.info("Cached assistance array values: \(assistance)")
+        
+    }
+    
+    func resetSelectedDays(){
+        let defaults = UserDefaults.standard
+        defaults.set(0, forKey: SavedKeys.getSelectedDay(week: "Week 1"))
+        log.debug("Selected day saved: \(defaults.value(forKey: SavedKeys.getSelectedDay(week: "Week 1")) as! Int)")
+        defaults.set(0, forKey: SavedKeys.getSelectedDay(week: "Week 2"))
+        log.debug("Selected day saved: \(defaults.value(forKey: SavedKeys.getSelectedDay(week: "Week 2")) as! Int)")
+        defaults.set(0, forKey: SavedKeys.getSelectedDay(week: "Week 3"))
+        log.debug("Selected day saved: \(defaults.value(forKey: SavedKeys.getSelectedDay(week: "Week 3")) as! Int)")
+        defaults.set(0, forKey: SavedKeys.getSelectedDay(week: "Week 4"))
+        log.debug("Selected day saved: \(defaults.value(forKey: SavedKeys.getSelectedDay(week: "Week 4")) as! Int)")
     }
     
     func prepareData(vc: WeekVC){
@@ -162,4 +205,4 @@ class CycleController {
         vc.controller.cbDelegate = self
     }
 }
-    
+

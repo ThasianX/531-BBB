@@ -36,6 +36,11 @@ class CycleDb {
     private let benchPressAssistance = Table("benchPressAssistance")
     private let squatAssistance = Table("squatAssistance")
     
+    private let cachedOverheadPressAssistance = Table("cachedOverheadPressAssistance")
+    private let cachedDeadliftAssistance = Table("cachedDeadliftAssistance")
+    private let cachedBenchPressAssistance = Table("cachedBenchPressAssistance")
+    private let cachedSquatAssistance = Table("cachedSquatAssistance")
+    
     private let programPercentages = Table("programPercentages")
     private let programName = Expression<String>("programName")
     private let w1d1 = Expression<Double>("w1d1")
@@ -126,6 +131,26 @@ class CycleDb {
             
             log.info("Creating squat assistance table")
             try db!.run(squatAssistance.create(ifNotExists: true) { table in
+                table.column(id, references: assistanceCatalog, id)
+            })
+            
+            log.info("Creating cached overhead Press assistance table")
+            try db!.run(cachedOverheadPressAssistance.create(ifNotExists: true) { table in
+                table.column(id, references: assistanceCatalog, id)
+            })
+            
+            log.info("Creating cached deadlift assistance table")
+            try db!.run(cachedDeadliftAssistance.create(ifNotExists: true) { table in
+                table.column(id, references: assistanceCatalog, id)
+            })
+            
+            log.info("Creating cached bench Press assistance table")
+            try db!.run(cachedBenchPressAssistance.create(ifNotExists: true) { table in
+                table.column(id, references: assistanceCatalog, id)
+            })
+            
+            log.info("Creating cached squat assistance table")
+            try db!.run(cachedSquatAssistance.create(ifNotExists: true) { table in
                 table.column(id, references: assistanceCatalog, id)
             })
             
@@ -223,6 +248,57 @@ class CycleDb {
             log.error("Get lift failed: \(error)")
         }
         return resultLift
+    }
+    
+    func cacheAssistanceExercises(){
+        do {
+            try db!.run(cachedOverheadPressAssistance.delete())
+            for assistance in try db!.prepare(overheadPressAssistance) {
+                let insert = cachedOverheadPressAssistance.insert(id <- assistance[id])
+                log.info("cacheAssistanceExercises SQL: \(insert.asSQL())")
+                try db!.run(insert)
+            }
+            
+            try db!.run(cachedDeadliftAssistance.delete())
+            for assistance in try db!.prepare(deadliftAssistance) {
+                let insert = cachedDeadliftAssistance.insert(id <- assistance[id])
+                log.info("cacheAssistanceExercises SQL: \(insert.asSQL())")
+                try db!.run(insert)
+            }
+            
+            try db!.run(cachedBenchPressAssistance.delete())
+            for assistance in try db!.prepare(benchPressAssistance) {
+                let insert = cachedBenchPressAssistance.insert(id <- assistance[id])
+                log.info("cacheAssistanceExercises SQL: \(insert.asSQL())")
+                try db!.run(insert)
+            }
+            
+            try db!.run(cachedSquatAssistance.delete())
+            for assistance in try db!.prepare(squatAssistance) {
+                let insert = cachedSquatAssistance.insert(id <- assistance[id])
+                log.info("cacheAssistanceExercises SQL: \(insert.asSQL())")
+                try db!.run(insert)
+            }
+        } catch {
+            log.error("cacheAssistanceExercises failed: \(error)")
+        }
+    }
+    
+    func getCachedAssistanceExercisesForLift(cid: Int64) -> [Assistance]{
+        var assistance = [Assistance]()
+        
+        do {
+            let assistanceTable = getCachedTableForId(id: cid)
+            for row in try db!.prepare(assistanceTable) {
+                let query = assistanceCatalog.filter(id == row[id])
+                let exercise = try db!.pluck(query)!
+                assistance.append(Assistance(id: exercise[id], name: exercise[name], reps: exercise[reps], sets: exercise[sets], type: exercise[type]))
+            }
+        } catch {
+            log.error("getCachedAssistanceExercisesForLift failed: \(error)")
+        }
+        
+        return assistance
     }
     
     func getLift(cid: Int64) -> Lift? {
@@ -461,12 +537,37 @@ class CycleDb {
         }
     }
     
+    private func getCachedTableForId(id: Int64) -> Table{
+        log.debug("Finding table with id: \(id)")
+        switch id {
+        case 0:
+            log.debug("Returning cached overhead press table - 0")
+            return cachedOverheadPressAssistance
+        case 1:
+            log.debug("Returning cached deadlift table - 1")
+            return cachedDeadliftAssistance
+        case 2:
+            log.debug("Returning cached bench press table - 2")
+            return cachedBenchPressAssistance
+        case 3:
+            log.debug("Returning cached squat table - 3")
+            return cachedSquatAssistance
+        default:
+            log.error("Could not get table with given ID")
+            fatalError()
+        }
+    }
+    
     func addPr(cdate: String, cpr: Int64, cname: String){
         do {
-            let insert = prValues.insert(or: .replace, date <- cdate, pr <- cpr, name <- cname)
+            let insert = prValues.insert(or: .replace, date <- cdate, pr <- cpr, liftName <- cname)
             log.info("addPR SQL: \(insert)")
             let rowid = try db!.run(insert)
             log.info("Inserted row at \(rowid)")
+            
+            for row in try db!.prepare(prValues){
+                log.info("\(row[id]) + \(row[liftName]) + \(row[date]) + \(row[pr])")
+            }
         } catch {
             log.info("Insertion failed: \(error)")
         }
