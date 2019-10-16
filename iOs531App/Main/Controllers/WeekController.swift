@@ -76,7 +76,8 @@ class WeekController {
                 sectionVMs.append(SectionSetVM(rowVMs: rowVMs, headerTitle: "\(title) - \(lift.name)"))
             case 1:
                 for i in 0...2 {
-                    let mainSetVM = MainSetVM(lift: lift, roundTo: roundTo, reps: reps[i], percentage: percentages[i], isChecked: isChecked(row: i, section: section))
+                    let prLabel = db.getPrLabel(cid: lift.id!, cweek: navTitle)
+                    let mainSetVM = MainSetVM(lift: lift, roundTo: roundTo, reps: reps[i], percentage: percentages[i], isChecked: isChecked(row: i, section: section), prLabel: prLabel)
                     vm = mainSetVM
                     rowVMs.append(vm!)
                 }
@@ -110,7 +111,7 @@ class WeekController {
     }
     
     func cellIdentifier(vm: SetViewModel, indexPath: IndexPath) -> String{
-        if (vm is MainSetVM) && indexPath.row == 2{
+        if (vm is MainSetVM) && indexPath.row == 2 && navTitle != "Week 4"{
             return "prCell"
         }
         return "setCell"
@@ -188,13 +189,18 @@ class WeekController {
                 
                 let vm = self.viewModel.sectionVms[indexPath.section].rowVMs[indexPath.row] as? MainSetVM
                 
+                log.debug("Current lift PR: \(lift.personalRecord)")
+                
                 if prVal > lift.personalRecord {
                     lift.personalRecord = prVal
-                    vm?.lift = lift
+                    if self.db.updateLift(cid: lift.id!, cpersonalRecord: prVal) {
+                        log.info("Successfully updated pr of \(lift.name) to \(lift.personalRecord)")
+                    }
                     vm?.prLabel = "Achieved a new PR of \(lift.personalRecord) reps"
                 } else {
                     vm?.prLabel = "Lower PR of \(prVal) reps this time. Beat \(lift.personalRecord) reps next time"
                 }
+                self.db.updateCyclePr(lift: lift, cweek: self.navTitle, cprLabel: vm!.prLabel)
             }
             self.setChecked(indexPath: indexPath, checked: true)
             var timerOn = false

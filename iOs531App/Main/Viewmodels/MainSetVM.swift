@@ -17,13 +17,13 @@ class MainSetVM: SetViewModel {
     var isChecked: Bool
     var prLabel: String
     
-    init(lift: Lift, roundTo: Double, reps: Int, percentage: Double, isChecked: Bool){
+    init(lift: Lift, roundTo: Double, reps: Int, percentage: Double, isChecked: Bool, prLabel: String){
         self.lift = lift
         self.weight = round((percentage*lift.trainingMax)/roundTo)*roundTo
         self.reps = reps
         self.percentage = percentage
         self.isChecked = isChecked
-        self.prLabel = "Beat your previous PR of \(lift.personalRecord) reps"
+        self.prLabel = prLabel
     }
     
     func getLabel() -> String{

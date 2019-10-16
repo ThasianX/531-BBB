@@ -61,6 +61,12 @@ class CycleDb {
     private let pr = Expression<Int64>("pr")
     private let liftName = Expression<String>("liftName")
     
+    private let cyclePrLabels = Table("cyclePrLabels")
+    private let prLabel = Expression<String>("prLabel")
+    private let week = Expression<String>("week")
+    private let liftId = Expression<Int64>("liftId")
+    
+    
     private init(){
         let path = NSSearchPathForDirectoriesInDomains(
             .documentDirectory, .userDomainMask, true
@@ -180,6 +186,17 @@ class CycleDb {
                 table.column(pr)
                 table.column(liftName)
             })
+            
+            log.info("Creating cycle pr values table")
+            try db!.run(cyclePrLabels.create(ifNotExists: true) {
+                table in
+                table.column(id, primaryKey: .autoincrement)
+                table.column(prLabel)
+                table.column(week)
+                table.column(liftId)
+                table.unique(week, liftId)
+            })
+            
         } catch {
             log.error("Unable to create table: \(error)")
         }
@@ -411,6 +428,21 @@ class CycleDb {
         return result
     }
     
+    func updateLift(cid: Int64, cpersonalRecord: Int64) -> Bool {
+        var result: Bool = false
+        let lift = cachedLifts.filter(id == cid)
+        do {
+            let update = lift.update(personalRecord <- cpersonalRecord)
+            if try db!.run(update) > 0 {
+                result = true
+            }
+        } catch {
+            log.error("Update failed: \(error)")
+        }
+        
+        return result
+    }
+    
     func getAssistanceExercisesForLift(cid: Int64) -> [Assistance]{
         var assistance = [Assistance]()
         
@@ -563,16 +595,94 @@ class CycleDb {
             let insert = prValues.insert(or: .replace, date <- cdate, pr <- cpr, liftName <- cname)
             log.info("addPR SQL: \(insert)")
             let rowid = try db!.run(insert)
-            log.info("Inserted row at \(rowid)")
+            log.info("Inserted row at \(rowid) for prValues table")
             
             for row in try db!.prepare(prValues){
                 log.info("\(row[id]) + \(row[liftName]) + \(row[date]) + \(row[pr])")
             }
+            
         } catch {
             log.info("Insertion failed: \(error)")
         }
     }
     
-    //get pr values
+    func updateCyclePr(lift: Lift, cweek: String, cprLabel: String){
+        do {
+            var insert = cyclePrLabels.insert(or: .replace, prLabel <- cprLabel, week <- cweek, liftId <- lift.id!)
+            try db!.run(insert)
+            
+            switch(cweek){
+            case "Week 1":
+                insert = cyclePrLabels.insert(or: .replace, prLabel <- "Beat your personal record of \(lift.personalRecord) reps", week <- "Week 2", liftId <- lift.id!)
+                try db!.run(insert)
+                insert = cyclePrLabels.insert(or: .replace, prLabel <- "Beat your personal record of \(lift.personalRecord) reps", week <- "Week 3", liftId <- lift.id!)
+                try db!.run(insert)
+            case "Week 2":
+                insert = cyclePrLabels.insert(or: .replace, prLabel <- "Beat your personal record of \(lift.personalRecord) reps", week <- "Week 3", liftId <- lift.id!)
+                try db!.run(insert)
+            default:
+                return
+            }
+        } catch {
+            log.info("Insertion failed: \(error)")
+        }
+        
+        do {
+            log.info("Current state of cyclePrLabels table:")
+            for row in try db!.prepare(cyclePrLabels){
+                log.debug("Pr Label: \(row[prLabel]). Week: \(row[week]). LiftId: \(row[liftId])")
+            }
+        } catch {
+            log.error(error)
+        }
+        
+    }
+    
+    func resetCyclePrLabels(){
+        do{
+            try db!.run(cyclePrLabels.delete())
+            let weeks = ["Week 1", "Week 2", "Week 3"]
+            let lifts = getCachedLifts()
+            for weekNum in weeks {
+                for lift in lifts {
+                    let insert = cyclePrLabels.insert(prLabel <- "Beat your previous PR of 0 reps", week <- weekNum, liftId <- lift.id!)
+                    log.info("addCyclePr SQL: \(insert)")
+                    let rowid = try db!.run(insert)
+                    log.info("Inserted row at \(rowid) for cyclePrLabels table")
+                }
+            }
+            
+            log.info("Current state of cyclePrLabels table:")
+            for row in try db!.prepare(cyclePrLabels){
+                log.debug("Pr Label: \(row[prLabel]). Week: \(row[week]). LiftId: \(row[liftId])")
+            }
+        } catch {
+            log.error("resetCyclePrLabels failed: \(error)")
+        }
+    }
+    
+    func getPrLabel(cid: Int64, cweek: String) -> String {
+        do {
+            let row = cyclePrLabels.filter(liftId == cid).filter(week == cweek)
+            let prRow = try db!.pluck(row)!
+            return prRow[prLabel]
+        } catch {
+            log.error("getPrLabel failed: \(error)")
+            fatalError()
+        }
+    }
+    
+    func incrementLifts(){
+        do {
+            for row in try db!.prepare(mainLifts){
+                let updatedTrainingMax = row[trainingMax] + row[progression]
+                let lift = mainLifts.filter(id == row[id])
+                try db!.run(lift.update(trainingMax <- updatedTrainingMax))
+            }
+        } catch {
+            log.error("Increment lifts failed: \(error)")
+        }
+        
+    }
     
 }

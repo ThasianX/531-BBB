@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 extension CycleController: CheckBoxStatesDelegate {
     func setCheckBoxState(checkboxStates: [Bool]) {
@@ -127,7 +128,12 @@ class CycleController {
         resetAssistanceAndCheckboxes()
         
         defaults.set(checkboxStates, forKey: SavedKeys.checkboxStates)
+        
+        //Resets where user last left off
         resetSelectedDays()
+        
+        //Resets pr labels
+        db.resetCyclePrLabels()
         
         populateViewModel()
     }
@@ -193,6 +199,30 @@ class CycleController {
         log.debug("Selected day saved: \(defaults.value(forKey: SavedKeys.getSelectedDay(week: "Week 3")) as! Int)")
         defaults.set(0, forKey: SavedKeys.getSelectedDay(week: "Week 4"))
         log.debug("Selected day saved: \(defaults.value(forKey: SavedKeys.getSelectedDay(week: "Week 4")) as! Int)")
+    }
+    
+    func completeCycle(){
+        log.info("Cycle completed.")
+        
+        log.info("Lifts being incremented")
+        db.incrementLifts()
+        
+        //Get the new sorted lifts
+        db.sortLiftsByDay()
+        sortedLifts = db.getCachedLifts()
+        
+        //Appends the correct number of falses and exercises to checkboxes and assistance array, respectively
+        resetAssistanceAndCheckboxes()
+        
+        UserDefaults.standard.set(checkboxStates, forKey: SavedKeys.checkboxStates)
+        
+        //Resets where user last left off
+        resetSelectedDays()
+        
+        //Resets pr labels
+        db.resetCyclePrLabels()
+        
+        populateViewModel()
     }
     
     func prepareData(vc: WeekVC){

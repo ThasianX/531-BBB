@@ -49,9 +49,22 @@ class CycleVC: UIViewController {
     
     //MARK: Outlets
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var completeCycleButton: UIButton!
     
     var viewModel: CycleVM {
         return controller.viewModel
+    }
+    
+    @IBAction func completeCycle(_ sender: UIButton) {
+        let alert = UIAlertController(title: "Complete cycle", message: "Completing will increment all lifts and continue to the next cycle", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+            self.controller.completeCycle()
+            self.collectionView.reloadSections(IndexSet(integer: 0))
+        } ))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil ))
+        
+        self.present(alert, animated: true)
     }
     
     lazy var controller: CycleController = {
@@ -70,8 +83,16 @@ class CycleVC: UIViewController {
 
     //MARK: Bar Button Action
     @IBAction func resetCycle(_ sender: UIBarButtonItem) {
-        controller.resetCycle()
-        collectionView.reloadSections(IndexSet(integer: 0))
+        let alert = UIAlertController(title: "Reset cycle", message: "Resetting will restart the current cycle", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+            self.controller.resetCycle()
+            self.collectionView.reloadSections(IndexSet(integer: 0))
+        } ))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil ))
+        
+        self.present(alert, animated: true)
+        
     }
 
     //MARK: Segue methods
