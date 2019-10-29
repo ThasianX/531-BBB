@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreGraphics
 
 class AddExerciseController {
     
@@ -16,6 +17,7 @@ class AddExerciseController {
     private (set) var inputs: [String]!
     
     init(viewModel: AssistanceCatalogVM = AssistanceCatalogVM()) {
+        log.info("AddExerciseController aware of view did load")
         self.viewModel = viewModel
         db = CycleDb.instance
         
@@ -58,6 +60,10 @@ class AddExerciseController {
     
     func addInputs(input: String){
         inputs.append(input)
+    }
+    
+    func getPreferredContentSize() -> CGSize{
+        return CGSize(width: 300, height: 44 + (viewModel.rowVMs.count*40))
     }
     
     

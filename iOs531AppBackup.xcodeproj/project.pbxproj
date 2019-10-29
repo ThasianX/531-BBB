@@ -57,8 +57,11 @@
 		1E7AD46F234A8D34009C141D /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7AD454234A77C8009C141D /* TextFieldCell.swift */; };
 		1E7AD471234A9246009C141D /* SchedulePickerVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7AD470234A9246009C141D /* SchedulePickerVM.swift */; };
 		1E7AD472234A959E009C141D /* DayAndLiftPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7AD455234A77C8009C141D /* DayAndLiftPickerCell.swift */; };
+		1E7BE26A23573FE20084AD70 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 1E7BE26923573FE20084AD70 /* Charts */; };
 		1E7BFD7E2346531A00695060 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 1E7BFD7D2346531A00695060 /* SQLite */; };
 		1E7BFD842346759900695060 /* CycleDb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7BFD832346759900695060 /* CycleDb.swift */; };
+		1E7F4E7E235893F2004AF2B7 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7F4E7D235893F2004AF2B7 /* LocalNotificationManager.swift */; };
+		1E7F4E8023589412004AF2B7 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7F4E7F23589412004AF2B7 /* Notification.swift */; };
 		1E824B6A235361340066DD1B /* TimerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E824B69235361330066DD1B /* TimerVC.swift */; };
 		1E8FC589234FC15F00932C79 /* CycleVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8FC588234FC15F00932C79 /* CycleVM.swift */; };
 		1E8FC58B234FC2AD00932C79 /* CycleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8FC58A234FC2AD00932C79 /* CycleController.swift */; };
@@ -161,6 +164,8 @@
 		1E7AD469234A7DC3009C141D /* SavedKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedKeys.swift; sourceTree = "<group>"; };
 		1E7AD470234A9246009C141D /* SchedulePickerVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePickerVM.swift; sourceTree = "<group>"; };
 		1E7BFD832346759900695060 /* CycleDb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CycleDb.swift; sourceTree = "<group>"; };
+		1E7F4E7D235893F2004AF2B7 /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
+		1E7F4E7F23589412004AF2B7 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		1E824B69235361330066DD1B /* TimerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerVC.swift; sourceTree = "<group>"; };
 		1E8FC588234FC15F00932C79 /* CycleVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CycleVM.swift; sourceTree = "<group>"; };
 		1E8FC58A234FC2AD00932C79 /* CycleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CycleController.swift; sourceTree = "<group>"; };
@@ -185,6 +190,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E7BFD7E2346531A00695060 /* SQLite in Frameworks */,
+				1E7BE26A23573FE20084AD70 /* Charts in Frameworks */,
 				1E78720023478B64009A2561 /* SwiftyBeaver in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -284,6 +290,7 @@
 		1E68FD2F2323FA1200631945 /* iOs531App */ = {
 			isa = PBXGroup;
 			children = (
+				1E7F4E7C235893E6004AF2B7 /* Notifications */,
 				1E7AD440234A511A009C141D /* AppDelegate */,
 				1E824B68235361330066DD1B /* Timer */,
 				1E7AD441234A514F009C141D /* Main */,
@@ -455,6 +462,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		1E7F4E7C235893E6004AF2B7 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				1E7F4E7D235893F2004AF2B7 /* LocalNotificationManager.swift */,
+				1E7F4E7F23589412004AF2B7 /* Notification.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
 		1E824B68235361330066DD1B /* Timer */ = {
 			isa = PBXGroup;
 			children = (
@@ -549,6 +565,7 @@
 			packageProductDependencies = (
 				1E7BFD7D2346531A00695060 /* SQLite */,
 				1E7871FF23478B64009A2561 /* SwiftyBeaver */,
+				1E7BE26923573FE20084AD70 /* Charts */,
 			);
 			productName = iOs531App;
 			productReference = 1E68FD2D2323FA1200631945 /* Fit Don't Quit.app */;
@@ -604,6 +621,7 @@
 			packageReferences = (
 				1E7BFD7C2346531A00695060 /* XCRemoteSwiftPackageReference "SQLite" */,
 				1E7871FE23478B64009A2561 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
+				1E7BE26823573FE20084AD70 /* XCRemoteSwiftPackageReference "Charts" */,
 			);
 			productRefGroup = 1E68FD2E2323FA1200631945 /* Products */;
 			projectDirPath = "";
@@ -660,6 +678,7 @@
 				1E7AD45C234A77DC009C141D /* WeekDisplayCell.swift in Sources */,
 				1EBF0BA3232FC43600502394 /* Lift.swift in Sources */,
 				1E79A5972354AFAA00BF5B00 /* Extensions.swift in Sources */,
+				1E7F4E8023589412004AF2B7 /* Notification.swift in Sources */,
 				1EB6E86E234E8C450052ED4B /* AddExerciseController.swift in Sources */,
 				1E0C0644234E5AD90037C11D /* AssistanceInputCellVM.swift in Sources */,
 				1E7AD463234A7A64009C141D /* SettingsVM.swift in Sources */,
@@ -682,6 +701,7 @@
 				1E7AD472234A959E009C141D /* DayAndLiftPickerCell.swift in Sources */,
 				1E0C0654234E5BEA0037C11D /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				1EBCD5DD235363E9004A458D /* AlertConfigurable.swift in Sources */,
+				1E7F4E7E235893F2004AF2B7 /* LocalNotificationManager.swift in Sources */,
 				1E7AD471234A9246009C141D /* SchedulePickerVM.swift in Sources */,
 				1E7AD46C234A80AF009C141D /* SavedKeys.swift in Sources */,
 				1E7AD46F234A8D34009C141D /* TextFieldCell.swift in Sources */,
@@ -983,6 +1003,14 @@
 				minimumVersion = 1.8.2;
 			};
 		};
+		1E7BE26823573FE20084AD70 /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielgindi/Charts";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.4.0;
+			};
+		};
 		1E7BFD7C2346531A00695060 /* XCRemoteSwiftPackageReference "SQLite" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/stephencelis/SQLite.swift";
@@ -998,6 +1026,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1E7871FE23478B64009A2561 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */;
 			productName = SwiftyBeaver;
+		};
+		1E7BE26923573FE20084AD70 /* Charts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1E7BE26823573FE20084AD70 /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = Charts;
 		};
 		1E7BFD7D2346531A00695060 /* SQLite */ = {
 			isa = XCSwiftPackageProductDependency;

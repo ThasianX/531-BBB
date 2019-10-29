@@ -76,7 +76,12 @@ class WeekController {
                 sectionVMs.append(SectionSetVM(rowVMs: rowVMs, headerTitle: "\(title) - \(lift.name)"))
             case 1:
                 for i in 0...2 {
-                    let prLabel = db.getPrLabel(cid: lift.id!, cweek: navTitle)
+                    var prLabel: String
+                    if navTitle == "Week 4" {
+                        prLabel = ""
+                    } else {
+                        prLabel = db.getPrLabel(cid: lift.id!, cweek: navTitle)
+                    }
                     let mainSetVM = MainSetVM(lift: lift, roundTo: roundTo, reps: reps[i], percentage: percentages[i], isChecked: isChecked(row: i, section: section), prLabel: prLabel)
                     vm = mainSetVM
                     rowVMs.append(vm!)
@@ -223,9 +228,9 @@ class WeekController {
     }
     
     func setupSetDescriptions(indexPath: IndexPath){
-        currentSetDescription = "Completed:  \(viewModel.sectionVms[indexPath.section].headerTitle) |  \(viewModel.sectionVms[indexPath.section].rowVMs[indexPath.row].getLabel())"
+        currentSetDescription = "Completed:  \(viewModel.sectionVms[indexPath.section].headerTitle)\n \(viewModel.sectionVms[indexPath.section].rowVMs[indexPath.row].getLabel())"
         if let nextCellIndexPath = nextCellIndexPath(currentIndexPath: indexPath) {
-            nextSetDescription = "Upcoming:  \(viewModel.sectionVms[indexPath.section].headerTitle) |  \(viewModel.sectionVms[nextCellIndexPath.section].rowVMs[nextCellIndexPath.row].getLabel())"
+            nextSetDescription = "Upcoming:  \(viewModel.sectionVms[nextCellIndexPath.section].headerTitle)\n \(viewModel.sectionVms[nextCellIndexPath.section].rowVMs[nextCellIndexPath.row].getLabel())"
         } else {
             nextSetDescription = "This is your last set! Well done!"
         }
@@ -276,11 +281,12 @@ class WeekController {
     }
     
     func prepareData(vc: TimerVC) {
-        let time = UserDefaults.standard.value(forKey: SavedKeys.getTimeLeftKeys(timer: selectedTimer!)) as! Int
+        let time = UserDefaults.standard.value(forKey: SavedKeys.getTimeLeftKeys(timer: selectedTimer!)) as! Double
         vc.timeLeft = time
         vc.finishedSet = currentSetDescription
         vc.nextSet = nextSetDescription
         vc.selectedTimer = selectedTimer
+        vc.startTime = time
         log.info("Starting time for this set is \(time) seconds")
     }
 }

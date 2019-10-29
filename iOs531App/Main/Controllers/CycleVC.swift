@@ -36,6 +36,25 @@ extension CycleVC: UICollectionViewDelegate {
     }
 }
 
+extension CycleVC: UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 40, left: 16, bottom: 40, right: 16)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let collectionViewWidth = collectionView.bounds.width
+        return CGSize(width: collectionViewWidth/2, height: collectionViewWidth/3)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 20
+    }
+}
+
 extension CycleVC: WeekVCDelegate {
     func workoutComplete() {
         controller.refreshCheckBoxState()
@@ -55,7 +74,23 @@ class CycleVC: UIViewController {
         return controller.viewModel
     }
     
-    @IBAction func completeCycle(_ sender: UIButton) {
+    lazy var controller: CycleController = {
+        return CycleController()
+    }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        log.info("CycleVC viewdidload called")
+        
+        controller.populateViewModel()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        controller.refreshCycleData()
+    }
+
+    //MARK: Bar Button Action
+    @IBAction func completeCycle(_ sender: Any) {
         let alert = UIAlertController(title: "Complete cycle", message: "Completing will increment all lifts and continue to the next cycle", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
@@ -67,21 +102,6 @@ class CycleVC: UIViewController {
         self.present(alert, animated: true)
     }
     
-    lazy var controller: CycleController = {
-        return CycleController()
-    }()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        log.info("CycleVC viewdidload called")
-        controller.populateViewModel()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        controller.refreshCycleData()
-    }
-
-    //MARK: Bar Button Action
     @IBAction func resetCycle(_ sender: UIBarButtonItem) {
         let alert = UIAlertController(title: "Reset cycle", message: "Resetting will restart the current cycle", preferredStyle: .alert)
         

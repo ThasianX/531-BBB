@@ -67,8 +67,6 @@ class SettingsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         log.info("SettingsVC view did load called.")
         controller.delegate = self
         
-        tableView.estimatedRowHeight = 80.0
-        tableView.rowHeight = UITableView.automaticDimension
         
         log.info("ViewModel being populated")
         controller.populateViewModel()
@@ -228,6 +226,15 @@ class SettingsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             
             controller.updateRoundToIndex(indexPath: indexPath)
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        var rowHeight = tableView.rowHeight
+        if controller.pickerIndexPath != nil && controller.pickerIndexPath! == indexPath {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "dayAndLiftPickerCell")!
+            rowHeight = cell.frame.height
+        }
+        return rowHeight
     }
     
     //MARK: Helper methods

@@ -8,6 +8,10 @@
 
 import Foundation
 
-class AssistanceInputCellVM {
+class AssistanceInputCellVM: RowViewModel {
+    var inputLabel: String
     
+    init(inputLabel: String) {
+        self.inputLabel = inputLabel
+    }
 }

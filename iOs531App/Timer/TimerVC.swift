@@ -19,17 +19,32 @@ extension Int {
         return CGFloat(self) * .pi / 180
     }
 }
+//
+//enum AppState {
+//    case active
+//    case background
+//}
 
 class TimerVC: UIViewController {
     //MARK: Data
+    //For drawing the progress indicator
     var shapeLayer: CAShapeLayer!
     var pulsatingLayer: CAShapeLayer!
-    var timeLeft: Int!
+    
+    //For tracking time
+    var timeLeft: TimeInterval!
     var timer : Timer!
+    var endTime: Date?
+    
+    //For UI and data persistence purposes
     var finishedSet: String!
     var nextSet: String!
     var selectedTimer: Int!
-    var startTime: Int!
+    var startTime: Double!
+    
+    //Notification purposes
+//    var appState = AppState.active
+    let manager = LocalNotificationManager()
     
     let timerLabel: UILabel = {
         let label = UILabel()
@@ -55,6 +70,7 @@ class TimerVC: UIViewController {
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = .white
+        label.numberOfLines = 0
         return label
     }()
     
@@ -64,6 +80,7 @@ class TimerVC: UIViewController {
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = .white
+        label.numberOfLines = 0
         return label
     }()
     
@@ -71,9 +88,11 @@ class TimerVC: UIViewController {
         super.viewDidLoad()
         print("TimerVC is aware of viewdidload call")
         
-        view.backgroundColor = UIColor.backgroundColor
+//        //Sets up AppState
+//        NotificationCenter.default.addObserver(self, selector: #selector(handleState), name: UIApplication.didEnterBackgroundNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(handleState), name: UIApplication.didBecomeActiveNotification, object: nil)
         
-        startTime = timeLeft
+        view.backgroundColor = UIColor.backgroundColor
         
         setUpCircleLayers()
         
@@ -83,10 +102,24 @@ class TimerVC: UIViewController {
         log.info("Attempting to animate timer stroke")
         animateTimer()
         
+        endTime = Date().addingTimeInterval(timeLeft)
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
         
+        scheduleNotification()
     }
-    
+//
+//    @objc func handleState(notification: NSNotification){
+//        if notification.name == UIApplication.didEnterBackgroundNotification {
+//            log.info("Application will enter background. AppState being changed to background")
+//            appState = .background
+//            scheduleNotification()
+//        } else if notification.name == UIApplication.didBecomeActiveNotification {
+//            log.info("Application is now active. AppState being changed to active")
+//            appState = .active
+//            manager.notifications.removeAll()
+//        }
+//    }
+//
     private func addLabels() {
         addTimeLabel()
         addTitleLabel()
@@ -116,7 +149,7 @@ class TimerVC: UIViewController {
         
         finishedSetLabel.translatesAutoresizingMaskIntoConstraints = false
         finishedSetLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        finishedSetLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
+        finishedSetLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16).isActive = true
         
     }
     
@@ -139,33 +172,33 @@ class TimerVC: UIViewController {
         view.addSubview(exitButton)
         exitButton.translatesAutoresizingMaskIntoConstraints = false
         exitButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        exitButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 8).isActive = true
+        exitButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
     
     private func addSubtractButton(){
-        let subtractButton = UIButton()
-        subtractButton.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-        subtractButton.setTitle("-10 seconds", for: .normal)
+        let image = UIImage(named: "SubtractTime")
+        let subtractButton = UIButton(type: .custom)
+        subtractButton.setImage(image, for: .normal)
         subtractButton.addTarget(self, action: #selector(subtractTime), for: .touchUpInside)
         
         view.addSubview(subtractButton)
         subtractButton.translatesAutoresizingMaskIntoConstraints = false
-        subtractButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8).isActive = true
-        subtractButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -32).isActive = true
+        subtractButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32).isActive = true
+        subtractButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         
     }
     
     private func addPlusButton(){
-        let plusButton = UIButton()
-        plusButton.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-        plusButton.setTitle("+10 seconds", for: .normal)
+        let image = UIImage(named: "AddTime")
+        let plusButton = UIButton(type: .custom)
+        plusButton.setImage(image, for: .normal)
         plusButton.addTarget(self, action: #selector(addTime), for: .touchUpInside)
         
         
         view.addSubview(plusButton)
         plusButton.translatesAutoresizingMaskIntoConstraints = false
-        plusButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 8).isActive = true
-        plusButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -32).isActive = true
+        plusButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32).isActive = true
+        plusButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         
     }
     
@@ -175,7 +208,7 @@ class TimerVC: UIViewController {
         //Label is centered
         timerLabel.center = view.center
         //Since the timer takes 1 second to start, I want to make sure there's text in the label for that second
-        timerLabel.text = formatTime()
+        timerLabel.text = timeLeft.time
         //Adds the timerLabel to the view.
         view.addSubview(timerLabel)
     }
@@ -234,59 +267,66 @@ class TimerVC: UIViewController {
         shapeLayer.add(basicAnimation, forKey: "timerAnimation")
     }
     
-    private func formatTime() -> String{
-        let seconds = timeLeft % 60
-        let minutes = timeLeft / 60
-        return String(format: "%02d:%02d", minutes, seconds)
-    }
-    
     //MARK: Objc methods
     @objc private func dismissTimer(){
-        timer.invalidate()
+        log.info("Timer being dismissed")
+        timer.invalidate();
+        
+        manager.removeAllNotifications()
         dismiss(animated: true, completion: nil)
     }
     
     @objc func updateTime(){
-        if timeLeft > 0{
-            timeLeft -= 1
-            timerLabel.text = formatTime()
+        log.info("UpdateTime being called")
+        timeLeft = endTime?.timeIntervalSinceNow
+        if timeLeft > 0 {
+            timerLabel.text = timeLeft.time
         } else {
+            timer.invalidate();
+            timerLabel.text = "00:00"
             dismissTimer()
         }
     }
     
+    
     @objc func addTime(){
         //Update Time and UI
-        print("Adding 10 seconds to time")
-        timeLeft+=10
-        timerLabel.text = formatTime()
-        
-        //Update the timer stroke
-        animateTimer()
+        log.info("Adding 10 seconds to time")
         updateStartTime(increment: true)
+        updateTime()
+       
+        animateTimer()
+        
     }
     
     @objc func subtractTime(){
         //Update time and UI
         print("Subtracting 10 seconds to time")
-        timeLeft-=10
-        if timeLeft > 0 {
-            timerLabel.text = formatTime()
-        } else {
-            timerLabel.text = "00:00"
-        }
+        updateStartTime(increment: false)
+        updateTime()
         
         animateTimer()
-        updateStartTime(increment: false)
     }
     
     private func updateStartTime(increment: Bool){
         if increment {
-            startTime+=10
+            timeLeft += 10
+            endTime! += 10
+            startTime += 10
         } else {
+            timeLeft-=10
+            endTime! -= 10
             startTime-=10
         }
+        scheduleNotification()
+        
         UserDefaults.standard.set(startTime, forKey: SavedKeys.getTimeLeftKeys(timer: selectedTimer))
+    }
+    
+    private func scheduleNotification(){
+        manager.notifications.removeAll()
+        manager.notifications.append(Notification(id: "reminder-timer-\(selectedTimer!)", title: "Break is over. Begin next set.", dateTime: Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: Date(timeIntervalSinceNow: timeLeft))))
+        manager.schedule()
     }
     
 }

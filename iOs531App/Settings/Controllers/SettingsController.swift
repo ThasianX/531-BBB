@@ -326,7 +326,7 @@ class SettingsController {
         let assistanceExercises = db.getAssistanceExercisesForLift(cid: id)
         var assistanceString = ""
         for exercise in assistanceExercises {
-            assistanceString.append("\(exercise.name) - \(exercise.sets)x\(exercise.reps)\n")
+            assistanceString.append("\u{2022}\(exercise.name) - \(exercise.sets)x\(exercise.reps)\n")
         }
         
         if assistanceString.count>0{

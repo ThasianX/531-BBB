@@ -172,10 +172,10 @@ class SetupController{
         defaults.set(90, forKey: SavedKeys.getTimeLeftKeys(timer: 1))
         defaults.set(90, forKey: SavedKeys.getTimeLeftKeys(timer: 2))
         defaults.set(90, forKey: SavedKeys.getTimeLeftKeys(timer: 3))
-        log.debug("Warmup time saved: \(defaults.value(forKey: SavedKeys.getTimeLeftKeys(timer: 0)) as! Int)")
-        log.debug("531 time saved: \(defaults.value(forKey: SavedKeys.getTimeLeftKeys(timer: 1)) as! Int)")
-        log.debug("BBB time saved: \(defaults.value(forKey: SavedKeys.getTimeLeftKeys(timer: 2)) as! Int)")
-        log.debug("Ass time saved: \(defaults.value(forKey: SavedKeys.getTimeLeftKeys(timer: 3)) as! Int)")
+        log.debug("Warmup time saved: \(defaults.value(forKey: SavedKeys.getTimeLeftKeys(timer: 0)) as! Double)")
+        log.debug("531 time saved: \(defaults.value(forKey: SavedKeys.getTimeLeftKeys(timer: 1)) as! Double)")
+        log.debug("BBB time saved: \(defaults.value(forKey: SavedKeys.getTimeLeftKeys(timer: 2)) as! Double)")
+        log.debug("Ass time saved: \(defaults.value(forKey: SavedKeys.getTimeLeftKeys(timer: 3)) as! Double)")
         
         //Setting the initial selected day value
         defaults.set(0, forKey: SavedKeys.getSelectedDay(week: "Week 1"))
