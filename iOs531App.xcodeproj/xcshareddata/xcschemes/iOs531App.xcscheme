@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1E68FD2C2323FA1200631945"
                BuildableName = "Fit Don&apos;t Quit.app"
-               BlueprintName = "iOs531AppBackup"
-               ReferencedContainer = "container:iOs531AppBackup.xcodeproj">
+               BlueprintName = "iOs531App"
+               ReferencedContainer = "container:iOs531App.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "1E7871F3234778E6009A2561"
                BuildableName = "Fit Don&apos;t QuitTests.xctest"
                BlueprintName = "Fit Don&apos;t QuitTests"
-               ReferencedContainer = "container:iOs531AppBackup.xcodeproj">
+               ReferencedContainer = "container:iOs531App.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -56,8 +56,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1E68FD2C2323FA1200631945"
             BuildableName = "Fit Don&apos;t Quit.app"
-            BlueprintName = "iOs531AppBackup"
-            ReferencedContainer = "container:iOs531AppBackup.xcodeproj">
+            BlueprintName = "iOs531App"
+            ReferencedContainer = "container:iOs531App.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -73,8 +73,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1E68FD2C2323FA1200631945"
             BuildableName = "Fit Don&apos;t Quit.app"
-            BlueprintName = "iOs531AppBackup"
-            ReferencedContainer = "container:iOs531AppBackup.xcodeproj">
+            BlueprintName = "iOs531App"
+            ReferencedContainer = "container:iOs531App.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

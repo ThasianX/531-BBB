@@ -39,7 +39,6 @@
 		1E747D302348D21400060423 /* SectionVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E747D2F2348D21400060423 /* SectionVM.swift */; };
 		1E74A7C7234B6F3900677E76 /* AssistanceCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E74A7C6234B6F3900677E76 /* AssistanceCellVM.swift */; };
 		1E74A7C9234B713000677E76 /* TimerCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E74A7C8234B713000677E76 /* TimerCellVM.swift */; };
-		1E7871F7234778E6009A2561 /* Fit_Don_t_QuitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7871F6234778E6009A2561 /* Fit_Don_t_QuitTests.swift */; };
 		1E78720023478B64009A2561 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = 1E7871FF23478B64009A2561 /* SwiftyBeaver */; };
 		1E79A5972354AFAA00BF5B00 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E79A5962354AFAA00BF5B00 /* Extensions.swift */; };
 		1E7AD436234A24E5009C141D /* ViewModelPressible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7AD435234A24E5009C141D /* ViewModelPressible.swift */; };
@@ -57,7 +56,6 @@
 		1E7AD46F234A8D34009C141D /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7AD454234A77C8009C141D /* TextFieldCell.swift */; };
 		1E7AD471234A9246009C141D /* SchedulePickerVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7AD470234A9246009C141D /* SchedulePickerVM.swift */; };
 		1E7AD472234A959E009C141D /* DayAndLiftPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7AD455234A77C8009C141D /* DayAndLiftPickerCell.swift */; };
-		1E7BE26A23573FE20084AD70 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 1E7BE26923573FE20084AD70 /* Charts */; };
 		1E7BFD7E2346531A00695060 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 1E7BFD7D2346531A00695060 /* SQLite */; };
 		1E7BFD842346759900695060 /* CycleDb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7BFD832346759900695060 /* CycleDb.swift */; };
 		1E7F4E7E235893F2004AF2B7 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7F4E7D235893F2004AF2B7 /* LocalNotificationManager.swift */; };
@@ -79,16 +77,6 @@
 		1ECCFA20235236DC00F8AFBB /* SectionSetVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ECCFA1F235236DC00F8AFBB /* SectionSetVM.swift */; };
 		1ECCFA22235237DA00F8AFBB /* SetConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ECCFA21235237DA00F8AFBB /* SetConfigurable.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		1E7871F9234778E6009A2561 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1E68FD252323FA1200631945 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1E68FD2C2323FA1200631945;
-			remoteInfo = iOs531App;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		1E7BFD7B23464F1800695060 /* Embed Frameworks */ = {
@@ -143,11 +131,6 @@
 		1E747D2F2348D21400060423 /* SectionVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionVM.swift; sourceTree = "<group>"; };
 		1E74A7C6234B6F3900677E76 /* AssistanceCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistanceCellVM.swift; sourceTree = "<group>"; };
 		1E74A7C8234B713000677E76 /* TimerCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerCellVM.swift; sourceTree = "<group>"; };
-		1E7871E6234774F4009A2561 /* Fit_Don_t_QuitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fit_Don_t_QuitTests.swift; sourceTree = "<group>"; };
-		1E7871E8234774F4009A2561 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1E7871F4234778E6009A2561 /* Fit Don't QuitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Fit Don't QuitTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		1E7871F6234778E6009A2561 /* Fit_Don_t_QuitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fit_Don_t_QuitTests.swift; sourceTree = "<group>"; };
-		1E7871F8234778E6009A2561 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1E79A5962354AFAA00BF5B00 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		1E7AD435234A24E5009C141D /* ViewModelPressible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelPressible.swift; sourceTree = "<group>"; };
 		1E7AD439234A4443009C141D /* EditValueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditValueCell.swift; sourceTree = "<group>"; };
@@ -190,15 +173,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E7BFD7E2346531A00695060 /* SQLite in Frameworks */,
-				1E7BE26A23573FE20084AD70 /* Charts in Frameworks */,
 				1E78720023478B64009A2561 /* SwiftyBeaver in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1E7871F1234778E6009A2561 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,8 +246,6 @@
 			isa = PBXGroup;
 			children = (
 				1E68FD2F2323FA1200631945 /* iOs531App */,
-				1E7871E5234774F4009A2561 /* Fit Don't QuitTests */,
-				1E7871F5234778E6009A2561 /* Fit Don't QuitTests */,
 				1E68FD2E2323FA1200631945 /* Products */,
 				1E7BFD7823464F1800695060 /* Frameworks */,
 			);
@@ -282,7 +255,6 @@
 			isa = PBXGroup;
 			children = (
 				1E68FD2D2323FA1200631945 /* Fit Don't Quit.app */,
-				1E7871F4234778E6009A2561 /* Fit Don't QuitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -318,24 +290,6 @@
 				1E6C6A8D234E21DB00144BBA /* ReflectedStringConvertible.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		1E7871E5234774F4009A2561 /* Fit Don't QuitTests */ = {
-			isa = PBXGroup;
-			children = (
-				1E7871E6234774F4009A2561 /* Fit_Don_t_QuitTests.swift */,
-				1E7871E8234774F4009A2561 /* Info.plist */,
-			);
-			path = "Fit Don't QuitTests";
-			sourceTree = "<group>";
-		};
-		1E7871F5234778E6009A2561 /* Fit Don't QuitTests */ = {
-			isa = PBXGroup;
-			children = (
-				1E7871F6234778E6009A2561 /* Fit_Don_t_QuitTests.swift */,
-				1E7871F8234778E6009A2561 /* Info.plist */,
-			);
-			path = "Fit Don't QuitTests";
 			sourceTree = "<group>";
 		};
 		1E7AD43B234A50A5009C141D /* Viewmodels */ = {
@@ -548,9 +502,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1E68FD2C2323FA1200631945 /* iOs531AppBackup */ = {
+		1E68FD2C2323FA1200631945 /* iOs531App */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1E68FD4A2323FA1200631945 /* Build configuration list for PBXNativeTarget "iOs531AppBackup" */;
+			buildConfigurationList = 1E68FD4A2323FA1200631945 /* Build configuration list for PBXNativeTarget "iOs531App" */;
 			buildPhases = (
 				1E68FD292323FA1200631945 /* Sources */,
 				1E68FD2A2323FA1200631945 /* Frameworks */,
@@ -561,33 +515,14 @@
 			);
 			dependencies = (
 			);
-			name = iOs531AppBackup;
+			name = iOs531App;
 			packageProductDependencies = (
 				1E7BFD7D2346531A00695060 /* SQLite */,
 				1E7871FF23478B64009A2561 /* SwiftyBeaver */,
-				1E7BE26923573FE20084AD70 /* Charts */,
 			);
 			productName = iOs531App;
 			productReference = 1E68FD2D2323FA1200631945 /* Fit Don't Quit.app */;
 			productType = "com.apple.product-type.application";
-		};
-		1E7871F3234778E6009A2561 /* Fit Don't QuitTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1E7871FB234778E6009A2561 /* Build configuration list for PBXNativeTarget "Fit Don't QuitTests" */;
-			buildPhases = (
-				1E7871F0234778E6009A2561 /* Sources */,
-				1E7871F1234778E6009A2561 /* Frameworks */,
-				1E7871F2234778E6009A2561 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				1E7871FA234778E6009A2561 /* PBXTargetDependency */,
-			);
-			name = "Fit Don't QuitTests";
-			productName = "Fit Don't QuitTests";
-			productReference = 1E7871F4234778E6009A2561 /* Fit Don't QuitTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -603,13 +538,9 @@
 						CreatedOnToolsVersion = 10.3;
 						LastSwiftMigration = 1100;
 					};
-					1E7871F3234778E6009A2561 = {
-						CreatedOnToolsVersion = 11.0;
-						TestTargetID = 1E68FD2C2323FA1200631945;
-					};
 				};
 			};
-			buildConfigurationList = 1E68FD282323FA1200631945 /* Build configuration list for PBXProject "iOs531AppBackup" */;
+			buildConfigurationList = 1E68FD282323FA1200631945 /* Build configuration list for PBXProject "iOs531App" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -621,14 +552,12 @@
 			packageReferences = (
 				1E7BFD7C2346531A00695060 /* XCRemoteSwiftPackageReference "SQLite" */,
 				1E7871FE23478B64009A2561 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
-				1E7BE26823573FE20084AD70 /* XCRemoteSwiftPackageReference "Charts" */,
 			);
 			productRefGroup = 1E68FD2E2323FA1200631945 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1E68FD2C2323FA1200631945 /* iOs531AppBackup */,
-				1E7871F3234778E6009A2561 /* Fit Don't QuitTests */,
+				1E68FD2C2323FA1200631945 /* iOs531App */,
 			);
 		};
 /* End PBXProject section */
@@ -641,13 +570,6 @@
 				1E68FD3B2323FA1200631945 /* LaunchScreen.storyboard in Resources */,
 				1E68FD382323FA1200631945 /* Assets.xcassets in Resources */,
 				1E68FD362323FA1200631945 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1E7871F2234778E6009A2561 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -725,23 +647,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1E7871F0234778E6009A2561 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1E7871F7234778E6009A2561 /* Fit_Don_t_QuitTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		1E7871FA234778E6009A2561 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1E68FD2C2323FA1200631945 /* iOs531AppBackup */;
-			targetProxy = 1E7871F9234778E6009A2561 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		1E68FD342323FA1200631945 /* Main.storyboard */ = {
@@ -920,52 +826,10 @@
 			};
 			name = Release;
 		};
-		1E7871FC234778E6009A2561 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 75H2NCGMKS;
-				INFOPLIST_FILE = "Fit Don't QuitTests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.kevinli.Fit-Don-t-QuitTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fit Don't Quit.app/Fit Don't Quit";
-			};
-			name = Debug;
-		};
-		1E7871FD234778E6009A2561 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 75H2NCGMKS;
-				INFOPLIST_FILE = "Fit Don't QuitTests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.kevinli.Fit-Don-t-QuitTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fit Don't Quit.app/Fit Don't Quit";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1E68FD282323FA1200631945 /* Build configuration list for PBXProject "iOs531AppBackup" */ = {
+		1E68FD282323FA1200631945 /* Build configuration list for PBXProject "iOs531App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1E68FD482323FA1200631945 /* Debug */,
@@ -974,20 +838,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1E68FD4A2323FA1200631945 /* Build configuration list for PBXNativeTarget "iOs531AppBackup" */ = {
+		1E68FD4A2323FA1200631945 /* Build configuration list for PBXNativeTarget "iOs531App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1E68FD4B2323FA1200631945 /* Debug */,
 				1E68FD4C2323FA1200631945 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		1E7871FB234778E6009A2561 /* Build configuration list for PBXNativeTarget "Fit Don't QuitTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1E7871FC234778E6009A2561 /* Debug */,
-				1E7871FD234778E6009A2561 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1001,14 +856,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.8.2;
-			};
-		};
-		1E7BE26823573FE20084AD70 /* XCRemoteSwiftPackageReference "Charts" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/danielgindi/Charts";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.4.0;
 			};
 		};
 		1E7BFD7C2346531A00695060 /* XCRemoteSwiftPackageReference "SQLite" */ = {
@@ -1026,11 +873,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1E7871FE23478B64009A2561 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */;
 			productName = SwiftyBeaver;
-		};
-		1E7BE26923573FE20084AD70 /* Charts */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1E7BE26823573FE20084AD70 /* XCRemoteSwiftPackageReference "Charts" */;
-			productName = Charts;
 		};
 		1E7BFD7D2346531A00695060 /* SQLite */ = {
 			isa = XCSwiftPackageProductDependency;
