@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E03D84A2367EB8E001B29D2 /* Kevin Li.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E03D8492367EB8D001B29D2 /* Kevin Li.png */; };
 		1E0C0643234E5AD90037C11D /* AssistanceExerciseCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0C0637234E5AD90037C11D /* AssistanceExerciseCellVM.swift */; };
 		1E0C0644234E5AD90037C11D /* AssistanceInputCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0C0638234E5AD90037C11D /* AssistanceInputCellVM.swift */; };
 		1E0C0645234E5AD90037C11D /* AssistanceExerciseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0C063A234E5AD90037C11D /* AssistanceExerciseCell.swift */; };
@@ -92,6 +93,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1E03D8492367EB8D001B29D2 /* Kevin Li.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Kevin Li.png"; sourceTree = "<group>"; };
 		1E0C0637234E5AD90037C11D /* AssistanceExerciseCellVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssistanceExerciseCellVM.swift; sourceTree = "<group>"; };
 		1E0C0638234E5AD90037C11D /* AssistanceInputCellVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssistanceInputCellVM.swift; sourceTree = "<group>"; };
 		1E0C063A234E5AD90037C11D /* AssistanceExerciseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssistanceExerciseCell.swift; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 				1E68FD342323FA1200631945 /* Main.storyboard */,
 				1E68FD372323FA1200631945 /* Assets.xcassets */,
 				1E68FD392323FA1200631945 /* LaunchScreen.storyboard */,
+				1E03D8492367EB8D001B29D2 /* Kevin Li.png */,
 				1E68FD3C2323FA1200631945 /* Info.plist */,
 			);
 			path = iOs531App;
@@ -568,6 +571,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E68FD3B2323FA1200631945 /* LaunchScreen.storyboard in Resources */,
+				1E03D84A2367EB8E001B29D2 /* Kevin Li.png in Resources */,
 				1E68FD382323FA1200631945 /* Assets.xcassets in Resources */,
 				1E68FD362323FA1200631945 /* Main.storyboard in Resources */,
 			);
