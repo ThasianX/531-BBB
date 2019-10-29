@@ -256,8 +256,8 @@ class WeekController {
         var nextRow = startRow
         var nextSection = startSection
         
-        if (nextSection == 3 && (nextRow == (viewModel.sectionVms[3].rowVMs.count-1))) ||
-            (startSection == 2 && viewModel.sectionVms[3].rowVMs.count == 0){
+        if (nextSection == 3 && nextRow == viewModel.sectionVms[3].rowVMs.count-1) ||
+            (startSection == 2 && startRow == viewModel.sectionVms[2].rowVMs.count-1 && viewModel.sectionVms[3].rowVMs.count == 0){
             return nil
         } else if startRow == (viewModel.sectionVms[startSection].rowVMs.count-1) {
             nextSection+=1
