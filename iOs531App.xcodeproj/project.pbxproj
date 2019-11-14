@@ -116,7 +116,7 @@
 		1E63465C2350C7D200DA904B /* WeekController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekController.swift; sourceTree = "<group>"; };
 		1E63465E2350C93100DA904B /* WeekListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekListVM.swift; sourceTree = "<group>"; };
 		1E66D3492347A7B0007F192F /* SetupData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupData.swift; sourceTree = "<group>"; };
-		1E68FD2D2323FA1200631945 /* Fit Don't Quit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fit Don't Quit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E68FD2D2323FA1200631945 /* 531 BBB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "531 BBB.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E68FD302323FA1200631945 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1E68FD322323FA1200631945 /* SetupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupVC.swift; sourceTree = "<group>"; };
 		1E68FD352323FA1200631945 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -256,7 +256,7 @@
 		1E68FD2E2323FA1200631945 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1E68FD2D2323FA1200631945 /* Fit Don't Quit.app */,
+				1E68FD2D2323FA1200631945 /* 531 BBB.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -524,7 +524,7 @@
 				1E7871FF23478B64009A2561 /* SwiftyBeaver */,
 			);
 			productName = iOs531App;
-			productReference = 1E68FD2D2323FA1200631945 /* Fit Don't Quit.app */;
+			productReference = 1E68FD2D2323FA1200631945 /* 531 BBB.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -802,7 +802,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kevinli.iOs531App;
-				PRODUCT_NAME = "Fit Don't Quit";
+				PRODUCT_NAME = "531 BBB";
 				SWIFT_OBJC_BRIDGING_HEADER = "iOs531App/iOs531App-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -823,7 +823,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kevinli.iOs531App;
-				PRODUCT_NAME = "Fit Don't Quit";
+				PRODUCT_NAME = "531 BBB";
 				SWIFT_OBJC_BRIDGING_HEADER = "iOs531App/iOs531App-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
