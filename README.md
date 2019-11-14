@@ -1,4 +1,4 @@
-# 531 Fitness App <img src="./App Images/app_icon.png" height="50">
+# 531 BBB Fitness App <img src="./App Images/app_icon.png" height="50">
 
 Fitness app tailored for my gym program of 5/3/1 Boring But Big.
 
