@@ -1,8 +1,10 @@
-# 531 Fitness App
+# 531 Fitness App <img src="./App Images/app_icon.png" height="50">
 
-App tailored for my gym program of 5/3/1 Boring but big.
+Fitness app tailored for my gym program of 5/3/1 Boring But Big.
 
-Rendition of my 5/3/1 Android app.
+Code: Mostly vanilla except for the additions of Sqlite for the database and SwiftyBeaver for logging.
+
+Architecture: Mostly MVVM. I got too lazy to refactor certain portions. Used a lot of protocol delegation to transfer data. 
 
 ### App Screenshots and Flow
 
