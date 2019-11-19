@@ -1,7 +1,4 @@
 os: osx
 osx_image: xcode11.2
 language: swift
-
-xcode_project: iOs531App.xcodeproj
-xcode_scheme: iOs531App
-xcode_destination: platform=iOS Simulator,OS:13.2, name:iPhone 11
+script: xcodebuild clean build test -project iOs531App.xcodeproj -scheme iOs531App -sdk iphonesimulator -destination “platform=iOS Simulator,OS=13.2,name=iPhone 11” ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO
