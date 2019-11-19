@@ -5,6 +5,3 @@ language: swift
 xcode_project: iOs531App.xcodeproj
 xcode_scheme: iOs531App
 xcode_destination: platform=iOS Simulator,OS=13.1,name=iPhone X
-
-
-
