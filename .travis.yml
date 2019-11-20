@@ -1,6 +1,14 @@
-export TEST_DESTINATION=“platform=iOS Simulator,OS=13.2,name=iPhone 11”
-
-os: osx
 osx_image: xcode11.2
 language: swift
-script: xcodebuild clean build test -project iOs531App.xcodeproj -scheme iOs531App -sdk iphonesimulator -destination "$TEST_DESTINATION"
+
+env:
+  global:
+    - PROJECT="iOs531App.xcodeproj"
+    - IOS_SDK="iphonesimulator13.2"
+    - IOS_DESTINATION="platform=iOS Simulator,name=iPhone 11,OS=13.2"
+  matrix:
+    - SCHEME="iOs531App"        SDK="$IOS_SDK"      ACTION="test"
+
+script:
+  - set -o pipefail && xcodebuild clean $ACTION -project "$PROJECT" -scheme "$SCHEME" -sdk "$SDK" -destination "$IOS_DESTINATION" -configuration Debug CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty -c
+
