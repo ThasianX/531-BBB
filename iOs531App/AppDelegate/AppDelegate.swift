@@ -19,8 +19,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        let id = notification.request.identifier
-        log.info("Recieved notification with ID - \(id)")
         completionHandler([.sound, .alert])
     }
 }

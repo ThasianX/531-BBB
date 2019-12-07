@@ -19,11 +19,6 @@ extension Int {
         return CGFloat(self) * .pi / 180
     }
 }
-//
-//enum AppState {
-//    case active
-//    case background
-//}
 
 class TimerVC: UIViewController {
     //MARK: Data
@@ -43,7 +38,6 @@ class TimerVC: UIViewController {
     var startTime: Double!
     
     //Notification purposes
-//    var appState = AppState.active
     let manager = LocalNotificationManager()
     
     let timerLabel: UILabel = {
@@ -86,11 +80,6 @@ class TimerVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("TimerVC is aware of viewdidload call")
-        
-//        //Sets up AppState
-//        NotificationCenter.default.addObserver(self, selector: #selector(handleState), name: UIApplication.didEnterBackgroundNotification, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(handleState), name: UIApplication.didBecomeActiveNotification, object: nil)
         
         view.backgroundColor = UIColor.backgroundColor
         
@@ -99,27 +88,26 @@ class TimerVC: UIViewController {
         addLabels()
         addButtons()
         
-        log.info("Attempting to animate timer stroke")
         animateTimer()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleState), name: UIApplication.didEnterBackgroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleState), name: UIApplication.didBecomeActiveNotification, object: nil)
         
         endTime = Date().addingTimeInterval(timeLeft)
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
-        
-        scheduleNotification()
     }
-//
-//    @objc func handleState(notification: NSNotification){
-//        if notification.name == UIApplication.didEnterBackgroundNotification {
-//            log.info("Application will enter background. AppState being changed to background")
-//            appState = .background
-//            scheduleNotification()
-//        } else if notification.name == UIApplication.didBecomeActiveNotification {
-//            log.info("Application is now active. AppState being changed to active")
-//            appState = .active
-//            manager.notifications.removeAll()
-//        }
-//    }
-//
+
+    @objc func handleState(notification: NSNotification){
+        if notification.name == UIApplication.didEnterBackgroundNotification {
+            timer.invalidate()
+            scheduleNotification()
+        } else if notification.name == UIApplication.didBecomeActiveNotification {
+            timer.invalidate()
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+            manager.notifications.removeAll()
+        }
+    }
+
     private func addLabels() {
         addTimeLabel()
         addTitleLabel()
@@ -269,7 +257,6 @@ class TimerVC: UIViewController {
     
     //MARK: Objc methods
     @objc private func dismissTimer(){
-        log.info("Timer being dismissed")
         timer.invalidate();
         
         manager.removeAllNotifications()
@@ -277,12 +264,11 @@ class TimerVC: UIViewController {
     }
     
     @objc func updateTime(){
-        log.info("UpdateTime being called")
         timeLeft = endTime?.timeIntervalSinceNow
+        log.info("When called: \(timeLeft!)")
         if timeLeft > 0 {
             timerLabel.text = timeLeft.time
         } else {
-            timer.invalidate();
             timerLabel.text = "00:00"
             dismissTimer()
         }
@@ -290,18 +276,15 @@ class TimerVC: UIViewController {
     
     
     @objc func addTime(){
-        //Update Time and UI
-        log.info("Adding 10 seconds to time")
+        log.info("Adding 10 seconds to time for timer \(selectedTimer!)")
         updateStartTime(increment: true)
         updateTime()
        
         animateTimer()
-        
     }
     
     @objc func subtractTime(){
-        //Update time and UI
-        print("Subtracting 10 seconds to time")
+        log.info("Subtracting 10 seconds to time for timer \(selectedTimer!)")
         updateStartTime(increment: false)
         updateTime()
         
@@ -318,8 +301,6 @@ class TimerVC: UIViewController {
             endTime! -= 10
             startTime-=10
         }
-        scheduleNotification()
-        
         UserDefaults.standard.set(startTime, forKey: SavedKeys.getTimeLeftKeys(timer: selectedTimer))
     }
     

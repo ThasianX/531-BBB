@@ -77,6 +77,7 @@
 		1ECCFA1E235235E600F8AFBB /* SetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ECCFA1D235235E600F8AFBB /* SetViewModel.swift */; };
 		1ECCFA20235236DC00F8AFBB /* SectionSetVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ECCFA1F235236DC00F8AFBB /* SectionSetVM.swift */; };
 		1ECCFA22235237DA00F8AFBB /* SetConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ECCFA21235237DA00F8AFBB /* SetConfigurable.swift */; };
+		1ED16E20239BEE490012DAA1 /* PersonalRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED16E1F239BEE490012DAA1 /* PersonalRecord.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -167,6 +168,7 @@
 		1ECCFA1D235235E600F8AFBB /* SetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetViewModel.swift; sourceTree = "<group>"; };
 		1ECCFA1F235236DC00F8AFBB /* SectionSetVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionSetVM.swift; sourceTree = "<group>"; };
 		1ECCFA21235237DA00F8AFBB /* SetConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetConfigurable.swift; sourceTree = "<group>"; };
+		1ED16E1F239BEE490012DAA1 /* PersonalRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalRecord.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -291,6 +293,7 @@
 				1E7BFD832346759900695060 /* CycleDb.swift */,
 				1E7AD469234A7DC3009C141D /* SavedKeys.swift */,
 				1E6C6A8D234E21DB00144BBA /* ReflectedStringConvertible.swift */,
+				1ED16E1F239BEE490012DAA1 /* PersonalRecord.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -638,6 +641,7 @@
 				1ECCFA1E235235E600F8AFBB /* SetViewModel.swift in Sources */,
 				1E7AD458234A77C8009C141D /* TimerCell.swift in Sources */,
 				1E63465B2350C70700DA904B /* SetCell.swift in Sources */,
+				1ED16E20239BEE490012DAA1 /* PersonalRecord.swift in Sources */,
 				1EB22DC2232C0F0800099FBB /* RoundToCell.swift in Sources */,
 				1E6346592350C70000DA904B /* PrCell.swift in Sources */,
 				1ECCFA22235237DA00F8AFBB /* SetConfigurable.swift in Sources */,

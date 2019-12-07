@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4c2-KJ-YIP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4c2-KJ-YIP">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,7 +12,7 @@
         <!--SetupVC-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="Setup" id="BYZ-38-t0r" customClass="SetupVC" customModule="Fit_Don_t_Quit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Setup" id="BYZ-38-t0r" customClass="SetupVC" customModule="_31_BBB" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -27,15 +27,15 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="roundToCell" id="vfl-1f-bNp" customClass="RoundToCell" customModule="Fit_Don_t_Quit" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.5" width="414" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="roundToCell" id="vfl-1f-bNp" customClass="RoundToCell" customModule="_31_BBB" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="55.5" width="414" height="44.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vfl-1f-bNp" id="NYe-wl-xB3">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5.0 lb" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lqj-qM-pz1">
-                                                    <rect key="frame" x="20" y="11.5" width="42.5" height="21"/>
+                                                    <rect key="frame" x="20" y="11.5" width="42.5" height="21.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -53,8 +53,8 @@
                                             <outlet property="weightLabel" destination="Lqj-qM-pz1" id="pCy-lX-qlW"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="editValueCell" id="YMS-sf-dCc" customClass="EditValueCell" customModule="Fit_Don_t_Quit" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="99.5" width="414" height="39.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="editValueCell" id="YMS-sf-dCc" customClass="EditValueCell" customModule="_31_BBB" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="100" width="414" height="39.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YMS-sf-dCc" id="BLY-NE-D5B">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="39.5"/>
@@ -119,7 +119,7 @@
         <!--Settings-->
         <scene sceneID="s4c-ia-OSg">
             <objects>
-                <viewController id="67x-q6-fbd" customClass="SettingsVC" customModule="Fit_Don_t_Quit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="67x-q6-fbd" customClass="SettingsVC" customModule="_31_BBB" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OD0-e2-4gd">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -128,7 +128,7 @@
                                 <rect key="frame" x="0.0" y="56" width="414" height="703"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="textFieldCell" id="yvh-Og-LvW" customClass="TextFieldCell" customModule="Fit_Don_t_Quit" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="textFieldCell" id="yvh-Og-LvW" customClass="TextFieldCell" customModule="_31_BBB" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="414" height="41"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yvh-Og-LvW" id="0Lk-za-CLh">
@@ -161,7 +161,7 @@
                                             <outlet property="liftNameLabel" destination="Zwe-CF-2KT" id="w3J-bH-zMs"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="dayAndLiftPickerCell" rowHeight="140" id="Qbk-Z1-zF2" customClass="DayAndLiftPickerCell" customModule="Fit_Don_t_Quit" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="dayAndLiftPickerCell" rowHeight="140" id="Qbk-Z1-zF2" customClass="DayAndLiftPickerCell" customModule="_31_BBB" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="96.5" width="414" height="140"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Qbk-Z1-zF2" id="dJi-kD-8Wc">
@@ -183,15 +183,15 @@
                                             <outlet property="dayAndLiftPicker" destination="FoQ-bt-DHG" id="fGO-vt-LAX"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="roundToCell" id="VP2-cd-bqo" customClass="RoundToCell" customModule="Fit_Don_t_Quit" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="236.5" width="414" height="44.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="roundToCell" id="VP2-cd-bqo" customClass="RoundToCell" customModule="_31_BBB" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="236.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VP2-cd-bqo" id="nuU-hf-Ivy">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5.0 lb" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IlD-e2-t6S">
-                                                    <rect key="frame" x="20" y="11.5" width="42.5" height="21.5"/>
+                                                    <rect key="frame" x="20" y="11.5" width="42.5" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -209,8 +209,8 @@
                                             <outlet property="weightLabel" destination="IlD-e2-t6S" id="LFj-gN-ZBO"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="editValueCell" id="zlJ-va-AEQ" customClass="EditValueCell" customModule="Fit_Don_t_Quit" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="281" width="414" height="39.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="editValueCell" id="zlJ-va-AEQ" customClass="EditValueCell" customModule="_31_BBB" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="280.5" width="414" height="39.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zlJ-va-AEQ" id="efg-4k-pzg">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="39.5"/>
@@ -243,21 +243,21 @@
                                             <outlet property="liftName" destination="h9K-Ib-sxC" id="e4U-0p-puz"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="assistanceCell" id="435-28-y4Y" customClass="AssistanceCell" customModule="Fit_Don_t_Quit" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="320.5" width="414" height="43.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="assistanceCell" id="435-28-y4Y" customClass="AssistanceCell" customModule="_31_BBB" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="320" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="435-28-y4Y" id="PxF-Yq-IMm">
-                                            <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="383" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Overhead Press" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8pN-aI-f21">
-                                                    <rect key="frame" x="20" y="11" width="130.5" height="21"/>
+                                                    <rect key="frame" x="20" y="11" width="130.5" height="21.5"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rTQ-44-eIP">
-                                                    <rect key="frame" x="158.5" y="11" width="216" height="20.5"/>
+                                                    <rect key="frame" x="158.5" y="11" width="216" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="216" id="bvt-yo-QVv"/>
                                                     </constraints>
@@ -282,7 +282,7 @@
                                             <segue destination="A0s-7O-pgK" kind="show" identifier="showAssistance" id="hDi-eF-elo"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="timerCell" id="V9H-Un-Wdu" customClass="TimerCell" customModule="Fit_Don_t_Quit" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="timerCell" id="V9H-Un-Wdu" customClass="TimerCell" customModule="_31_BBB" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="364" width="414" height="62.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="V9H-Un-Wdu" id="Mb1-MN-AqV">
@@ -347,7 +347,7 @@
         <!--Assistance Catalog-->
         <scene sceneID="VWD-n9-Wk6">
             <objects>
-                <viewController id="A0s-7O-pgK" customClass="AssistanceCatalogVC" customModule="Fit_Don_t_Quit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="A0s-7O-pgK" customClass="AssistanceCatalogVC" customModule="_31_BBB" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZT6-9f-1YN">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -356,21 +356,21 @@
                                 <rect key="frame" x="0.0" y="93" width="414" height="666"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="assistanceExerciseCell" id="aDq-He-rli" customClass="AssistanceExerciseCell" customModule="Fit_Don_t_Quit" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="44.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="assistanceExerciseCell" id="aDq-He-rli" customClass="AssistanceExerciseCell" customModule="_31_BBB" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aDq-He-rli" id="xgd-xv-bif">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X3N-ou-cTN">
-                                                    <rect key="frame" x="16" y="11.5" width="48" height="21.5"/>
+                                                    <rect key="frame" x="16" y="11.5" width="48" height="21"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 sets x 10 reps" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tcd-LJ-NSB">
-                                                    <rect key="frame" x="305" y="14.5" width="89" height="15.5"/>
+                                                    <rect key="frame" x="305" y="14.5" width="89" height="15"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -434,7 +434,7 @@
         <!--Add ExerciseVC-->
         <scene sceneID="aAE-Ey-DHm">
             <objects>
-                <viewController storyboardIdentifier="AddExerciseVC" id="en3-W3-Iup" customClass="AddExerciseVC" customModule="Fit_Don_t_Quit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddExerciseVC" id="en3-W3-Iup" customClass="AddExerciseVC" customModule="_31_BBB" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KTw-aH-pqZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -443,7 +443,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="assistanceInputCell" rowHeight="39.5" id="Muh-Cb-RnH" customClass="AssistanceInputCell" customModule="Fit_Don_t_Quit" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="assistanceInputCell" rowHeight="39.5" id="Muh-Cb-RnH" customClass="AssistanceInputCell" customModule="_31_BBB" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="39.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Muh-Cb-RnH" id="cu0-qT-KJZ">
@@ -515,7 +515,7 @@
         <!--Cycle-->
         <scene sceneID="p4L-Us-IKh">
             <objects>
-                <viewController title="Cycle" id="7Da-Fe-1hX" customClass="CycleVC" customModule="Fit_Don_t_Quit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Cycle" id="7Da-Fe-1hX" customClass="CycleVC" customModule="_31_BBB" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PAk-WV-XNL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -530,7 +530,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="weekDisplayCell" id="8PC-K0-8Pl" customClass="WeekDisplayCell" customModule="Fit_Don_t_Quit" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="weekDisplayCell" id="8PC-K0-8Pl" customClass="WeekDisplayCell" customModule="_31_BBB" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="167" height="130"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="QQ8-eQ-EIi">
@@ -622,7 +622,7 @@
         <!--Week 1-->
         <scene sceneID="hiO-kv-adP">
             <objects>
-                <viewController id="cTP-vF-UCn" customClass="WeekVC" customModule="Fit_Don_t_Quit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="cTP-vF-UCn" customClass="WeekVC" customModule="_31_BBB" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZxY-oI-Xod">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -643,7 +643,7 @@
                                 <rect key="frame" x="0.0" y="95" width="414" height="664"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="setCell" rowHeight="56" id="0TO-c5-Xmg" customClass="SetCell" customModule="Fit_Don_t_Quit" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="setCell" rowHeight="56" id="0TO-c5-Xmg" customClass="SetCell" customModule="_31_BBB" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="414" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0TO-c5-Xmg" id="2dD-BA-Bme">
@@ -678,7 +678,7 @@
                                             <outlet property="setLabel" destination="3zS-Le-DzB" id="fgT-UE-gfT"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="prCell" rowHeight="74" id="Bfy-X1-Bdv" customClass="PrCell" customModule="Fit_Don_t_Quit" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="prCell" rowHeight="74" id="Bfy-X1-Bdv" customClass="PrCell" customModule="_31_BBB" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="111.5" width="414" height="74"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Bfy-X1-Bdv" id="RJ5-P1-R7H">
@@ -756,7 +756,7 @@
         <!--Timer-->
         <scene sceneID="5N6-P5-POr">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="Kvs-Ke-OGu" customClass="TimerVC" customModule="Fit_Don_t_Quit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="Kvs-Ke-OGu" customClass="TimerVC" customModule="_31_BBB" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Aed-qp-FFW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -769,10 +769,10 @@
             </objects>
             <point key="canvasLocation" x="2501" y="-350"/>
         </scene>
-        <!--Main Controller-->
+        <!--Tab Bar Controller-->
         <scene sceneID="zQh-my-wDs">
             <objects>
-                <tabBarController modalPresentationStyle="fullScreen" id="4c2-KJ-YIP" customClass="MainController" customModule="Fit_Don_t_Quit" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController modalPresentationStyle="fullScreen" id="4c2-KJ-YIP" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3Ur-fb-cXf">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

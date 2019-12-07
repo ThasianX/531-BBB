@@ -606,6 +606,21 @@ class CycleDb {
         }
     }
     
+    func getPrs() -> [PersonalRecord]{
+        var prs = [PersonalRecord]()
+        
+        do {
+            for prObj in try db!.prepare(self.prValues) {
+                prs.append(PersonalRecord(date: prObj[date], reps: prObj[pr], liftName: prObj[liftName]))
+            }
+        } catch {
+            
+            log.error("getPrs failed: \(error)")
+        }
+        
+        return prs
+    }
+    
     func updateCyclePr(lift: Lift, cweek: String, cprLabel: String){
         do {
             var insert = cyclePrLabels.insert(or: .replace, prLabel <- cprLabel, week <- cweek, liftId <- lift.id!)

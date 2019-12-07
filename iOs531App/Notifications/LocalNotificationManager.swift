@@ -13,45 +13,46 @@ class LocalNotificationManager {
     var notifications = [Notification]()
     
     private var options: UNAuthorizationOptions = [.alert, .badge, .sound]
-       
-       func listScheduledNotifications(){
-           UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { notifications in
-               log.info("There are \(notifications.count) pending notifications: ")
-               for notification in notifications{
-                   log.info("Pending notification: \(notification)")
-               }
-           })
-       }
-       
-       private func requestAuthorization(){
-           UNUserNotificationCenter.current().requestAuthorization(options: options, completionHandler: {
-               (didAllow, error) in
-               if didAllow && error == nil {
-                   self.scheduleNotifications()
-               }
-           })
-       }
-       
-       func schedule(){
-           UNUserNotificationCenter.current().getNotificationSettings(completionHandler: { settings in
-               switch settings.authorizationStatus {
-               case .notDetermined:
-                   self.requestAuthorization()
-               case .authorized, .provisional:
-                   self.scheduleNotifications()
-               default:
-                   break
-               }
-           })
-       }
+    
+    func listScheduledNotifications(){
+        UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { notifications in
+            log.info("There are \(notifications.count) pending notifications: ")
+            for notification in notifications{
+                log.info("Pending notification: \(notification)")
+            }
+        })
+    }
+    
+    private func requestAuthorization(){
+        UNUserNotificationCenter.current().requestAuthorization(options: options, completionHandler: {
+            (didAllow, error) in
+            if didAllow && error == nil {
+                self.scheduleNotifications()
+            }
+        })
+    }
+    
+    func schedule(){
+        UNUserNotificationCenter.current().getNotificationSettings(completionHandler: { settings in
+            switch settings.authorizationStatus {
+            case .notDetermined:
+                self.requestAuthorization()
+            case .authorized, .provisional:
+                self.scheduleNotifications()
+            default:
+                break
+            }
+        })
+    }
     
     func removeAllNotifications(){
+        log.info("Removing all current notifications")
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
     }
-       
-       private func scheduleNotifications(){
-           for notification in notifications {
-               let content = UNMutableNotificationContent()
+    
+    private func scheduleNotifications(){
+        for notification in notifications {
+            let content = UNMutableNotificationContent()
             content.title = notification.title
             content.sound = .default
             
@@ -65,6 +66,6 @@ class LocalNotificationManager {
                 
                 log.info("Notification with ID - \(notification.id) - scheduled! ")
             })
-           }
-       }
+        }
+    }
 }

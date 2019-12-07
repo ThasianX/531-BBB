@@ -43,14 +43,19 @@ class SettingsController {
     let viewModel: SettingsVM
     
     init(viewModel: SettingsVM = SettingsVM()){
+        log.verbose("SettingsVM is informed of the view did load call")
         self.viewModel = viewModel
-        log.info("Grabbing database instance")
+        log.verbose("Grabbing database instance")
         db = CycleDb.instance
         
-        log.info("SettingsVM is informed of the view did load call")
-        log.info("Lifts are being loaded in from the database to populate the viewmodel")
+        log.verbose("Displaying current pr values:")
+        for pr in db.getPrs() {
+            log.verbose(pr)
+        }
+        
+        log.verbose("Lifts are being loaded in from the database to populate the viewmodel")
         loadLifts()
-        log.info("Configuring output properties that will be accessed by the view")
+        log.verbose("Configuring output properties that will be accessed by the view")
         configureOutput()
         
     }
