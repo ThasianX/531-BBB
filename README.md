@@ -1,10 +1,14 @@
-# 531 BBB Fitness App <img src="./App Images/app_icon.png" height="50">
+# 531 BBB Fitness App **Archived
 
 Fitness app tailored for my gym program of 5/3/1 Boring But Big.
 
 Code: Mostly vanilla except for the additions of Sqlite for the database and SwiftyBeaver for logging.
 
 Architecture: Mostly MVVM. I got too lazy to refactor certain portions. Used a lot of protocol delegation to transfer data. 
+
+### Unfinished todos
+- Create a 1-2 second progress screen when cycle is reset or completed
+- Create another tab to display a graph of training maxes over time
 
 ### App Screenshots and Flow
 
