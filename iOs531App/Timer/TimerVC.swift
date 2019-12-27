@@ -116,7 +116,6 @@ class TimerVC: UIViewController {
     }
     
     private func addButtons(){
-        addExitButton()
         addSubtractButton()
         addPlusButton()
     }
@@ -149,18 +148,6 @@ class TimerVC: UIViewController {
         nextSetLabel.translatesAutoresizingMaskIntoConstraints = false
         nextSetLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         nextSetLabel.topAnchor.constraint(equalTo: finishedSetLabel.bottomAnchor, constant: 8).isActive = true
-    }
-    
-    private func addExitButton() {
-        let exitButton = UIButton()
-        exitButton.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-        exitButton.setImage(UIImage(named: "Dismiss"), for: .normal)
-        exitButton.addTarget(self, action: #selector(dismissTimer), for: .touchUpInside)
-        
-        view.addSubview(exitButton)
-        exitButton.translatesAutoresizingMaskIntoConstraints = false
-        exitButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        exitButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
     
     private func addSubtractButton(){
@@ -253,6 +240,12 @@ class TimerVC: UIViewController {
         basicAnimation.isRemovedOnCompletion = false
         
         shapeLayer.add(basicAnimation, forKey: "timerAnimation")
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        timer.invalidate();
+        
+        manager.removeAllNotifications()
     }
     
     //MARK: Objc methods
