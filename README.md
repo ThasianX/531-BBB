@@ -1,6 +1,6 @@
-# 531 BBB Fitness App **Archived
+# 531 BBB
 
-Fitness app tailored for my gym program of 5/3/1 Boring But Big.
+[531 BBB](https://apps.apple.com/us/app/531-bbb/id1494591328?ls=1) is a fitness app tailored for my gym program of 5/3/1 Boring But Big.
 
 Code: Mostly vanilla except for the additions of Sqlite for the database and SwiftyBeaver for logging.
 
