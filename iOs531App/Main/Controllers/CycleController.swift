@@ -38,37 +38,48 @@ class CycleController {
         setupOutput()
     }
     
-    private func executeDbTasks() {
-        let percentages = db.getPercentagesForProgram(name: SavedKeys.programName)
-        
-        weekPercentages = [[percentages.w1d1, percentages.w1d2, percentages.w1d3], [percentages.w2d1, percentages.w2d2, percentages.w2d3], [percentages.w3d1, percentages.w3d2, percentages.w3d3], [percentages.w4d1, percentages.w4d2, percentages.w4d3]]
-        
-        weekDescriptions = [
-            "5/3/1 - \(weekPercentages[0][0]*100)% | \(weekPercentages[0][1]*100)% | \(weekPercentages[0][2]*100)%", "5/3/1 - \(weekPercentages[1][0]*100)% | \(weekPercentages[1][1]*100)% | \(weekPercentages[1][2]*100)%", "5/3/1 - \(weekPercentages[2][0]*100)% | \(weekPercentages[2][1]*100)% | \(weekPercentages[2][2]*100)%", "Deload - \(weekPercentages[3][0]*100)% | \(weekPercentages[3][1]*100)% | \(weekPercentages[3][2]*100)%"
-        ]
-        
-        sortedLifts = db.getCachedLifts()
-        setupAssistance()
-    }
-    
     private func setupOutput(){
         weekTitles = ["Week 1", "Week 2", "Week 3", "Week 4"]
         weekReps = [[5,5,5],[3,3,3], [5,3,1],[5,5,5]]
         refreshCheckBoxState()
         executeDbTasks()
     }
-    
+
     func refreshCheckBoxState(){
         checkboxStates = UserDefaults.standard.value(forKey: SavedKeys.checkboxStates) as? [[Bool]]
     }
-    
-    private func calculateProgress(index: Int)-> Float{
-        let numberOfTrue = checkboxStates[index].filter{$0}.count
-        log.debug("There are \(numberOfTrue) trues in the array of  \(checkboxStates[index].count) booleans")
-        let progress = Float(Double(numberOfTrue) / Double(checkboxStates[index].count))
-        return progress
+
+    private func executeDbTasks() {
+        let percentages = db.getPercentagesForProgram(name: SavedKeys.programName)
+
+        weekPercentages = [[percentages.w1d1, percentages.w1d2, percentages.w1d3], [percentages.w2d1, percentages.w2d2, percentages.w2d3], [percentages.w3d1, percentages.w3d2, percentages.w3d3], [percentages.w4d1, percentages.w4d2, percentages.w4d3]]
+
+        weekDescriptions = [
+            "5/3/1 - \(weekPercentages[0][0]*100)% | \(weekPercentages[0][1]*100)% | \(weekPercentages[0][2]*100)%", "5/3/1 - \(weekPercentages[1][0]*100)% | \(weekPercentages[1][1]*100)% | \(weekPercentages[1][2]*100)%", "5/3/1 - \(weekPercentages[2][0]*100)% | \(weekPercentages[2][1]*100)% | \(weekPercentages[2][2]*100)%", "Deload - \(weekPercentages[3][0]*100)% | \(weekPercentages[3][1]*100)% | \(weekPercentages[3][2]*100)%"
+        ]
+
+        sortedLifts = db.getOrderedCachedLifts()
+        setupAssistance()
     }
-    
+
+    func setupAssistance(){
+
+        for (i, lift) in sortedLifts.enumerated() {
+
+            let assistanceExercises = db.getCachedAssistanceExercisesForLift(cid: lift.id!)
+
+            assistance.append([Assistance]())
+
+            for exercise in assistanceExercises {
+                for _ in 0..<exercise.sets {
+                    assistance[i].append(exercise)
+                }
+            }
+        }
+        log.info("Cached assistance array values: \(assistance)")
+
+    }
+
     func populateViewModel(){
         log.info("CycleController populateViewModel called")
         var vm: RowViewModel?
@@ -82,6 +93,13 @@ class CycleController {
         }
         self.viewModel.rowVms = rowVMs
     }
+
+    private func calculateProgress(index: Int)-> Float{
+        let numberOfTrue = checkboxStates[index].filter{$0}.count
+        log.debug("There are \(numberOfTrue) trues in the array of  \(checkboxStates[index].count) booleans")
+        let progress = Float(Double(numberOfTrue) / Double(checkboxStates[index].count))
+        return progress
+    }
     
     func refreshSelectedRow(){
         let index = selectedIndex!
@@ -94,7 +112,7 @@ class CycleController {
     
     func refreshCycleData(){
         log.info("Refreshing cycle data")
-        sortedLifts = db.getCachedLifts()
+        sortedLifts = db.getOrderedCachedLifts()
     }
     
     func cellIdentifier(rowVM: RowViewModel) -> String {
@@ -121,8 +139,8 @@ class CycleController {
         }
         
         //Get the new sorted lifts
-        db.sortLiftsByDay()
-        sortedLifts = db.getCachedLifts()
+        db.cacheLifts()
+        sortedLifts = db.getOrderedCachedLifts()
         
         //Appends the correct number of falses and exercises to checkboxes and assistance array, respectively
         resetAssistanceAndCheckboxes()
@@ -171,24 +189,6 @@ class CycleController {
         log.info("Assistance array values: \(assistance)")
     }
     
-    func setupAssistance(){
-        
-        for (i, lift) in sortedLifts.enumerated() {
-            
-            let assistanceExercises = db.getCachedAssistanceExercisesForLift(cid: lift.id!)
-            
-            assistance.append([Assistance]())
-            
-            for exercise in assistanceExercises {
-                for _ in 0..<exercise.sets {
-                    assistance[i].append(exercise)
-                }
-            }
-        }
-        log.info("Cached assistance array values: \(assistance)")
-        
-    }
-    
     func resetSelectedDays(){
         let defaults = UserDefaults.standard
         defaults.set(0, forKey: SavedKeys.getSelectedDay(week: "Week 1"))
@@ -208,8 +208,8 @@ class CycleController {
         db.incrementLifts()
         
         //Get the new sorted lifts
-        db.sortLiftsByDay()
-        sortedLifts = db.getCachedLifts()
+        db.cacheLifts()
+        sortedLifts = db.getOrderedCachedLifts()
         
         //Appends the correct number of falses and exercises to checkboxes and assistance array, respectively
         resetAssistanceAndCheckboxes()
@@ -226,6 +226,7 @@ class CycleController {
     }
     
     func prepareData(vc: WeekVC){
+        print(sortedLifts)
         vc.controller.lifts = sortedLifts
         vc.controller.percentages = weekPercentages[selectedIndex!]
         vc.controller.navTitle = weekTitles[selectedIndex!]

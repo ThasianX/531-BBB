@@ -205,7 +205,7 @@ class SetupController{
         let percentages = ProgramPercentages(id: nil, name: "Boring But Big", w1d1: 0.65, w1d2: 0.75, w1d3: 0.85, w2d1: 0.70, w2d2: 0.8, w2d3: 0.9, w3d1: 0.75, w3d2: 0.85, w3d3: 0.95, w4d1: 0.4, w4d2: 0.5, w4d3: 0.6)
         db.insertProgramPercentage(percentages: percentages)
         
-        db.sortLiftsByDay()
+        db.cacheLifts()
         db.cacheAssistanceExercises()
         db.resetCyclePrLabels()
     }

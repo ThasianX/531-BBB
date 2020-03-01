@@ -303,7 +303,7 @@ class SettingsController {
         lifts[indexPath.row].dayInt = dayInt
         
         if db.updateLift(cid: lifts[indexPath.row].id!, cdayString: day, cdayInt: dayInt) {
-            log.info("Lift day updated successfully in database")
+            log.info("Lift day updated successfully in database - int: \(dayInt)")
         }
         
         let vm = viewModel.sectionVMs[indexPath.section].rowVMs[indexPath.row] as! SchedulePickerVM
@@ -319,7 +319,7 @@ class SettingsController {
         lifts[indexPath.row].bbbLiftId = bbbLift!.id!
         
         if db.updateLift(cid: lifts[indexPath.row].id!, cbbbLiftId: bbbLift!.id!) {
-            log.info("Lift bbbLiftId updated successfully in database")
+            log.info("Lift bbbLiftId updated successfully in database - int: \(bbbLift!.id)")
         }
         
         let vm = viewModel.sectionVMs[indexPath.section].rowVMs[indexPath.row] as! SchedulePickerVM

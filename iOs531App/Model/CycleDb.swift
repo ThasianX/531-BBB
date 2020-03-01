@@ -226,31 +226,30 @@ class CycleDb {
         return lifts
     }
     
-    func getCachedLifts() -> [Lift]{
+    func getOrderedCachedLifts() -> [Lift]{
         var lifts = [Lift]()
+        let orderedTable = cachedLifts.order(dayInt.asc)
         
         do {
-            for lift in try db!.prepare(self.cachedLifts) {
+            for lift in try db!.prepare(orderedTable) {
                 lifts.append(Lift(id: lift[id], name: lift[name], progression: lift[progression], trainingMax: lift[trainingMax], personalRecord: lift[personalRecord], dayString: lift[dayString], dayInt: lift[dayInt], bbbLiftId: lift[bbbLiftId]))
             }
         } catch {
-            log.error("getCachedLifts failed: \(error)")
+            log.error("getOrderedCachedLifts failed: \(error)")
         }
         
         return lifts
     }
     
-    func sortLiftsByDay() {
+    func cacheLifts() {
         do {
-            let orderedTable = mainLifts.order(dayInt.asc)
-            
-            for lift in try db!.prepare(orderedTable) {
+            for lift in try db!.prepare(mainLifts) {
                 let insert = cachedLifts.insert(or: .replace, id <- lift[id], name <- lift[name], progression <- lift[progression], trainingMax <- lift[trainingMax], personalRecord <- lift[personalRecord], dayString <- lift[dayString], dayInt <- lift[dayInt], bbbLiftId <- lift[bbbLiftId])
                 log.info("AddLift SQL: \(insert.asSQL())")
                 try db!.run(insert)
             }
         } catch {
-            log.error("sortLiftsByDay failed: \(error)")
+            log.error("cacheLifts failed: \(error)")
         }
     }
     
@@ -657,7 +656,7 @@ class CycleDb {
         do{
             try db!.run(cyclePrLabels.delete())
             let weeks = ["Week 1", "Week 2", "Week 3"]
-            let lifts = getCachedLifts()
+            let lifts = getOrderedCachedLifts()
             for weekNum in weeks {
                 for lift in lifts {
                     let insert = cyclePrLabels.insert(prLabel <- "Beat your previous PR of 0 reps", week <- weekNum, liftId <- lift.id!)
