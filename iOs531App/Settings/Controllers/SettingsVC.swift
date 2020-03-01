@@ -152,7 +152,8 @@ class SettingsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         
-        if (indexPath.section == 1) { controller.updateSelectedAssistanceIndex(index: indexPath.row)
+        if (indexPath.section == 1) {
+            controller.updateSelectedAssistanceIndex(index: indexPath.row)
         }
         
         return indexPath
