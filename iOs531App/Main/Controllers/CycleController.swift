@@ -226,7 +226,6 @@ class CycleController {
     }
     
     func prepareData(vc: WeekVC){
-        print(sortedLifts)
         vc.controller.lifts = sortedLifts
         vc.controller.percentages = weekPercentages[selectedIndex!]
         vc.controller.navTitle = weekTitles[selectedIndex!]

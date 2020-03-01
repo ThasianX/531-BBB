@@ -94,7 +94,8 @@ class TimerVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(handleState), name: UIApplication.didBecomeActiveNotification, object: nil)
         
         endTime = Date().addingTimeInterval(timeLeft)
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 0.0002, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+        scheduleNotification()
     }
 
     @objc func handleState(notification: NSNotification){
@@ -102,9 +103,7 @@ class TimerVC: UIViewController {
             timer.invalidate()
             scheduleNotification()
         } else if notification.name == UIApplication.didBecomeActiveNotification {
-            timer.invalidate()
-            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
-            manager.notifications.removeAll()
+            timer = Timer.scheduledTimer(timeInterval: 0.0002, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
         }
     }
 
@@ -241,10 +240,11 @@ class TimerVC: UIViewController {
         
         shapeLayer.add(basicAnimation, forKey: "timerAnimation")
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         timer.invalidate();
-        
+
         manager.removeAllNotifications()
     }
     
@@ -272,6 +272,7 @@ class TimerVC: UIViewController {
         log.info("Adding 10 seconds to time for timer \(selectedTimer!)")
         updateStartTime(increment: true)
         updateTime()
+        scheduleNotification()
        
         animateTimer()
     }
