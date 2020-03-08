@@ -90,21 +90,9 @@ class TimerVC: UIViewController {
         
         animateTimer()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(handleState), name: UIApplication.didEnterBackgroundNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(handleState), name: UIApplication.didBecomeActiveNotification, object: nil)
-        
         endTime = Date().addingTimeInterval(timeLeft)
         timer = Timer.scheduledTimer(timeInterval: 0.0002, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
         scheduleNotification()
-    }
-
-    @objc func handleState(notification: NSNotification){
-        if notification.name == UIApplication.didEnterBackgroundNotification {
-            timer.invalidate()
-            scheduleNotification()
-        } else if notification.name == UIApplication.didBecomeActiveNotification {
-            timer = Timer.scheduledTimer(timeInterval: 0.0002, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
-        }
     }
 
     private func addLabels() {
