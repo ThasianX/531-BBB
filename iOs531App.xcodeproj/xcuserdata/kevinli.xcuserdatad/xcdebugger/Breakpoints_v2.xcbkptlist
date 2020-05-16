@@ -45,8 +45,8 @@
             filePath = "iOs531App/Timer/TimerVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "252"
-            endingLineNumber = "252"
+            startingLineNumber = "264"
+            endingLineNumber = "264"
             landmarkName = "updateTime()"
             landmarkType = "7">
          </BreakpointContent>
