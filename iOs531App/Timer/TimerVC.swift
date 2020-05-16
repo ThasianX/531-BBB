@@ -28,7 +28,7 @@ class TimerVC: UIViewController {
     
     //For tracking time
     var timeLeft: TimeInterval!
-    var timer : Timer!
+    weak var timer: Timer?
     var endTime: Date?
     
     //For UI and data persistence purposes
@@ -100,7 +100,8 @@ class TimerVC: UIViewController {
 
     @objc func handleState(notification: NSNotification){
         if notification.name == UIApplication.didEnterBackgroundNotification {
-            timer.invalidate()
+            timer?.invalidate()
+            timer = nil
             scheduleNotification()
         } else if notification.name == UIApplication.didBecomeActiveNotification {
             timer = Timer.scheduledTimer(timeInterval: 0.0002, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
@@ -243,14 +244,16 @@ class TimerVC: UIViewController {
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        timer.invalidate();
+        timer?.invalidate();
+        timer = nil
 
         manager.removeAllNotifications()
     }
     
     //MARK: Objc methods
     @objc private func dismissTimer(){
-        timer.invalidate();
+        timer?.invalidate();
+        timer = nil
         
         manager.removeAllNotifications()
         dismiss(animated: true, completion: nil)
